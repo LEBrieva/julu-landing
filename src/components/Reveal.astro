@@ -1,0 +1,16 @@
+---
+interface Props {
+  /** Retardo en ms para escalonar elementos hermanos. */
+  delay?: number;
+  /** Etiqueta HTML a renderizar (div por defecto). */
+  as?: keyof HTMLElementTagNameMap;
+  class?: string;
+}
+
+const { delay, as = 'div', class: className = '' } = Astro.props;
+const Tag = as;
+---
+
+<Tag data-reveal data-reveal-delay={delay} class={className}>
+  <slot />
+</Tag>

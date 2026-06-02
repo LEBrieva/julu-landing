@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets';
+import { lookbook, stores } from '@/data/site';
+import Section from './Section.astro';
+import Reveal from './Reveal.astro';
+import Button from './Button.astro';
+
+const [look1, look2, look3] = lookbook.looks;
+---
+
+<Section id="lifestyle" tone="paper" labelledby="lifestyle-title">
+  <div class="max-w-2xl">
+    <Reveal as="p" class="text-sm font-semibold uppercase tracking-[0.2em] text-volt">
+      {lookbook.eyebrow}
+    </Reveal>
+    <Reveal as="h2" delay={60} class="mt-4 text-4xl sm:text-5xl">
+      <span id="lifestyle-title">{lookbook.title}</span>
+    </Reveal>
+    <Reveal as="p" delay={120} class="mt-4 text-lg text-muted">
+      {lookbook.subtitle}
+    </Reveal>
+  </div>
+
+  <!-- Grid editorial: una grande + dos apiladas -->
+  <div class="mt-12 grid gap-4 sm:gap-6 lg:grid-cols-3 lg:grid-rows-2">
+    <Reveal class="overflow-hidden rounded-card lg:col-span-2 lg:row-span-2">
+      <Image
+        src={look1.image}
+        alt={look1.alt}
+        widths={[640, 960, 1280]}
+        sizes="(min-width: 1024px) 65vw, 100vw"
+        loading="lazy"
+        class="h-full min-h-72 w-full object-cover transition-transform duration-700 hover:scale-105"
+      />
+    </Reveal>
+    <Reveal delay={100} class="overflow-hidden rounded-card">
+      <Image
+        src={look2.image}
+        alt={look2.alt}
+        widths={[400, 600, 800]}
+        sizes="(min-width: 1024px) 33vw, 100vw"
+        loading="lazy"
+        class="h-full min-h-56 w-full object-cover transition-transform duration-700 hover:scale-105"
+      />
+    </Reveal>
+    <Reveal delay={180} class="overflow-hidden rounded-card">
+      <Image
+        src={look3.image}
+        alt={look3.alt}
+        widths={[400, 600, 800]}
+        sizes="(min-width: 1024px) 33vw, 100vw"
+        loading="lazy"
+        class="h-full min-h-56 w-full object-cover transition-transform duration-700 hover:scale-105"
+      />
+    </Reveal>
+  </div>
+
+  <Reveal class="mt-12 flex flex-wrap items-center justify-center gap-4">
+    <Button href={stores.shopee} variant="shopee" external>
+      Ver en Shopee
+    </Button>
+    <Button href={stores.mercadolibre} variant="meli" external>
+      Ver en Mercado Libre
+    </Button>
+  </Reveal>
+</Section>

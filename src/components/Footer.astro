@@ -1,0 +1,82 @@
+---
+import { Image } from 'astro:assets';
+import { brand, footer, social, nav } from '@/data/site';
+import logoWhite from '@/assets/logo-white.png';
+
+const socials = [
+  { ...social.instagram, key: 'instagram' },
+  { ...social.tiktok, key: 'tiktok' },
+  { ...social.whatsapp, key: 'whatsapp' },
+  { ...social.email, key: 'email' },
+];
+---
+
+<footer class="bg-ink text-paper">
+  <div
+    class="mx-auto grid w-full max-w-7xl gap-12 px-5 py-16 sm:grid-cols-2 sm:px-8 lg:grid-cols-4 lg:px-12"
+  >
+    <!-- Marca -->
+    <div class="sm:col-span-2 lg:col-span-2">
+      <Image
+        src={logoWhite}
+        alt={brand.name}
+        widths={[140, 200, 280]}
+        sizes="140px"
+        class="h-16 w-auto"
+      />
+      <p class="mt-4 max-w-xs text-sm text-muted-dark">{footer.tagline}</p>
+    </div>
+
+    <!-- Navegación -->
+    <nav aria-label="Pie de página">
+      <h2 class="text-sm font-semibold uppercase tracking-wide text-amber">
+        Explorar
+      </h2>
+      <ul class="mt-4 space-y-2.5">
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="text-sm text-paper/75 transition-colors hover:text-paper"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <!-- Redes / contacto -->
+    <div>
+      <h2 class="text-sm font-semibold uppercase tracking-wide text-amber">
+        Seguinos
+      </h2>
+      <ul class="mt-4 space-y-2.5">
+        {
+          socials.map((s) => (
+            <li>
+              <a
+                href={s.href}
+                target={s.key === 'email' ? undefined : '_blank'}
+                rel={s.key === 'email' ? undefined : 'noopener noreferrer'}
+                class="text-sm text-paper/75 transition-colors hover:text-paper"
+              >
+                {s.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-paper/10">
+    <div
+      class="mx-auto w-full max-w-7xl px-5 py-6 text-center text-xs text-muted-dark sm:px-8 lg:px-12"
+    >
+      {footer.copyright}
+    </div>
+  </div>
+</footer>

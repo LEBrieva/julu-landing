@@ -1,0 +1,47 @@
+---
+type Variant = 'primary' | 'outline' | 'outline-dark' | 'shopee' | 'meli';
+
+interface Props {
+  href?: string;
+  variant?: Variant;
+  /** Abrir en pestaña nueva (links externos). */
+  external?: boolean;
+  class?: string;
+  ariaLabel?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  external = false,
+  class: className = '',
+  ariaLabel,
+} = Astro.props;
+
+const base =
+  'inline-flex items-center justify-center gap-2 rounded-pill px-7 py-3.5 text-sm font-semibold uppercase tracking-wide transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0';
+
+const variants: Record<Variant, string> = {
+  primary: 'bg-volt text-ink hover:bg-amber',
+  outline: 'border-2 border-ink text-ink hover:bg-ink hover:text-paper',
+  'outline-dark':
+    'border-2 border-paper/40 text-paper hover:bg-paper hover:text-ink',
+  shopee: 'bg-[#ee4d2d] text-white hover:brightness-110',
+  meli: 'bg-[#ffe600] text-ink hover:brightness-105',
+};
+
+const classes = `${base} ${variants[variant]} ${className}`;
+const rel = external ? 'noopener noreferrer' : undefined;
+const target = external ? '_blank' : undefined;
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag
+  href={href}
+  target={target}
+  rel={rel}
+  class={classes}
+  aria-label={ariaLabel}
+>
+  <slot />
+</Tag>

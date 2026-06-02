@@ -1,0 +1,45 @@
+---
+import { behind, founders, cats } from '@/data/site';
+import Section from './Section.astro';
+import Reveal from './Reveal.astro';
+import PersonCard from './PersonCard.astro';
+---
+
+<Section id="nosotros" tone="ink" labelledby="nosotros-title">
+  <div class="mx-auto max-w-2xl text-center">
+    <Reveal as="p" class="text-sm font-semibold uppercase tracking-[0.2em] text-amber">
+      {behind.eyebrow}
+    </Reveal>
+    <Reveal as="h2" delay={60} class="mt-4 text-4xl sm:text-5xl">
+      <span id="nosotros-title">{behind.title}</span>
+    </Reveal>
+    <Reveal as="p" delay={120} class="mt-4 text-lg text-muted-dark">
+      {behind.intro}
+    </Reveal>
+  </div>
+
+  <!-- Fundadores -->
+  <div class="mx-auto mt-16 grid max-w-2xl gap-10 sm:grid-cols-2">
+    {
+      founders.map((person, i) => (
+        <Reveal delay={i * 120}>
+          <PersonCard person={person} />
+        </Reveal>
+      ))
+    }
+  </div>
+
+  <!-- Los michis -->
+  <Reveal as="p" class="mt-20 text-center font-display text-2xl font-bold text-paper">
+    Y los que mandan de verdad 🐾
+  </Reveal>
+  <ul class="mt-10 grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4">
+    {
+      cats.map((cat, i) => (
+        <Reveal as="li" delay={(i % 4) * 90}>
+          <PersonCard person={cat} />
+        </Reveal>
+      ))
+    }
+  </ul>
+</Section>

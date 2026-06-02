@@ -1,0 +1,86 @@
+---
+import { Image } from 'astro:assets';
+import { storefront, stores } from '@/data/site';
+import Section from './Section.astro';
+import Reveal from './Reveal.astro';
+import Button from './Button.astro';
+---
+
+<Section id="prendas" tone="cream" labelledby="prendas-title">
+  <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+    <!-- Mockup de celular -->
+    <Reveal class="order-first flex justify-center lg:order-last">
+      <div class="relative">
+        <!-- Blob decorativo detrás -->
+        <span
+          class="absolute -inset-6 -z-10 rounded-[3rem] bg-volt/20 blur-2xl"
+          aria-hidden="true"></span>
+
+        <!-- Marco del teléfono -->
+        <div
+          class="relative w-[270px] rounded-[2.75rem] bg-ink p-2.5 shadow-2xl ring-1 ring-ink/20 sm:w-[300px]"
+        >
+          <!-- Notch -->
+          <div
+            class="absolute left-1/2 top-2.5 z-10 h-6 w-32 -translate-x-1/2 rounded-b-2xl bg-ink"
+            aria-hidden="true"></div>
+          <!-- Pantalla -->
+          <div class="overflow-hidden rounded-[2.1rem]">
+            <Image
+              src={storefront.image}
+              alt={storefront.imageAlt}
+              widths={[280, 420, 560]}
+              sizes="300px"
+              loading="lazy"
+              class="aspect-[9/19.5] w-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </Reveal>
+
+    <!-- Texto + accesos a la tienda -->
+    <div>
+      <Reveal as="p" class="text-sm font-semibold uppercase tracking-[0.2em] text-volt">
+        {storefront.eyebrow}
+      </Reveal>
+      <Reveal as="h2" delay={60} class="mt-4 text-4xl sm:text-5xl">
+        <span id="prendas-title">{storefront.title}</span>
+      </Reveal>
+      <Reveal as="p" delay={120} class="mt-4 max-w-lg text-lg text-muted">
+        {storefront.subtitle}
+      </Reveal>
+
+      <ul class="mt-7 space-y-3">
+        {
+          storefront.perks.map((perk, i) => (
+            <Reveal as="li" delay={160 + i * 60} class="flex items-start gap-3">
+              <svg
+                class="mt-0.5 h-5 w-5 flex-none text-volt"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0l-3.5-3.5a1 1 0 1 1 1.4-1.4l2.8 2.79 6.8-6.79a1 1 0 0 1 1.4 0Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span class="text-base text-ink/80">{perk}</span>
+            </Reveal>
+          ))
+        }
+      </ul>
+
+      <Reveal delay={320} class="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        <Button href={stores.shopee} variant="shopee" external class="w-full sm:w-auto">
+          Comprar en Shopee
+        </Button>
+        <Button href={stores.mercadolibre} variant="meli" external class="w-full sm:w-auto">
+          Comprar en Mercado Libre
+        </Button>
+      </Reveal>
+    </div>
+  </div>
+</Section>

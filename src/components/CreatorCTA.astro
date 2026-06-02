@@ -1,0 +1,30 @@
+---
+import { creatorCta } from '@/data/site';
+import Reveal from './Reveal.astro';
+import Button from './Button.astro';
+---
+
+<section
+  id="creadores"
+  aria-labelledby="creadores-title"
+  class="bg-volt text-ink"
+>
+  <div
+    class="mx-auto w-full max-w-4xl px-5 py-20 text-center sm:px-8 sm:py-28 lg:py-32"
+  >
+    <Reveal as="p" class="text-sm font-semibold uppercase tracking-[0.2em]">
+      {creatorCta.eyebrow}
+    </Reveal>
+    <Reveal as="h2" delay={60} class="mx-auto mt-4 max-w-3xl text-4xl sm:text-6xl">
+      <span id="creadores-title">{creatorCta.title}</span>
+    </Reveal>
+    <Reveal as="p" delay={120} class="mx-auto mt-6 max-w-2xl text-lg text-ink/80">
+      {creatorCta.text}
+    </Reveal>
+    <Reveal delay={180} class="mt-9">
+      <Button href={creatorCta.cta.href} variant="outline" external>
+        {creatorCta.cta.label}
+      </Button>
+    </Reveal>
+  </div>
+</section>

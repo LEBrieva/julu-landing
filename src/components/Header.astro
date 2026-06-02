@@ -1,0 +1,95 @@
+---
+import { Image } from 'astro:assets';
+import { brand, nav, stores } from '@/data/site';
+import Button from './Button.astro';
+import logo from '@/assets/logo.png';
+---
+
+<header
+  class="sticky top-0 z-40 border-b border-ink/10 bg-paper/80 backdrop-blur-md"
+>
+  <nav
+    aria-label="Navegación principal"
+    class="mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-3 sm:px-8 lg:px-12"
+  >
+    <a href="#top" class="shrink-0" aria-label={`${brand.name} — inicio`}>
+      <Image
+        src={logo}
+        alt={brand.name}
+        widths={[80, 120, 160]}
+        sizes="64px"
+        class="h-10 w-auto sm:h-11"
+      />
+    </a>
+
+    <!-- Links desktop -->
+    <ul class="hidden items-center gap-7 md:flex">
+      {
+        nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="text-sm font-medium text-ink/70 transition-colors hover:text-ink"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="hidden md:block">
+      <Button href={stores.mercadolibre} variant="primary" external>
+        Comprar
+      </Button>
+    </div>
+
+    <!-- Menú mobile (nativo, accesible, sin JS) -->
+    <details class="relative md:hidden">
+      <summary
+        class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-pill text-ink [&::-webkit-details-marker]:hidden"
+        aria-label="Abrir menú"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </summary>
+      <ul
+        class="absolute right-0 mt-3 w-56 rounded-card border border-ink/10 bg-paper p-2 shadow-xl"
+      >
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="block rounded-lg px-4 py-2.5 text-sm font-medium text-ink/80 hover:bg-ink/5"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li class="px-2 pb-1 pt-2">
+          <Button
+            href={stores.mercadolibre}
+            variant="primary"
+            external
+            class="w-full"
+          >
+            Comprar
+          </Button>
+        </li>
+      </ul>
+    </details>
+  </nav>
+</header>

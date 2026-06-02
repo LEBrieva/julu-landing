@@ -1,0 +1,58 @@
+---
+import { Image } from 'astro:assets';
+import { concept } from '@/data/site';
+import Section from './Section.astro';
+import Reveal from './Reveal.astro';
+---
+
+<Section id="concepto" tone="paper" labelledby="concepto-title">
+  <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+    <!-- Texto -->
+    <div>
+      <Reveal as="p" class="text-sm font-semibold uppercase tracking-[0.2em] text-volt">
+        {concept.eyebrow}
+      </Reveal>
+      <Reveal as="h2" delay={60} class="mt-4 text-4xl sm:text-5xl">
+        <span id="concepto-title">{concept.title}</span>
+      </Reveal>
+
+      <div class="mt-6 space-y-4 text-lg leading-relaxed text-muted">
+        {
+          concept.paragraphs.map((p, i) => (
+            <Reveal as="p" delay={120 + i * 60}>
+              {p}
+            </Reveal>
+          ))
+        }
+      </div>
+
+      <ul class="mt-9 grid gap-4 sm:grid-cols-3">
+        {
+          concept.highlights.map((h, i) => (
+            <Reveal as="li" delay={140 + i * 80} class="border-l-2 border-volt pl-4">
+              <p class="font-display text-lg font-bold text-ink">{h.label}</p>
+              <p class="text-sm text-muted">{h.detail}</p>
+            </Reveal>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Imagen -->
+    <Reveal delay={100} class="relative">
+      <div class="overflow-hidden rounded-card">
+        <Image
+          src={concept.image}
+          alt={concept.imageAlt}
+          widths={[480, 720, 1080]}
+          sizes="(min-width: 1024px) 45vw, 90vw"
+          loading="lazy"
+          class="aspect-[4/5] w-full object-cover"
+        />
+      </div>
+      <span
+        class="absolute -bottom-4 -left-4 -z-0 hidden h-24 w-24 rounded-card bg-volt lg:block"
+        aria-hidden="true"></span>
+    </Reveal>
+  </div>
+</Section>

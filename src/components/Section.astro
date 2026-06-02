@@ -1,0 +1,40 @@
+---
+type Tone = 'paper' | 'ink' | 'cream';
+
+interface Props {
+  id?: string;
+  tone?: Tone;
+  /** Quita el padding horizontal del contenedor (para secciones full-bleed). */
+  flush?: boolean;
+  class?: string;
+  labelledby?: string;
+}
+
+const {
+  id,
+  tone = 'paper',
+  flush = false,
+  class: className = '',
+  labelledby,
+} = Astro.props;
+
+const tones: Record<Tone, string> = {
+  paper: 'bg-paper text-ink',
+  ink: 'bg-ink text-paper',
+  cream: 'bg-cream text-ink',
+};
+
+const inner = flush
+  ? 'w-full'
+  : 'mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12';
+---
+
+<section
+  id={id}
+  aria-labelledby={labelledby}
+  class={`py-20 sm:py-28 lg:py-36 ${tones[tone]} ${className}`}
+>
+  <div class={inner}>
+    <slot />
+  </div>
+</section>
