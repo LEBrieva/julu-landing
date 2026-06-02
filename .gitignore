@@ -29,3 +29,6 @@ pnpm-debug.log*
 
 # agent tooling (local)
 .atl/
+
+# logo animado sin usar (se mantiene local, fuera del repo)
+src/assets/ExportLogoBlack.gif
