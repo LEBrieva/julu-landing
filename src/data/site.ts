@@ -5,6 +5,7 @@
    acá. Para editar la marca no hace falta tocar componentes:
    cambiá los valores de este archivo.
 
+   El texto visible está en português brasileiro (marca para Brasil).
    Las imágenes son placeholders en src/assets/ — reemplazá los
    archivos manteniendo el mismo nombre y se reoptimizan solas.
    ============================================================ */
@@ -53,26 +54,26 @@ export const brand = {
   /** Tagline corto del hero. */
   tagline: 'ROUPAS PRA QUEM É VIBE',
   /** Frase de bienvenida del banner. */
-  welcome: 'Bienvenidos a JULU',
+  welcome: 'Bem-vindos à JULU',
   /** Origen / sello de la marca. */
-  origin: 'Diseño de autor · Industria brasilera',
+  origin: 'Design autoral · Indústria brasileira',
 } as const;
 
 /* ---------- SEO ---------- */
 export const seo = {
-  title: 'JULU — Ropa de autor para amantes de los gatos',
+  title: 'JULU — Roupas autorais para quem ama gatos',
   description:
-    'JULU es ropa de autor brasilera para mamás y papás michis. Diseños artísticos, no producción en serie. Remeras, oversized y cropped inspirados en los gatos que amamos.',
+    'A JULU é roupa autoral brasileira para mães e pais de gato. Designs artísticos, nada de produção em série. Camisetas, oversized e cropped inspirados nos gatos que a gente ama.',
   /** Imagen Open Graph (1200×630). Vive en /public/og/. */
   ogImage: '/og/og-image.jpg',
-  locale: 'es_AR',
+  locale: 'pt_BR',
   themeColor: '#0a0a0a',
 } as const;
 
 /* ---------- Links de tienda (globales) ---------- */
 export const stores: StoreLinks = {
   shopee: 'https://shopee.com.br/julu', // ← reemplazar por el link real
-  mercadolibre: 'https://articulo.mercadolibre.com.ar/julu', // ← reemplazar
+  mercadolibre: 'https://produto.mercadolivre.com.br/julu', // ← reemplazar
 };
 
 /* ---------- Redes y contacto ---------- */
@@ -81,48 +82,48 @@ export const social = {
   tiktok: { label: 'TikTok', href: 'https://tiktok.com/@julu' },
   whatsapp: {
     label: 'WhatsApp',
-    href: 'https://wa.me/5491100000000', // ← reemplazar por el número real
+    href: 'https://wa.me/5511900000000', // ← reemplazar por el número real (Brasil +55)
   },
-  email: { label: 'Email', href: 'mailto:hola@julu.com' },
+  email: { label: 'Email', href: 'mailto:ola@julu.com' },
 } as const;
 
 /* ---------- Navegación ---------- */
 export const nav: NavLink[] = [
-  { label: 'Qué es JULU', href: '#concepto' },
-  { label: 'Prendas', href: '#prendas' },
-  { label: 'Quiénes somos', href: '#nosotros' },
+  { label: 'O que é JULU', href: '#concepto' },
+  { label: 'Roupas', href: '#prendas' },
+  { label: 'Quem somos', href: '#nosotros' },
   { label: 'Lifestyle', href: '#lifestyle' },
-  { label: 'Creadores', href: '#creadores' },
+  { label: 'Criadores', href: '#creadores' },
 ];
 
 /* ---------- Hero ---------- */
 export const hero = {
   image: heroImg,
   imageAlt:
-    'Persona luciendo una prenda JULU de estampa felina sobre fondo urbano',
+    'Pessoa usando uma roupa JULU de estampa felina em fundo urbano',
   eyebrow: brand.origin,
   title: brand.welcome,
   subtitle: brand.tagline,
-  ctaPrimary: { label: 'Ver las prendas', href: '#prendas' },
-  ctaSecondary: { label: 'Conocé la historia', href: '#concepto' },
+  ctaPrimary: { label: 'Ver as roupas', href: '#prendas' },
+  ctaSecondary: { label: 'Conheça a história', href: '#concepto' },
 };
 
 /* ---------- Concepto: ¿Qué es JULU? ---------- */
 export const concept = {
   image: conceptImg,
   imageAlt:
-    'Pareja con remeras JULU blancas mostrando la estampa ALVARÁ de diseño de autor',
-  eyebrow: '¿Qué es JULU?',
-  title: 'No es una remera más. Es diseño de autor.',
+    'Casal com camisetas JULU brancas mostrando a estampa ALVARÁ de design autoral',
+  eyebrow: 'O que é JULU?',
+  title: 'Não é só mais uma camiseta. É design autoral.',
   paragraphs: [
-    'JULU nace en Brasil como un proyecto de diseño de autor: cada estampa es una obra pensada, dibujada y editada en tiradas chicas. Nada de producción en serie ni de lo que encontrás en cualquier cadena.',
-    'Nuestras prendas son para quienes aman a los gatos y quieren llevarlos puestos con orgullo. Remeras, oversized y cropped que combinan la actitud del streetwear con el cariño michi.',
-    'Comprás una pieza con historia: ediciones limitadas, materiales cuidados y un diseño que no vas a ver repetido en la calle.',
+    'A JULU nasce no Brasil como um projeto de design autoral: cada estampa é uma obra pensada, desenhada e editada em tiragens pequenas. Nada de produção em série nem do que você acha em qualquer loja de rede.',
+    'Nossas roupas são para quem ama gatos e quer vesti-los com orgulho. Camisetas, oversized e cropped que combinam a atitude do streetwear com o carinho gateiro.',
+    'Você leva uma peça com história: edições limitadas, materiais caprichados e um design que você não vai ver repetido por aí.',
   ],
   highlights: [
-    { label: 'Diseño de autor', detail: 'Estampas originales, no genéricas' },
-    { label: 'Ediciones limitadas', detail: 'Tiradas chicas, nada en serie' },
-    { label: 'Hecho en Brasil', detail: 'Calidad e identidad propia' },
+    { label: 'Design autoral', detail: 'Estampas originais, nada genérico' },
+    { label: 'Edições limitadas', detail: 'Tiragens pequenas, nada em série' },
+    { label: 'Feito no Brasil', detail: 'Qualidade e identidade própria' },
   ],
 };
 
@@ -130,39 +131,39 @@ export const concept = {
 export const storefront = {
   /** Captura de la tienda que se muestra dentro del mockup de celular. */
   image: storefrontImg,
-  imageAlt: 'Vista de la tienda online de JULU con las prendas disponibles',
-  eyebrow: 'Nuestra tienda',
-  title: '¿Te gustan? Comprá acá',
+  imageAlt: 'Vista da loja online da JULU com as roupas disponíveis',
+  eyebrow: 'Nossa loja',
+  title: 'Curtiu? Compre aqui',
   subtitle:
-    'Toda la colección, stock y precios actualizados están en nuestras tiendas oficiales. Elegí dónde comprar y te llevamos JULU a casa.',
+    'Toda a coleção, estoque e preços atualizados estão nas nossas lojas oficiais. Escolha onde comprar e a gente leva a JULU até você.',
   /** Puntos cortos de confianza que se muestran junto a los botones. */
   perks: [
-    'Stock y precios siempre al día',
-    'Compra protegida en cada plataforma',
-    'Ediciones limitadas — cuando se agotan, se agotan',
+    'Estoque e preços sempre em dia',
+    'Compra protegida em cada plataforma',
+    'Edições limitadas — quando esgota, esgotou',
   ],
 };
 
 /* ---------- ¿Quiénes están detrás? ---------- */
 export const behind = {
-  eyebrow: '¿Quiénes están detrás de esto?',
-  title: 'Una familia (gatuna) detrás de cada estampa',
+  eyebrow: 'Quem está por trás disso?',
+  title: 'Uma família (gateira) por trás de cada estampa',
   intro:
-    'JULU lo hacemos nosotros dos, junto a los cuatro michis que nos inspiran todos los días. Ellos son la marca.',
+    'A JULU somos nós dois, junto com os quatro gatos que nos inspiram todos os dias. Eles são a marca.',
 };
 
 export const founders: Person[] = [
   {
     name: 'Juli',
-    role: 'Diseño & dirección de arte',
-    bio: 'La mano detrás de cada estampa. Dibuja, edita y le pone alma a cada pieza.',
+    role: 'Design & direção de arte',
+    bio: 'A mão por trás de cada estampa. Desenha, edita e coloca alma em cada peça.',
     image: juli,
     nameInImage: true,
   },
   {
     name: 'Lucas',
-    role: 'Producción & comunidad',
-    bio: 'Lleva las ideas a la realidad y conecta a JULU con la comunidad michi.',
+    role: 'Produção & comunidade',
+    bio: 'Leva as ideias para a realidade e conecta a JULU com a comunidade gateira.',
     image: lucas,
     nameInImage: true,
   },
@@ -171,29 +172,29 @@ export const founders: Person[] = [
 export const cats: Person[] = [
   {
     name: 'Roge',
-    role: 'Director creativo (autoproclamado)',
-    bio: 'El jefe. Si una estampa no lo convence, se sienta encima hasta que la cambiamos.',
+    role: 'Diretor criativo (autoproclamado)',
+    bio: 'O chefe. Se uma estampa não o convence, senta em cima dela até a gente mudar.',
     image: roge,
     isCat: true,
   },
   {
     name: 'Minimichi',
-    role: 'La inspiración tierna',
-    bio: 'Chiquita pero con carácter. Su carita está en más de un diseño.',
+    role: 'A inspiração fofa',
+    bio: 'Pequena, mas cheia de personalidade. A carinha dela está em mais de um design.',
     image: minimichi,
     isCat: true,
   },
   {
     name: 'Negrito',
-    role: 'Musa nocturna',
-    bio: 'Elegante y misterioso. Le debemos toda la línea en negro.',
+    role: 'Musa noturna',
+    bio: 'Elegante e misterioso. A ele devemos toda a linha em preto.',
     image: negrito,
     isCat: true,
   },
   {
     name: 'Gordis',
-    role: 'Control de calidad',
-    bio: 'Prueba cada tela durmiendo encima. Si le gusta, sale a la venta.',
+    role: 'Controle de qualidade',
+    bio: 'Testa cada tecido dormindo em cima. Se ele aprova, vai pra venda.',
     image: gordis,
     isCat: true,
   },
@@ -201,26 +202,26 @@ export const cats: Person[] = [
 
 /* ---------- Lifestyle / Lookbook ---------- */
 export const lookbook = {
-  eyebrow: 'En la calle',
-  title: 'Así se vive JULU',
-  subtitle: 'Prendas pensadas para usar todos los días. Mirá y conseguí la tuya.',
+  eyebrow: 'Na rua',
+  title: 'Assim se vive a JULU',
+  subtitle: 'Roupas pensadas para usar todo dia. Veja e garanta a sua.',
   looks: [
-    { image: look1, alt: 'Look urbano con remera JULU de estampa felina' },
-    { image: look2, alt: 'Hoodie oversized JULU en contexto callejero' },
-    { image: look3, alt: 'Cropped JULU combinado en outfit de día' },
+    { image: look1, alt: 'Look urbano com camiseta JULU de estampa felina' },
+    { image: look2, alt: 'Moletom oversized JULU em contexto de rua' },
+    { image: look3, alt: 'Cropped JULU combinado em look de dia' },
   ],
 };
 
 /* ---------- CTA creadores de contenido ---------- */
 export const creatorCta = {
-  eyebrow: 'Colaboraciones',
-  title: '¿Sos creador de contenido?',
-  text: '¿Te gustaría lucir nuestras prendas y mostrarlas a tu comunidad? Nos encantaría trabajar con vos. Escribinos y armamos algo juntos.',
-  cta: { label: 'Contactanos', href: social.whatsapp.href },
+  eyebrow: 'Colaborações',
+  title: 'É criador de conteúdo?',
+  text: 'Quer usar nossas roupas e mostrar para a sua comunidade? A gente ia adorar trabalhar com você. Manda mensagem e a gente cria algo juntos.',
+  cta: { label: 'Fale com a gente', href: social.whatsapp.href },
 };
 
 /* ---------- Footer ---------- */
 export const footer = {
-  tagline: 'Diseño de autor para quienes aman a los gatos.',
-  copyright: `© ${'2025'} JULU. Todos los derechos reservados.`,
+  tagline: 'Design autoral para quem ama gatos.',
+  copyright: `© ${'2025'} JULU. Todos os direitos reservados.`,
 };
