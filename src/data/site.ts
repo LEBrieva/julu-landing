@@ -38,6 +38,8 @@ export interface Person {
   image: ImageMetadata;
   /** true para los michis — habilita un detalle visual distinto. */
   isCat?: boolean;
+  /** true cuando la imagen ya trae el nombre — oculta el título de la tarjeta. */
+  nameInImage?: boolean;
 }
 
 export interface NavLink {
@@ -108,7 +110,8 @@ export const hero = {
 /* ---------- Concepto: ¿Qué es JULU? ---------- */
 export const concept = {
   image: conceptImg,
-  imageAlt: 'Detalle de una prenda JULU con estampa de diseño de autor',
+  imageAlt:
+    'Pareja con remeras JULU blancas mostrando la estampa ALVARÁ de diseño de autor',
   eyebrow: '¿Qué es JULU?',
   title: 'No es una remera más. Es diseño de autor.',
   paragraphs: [
@@ -154,12 +157,14 @@ export const founders: Person[] = [
     role: 'Diseño & dirección de arte',
     bio: 'La mano detrás de cada estampa. Dibuja, edita y le pone alma a cada pieza.',
     image: juli,
+    nameInImage: true,
   },
   {
     name: 'Lucas',
     role: 'Producción & comunidad',
     bio: 'Lleva las ideas a la realidad y conecta a JULU con la comunidad michi.',
     image: lucas,
+    nameInImage: true,
   },
 ];
 

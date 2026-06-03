@@ -30,8 +30,13 @@ const { person } = Astro.props;
       )
     }
   </div>
-  <h3 class="mt-4 font-display text-xl font-bold">{person.name}</h3>
-  <p class="text-sm font-semibold uppercase tracking-wide text-volt">
+  {!person.nameInImage && <h3 class="mt-4 font-display text-xl font-bold">{person.name}</h3>}
+  <p
+    class:list={[
+      'text-sm font-semibold uppercase tracking-wide text-volt',
+      person.nameInImage && 'mt-4',
+    ]}
+  >
     {person.role}
   </p>
   <p class="mt-2 text-sm leading-relaxed text-muted-dark">{person.bio}</p>

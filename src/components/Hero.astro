@@ -15,77 +15,97 @@ const taglineLead = taglineWords.slice(0, -1).join(' ');
 const taglineAccent = taglineWords[taglineWords.length - 1];
 ---
 
+<!--
+  Hero SPLIT: copy a la izquierda sobre fondo oscuro + imagen vertical a la
+  derecha. Pensado para una foto en formato retrato. Cuando exista una versión
+  apaisada (wide) de la imagen, se puede volver al hero full-bleed con overlay.
+-->
 <section
   id="top"
-  class="relative flex min-h-[100svh] items-end overflow-hidden bg-ink text-paper"
+  class="relative overflow-hidden bg-ink text-paper"
 >
-  <!-- Imagen de fondo (LCP: carga prioritaria) -->
-  <Image
-    src={hero.image}
-    alt={hero.imageAlt}
-    widths={[640, 960, 1280, 1920]}
-    sizes="100vw"
-    loading="eager"
-    fetchpriority="high"
-    class="hero-bg absolute inset-0 -z-10 h-full w-full object-cover will-change-transform"
-  />
-  <!-- Overlay para contraste accesible del texto -->
+  <!-- Blob volt de fondo, detrás de la imagen, como acento de marca -->
   <div
-    class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/55 to-ink/20"
+    class="pointer-events-none absolute -right-24 top-1/2 -z-0 h-[42rem] w-[42rem] -translate-y-1/2 rounded-full bg-volt/15 blur-3xl"
     aria-hidden="true"
   >
   </div>
 
-  <div class="mx-auto w-full max-w-7xl px-5 pb-16 pt-28 sm:px-8 sm:pb-24 lg:px-12">
-    <p
-      data-reveal
-      class="mb-5 text-sm font-semibold uppercase tracking-[0.25em] text-amber"
-    >
-      {hero.eyebrow}
-    </p>
-    <h1
-      data-reveal
-      data-reveal-delay="80"
-      class="max-w-4xl text-4xl uppercase leading-[0.95] sm:text-7xl lg:text-8xl"
-    >
-      {titlePrefix}
-      <span class="sr-only">{brand.name}</span>
-      <!--
-        La palabra "JULU" usa la lettering del logo, en su propia línea como
-        wordmark. Se pinta con el color `paper` del tema (no el blanco puro del
-        PNG) vía máscara CSS, para que matchee el texto. El tamaño va en `em`
-        para escalar con el h1.
-      -->
-      <span
-        aria-hidden="true"
-        class="mt-1 block h-[2.25em] w-[3em] bg-paper"
-        style={`-webkit-mask:url(${logoWhite.src}) left/contain no-repeat;mask:url(${logoWhite.src}) left/contain no-repeat;`}
-      ></span>
-    </h1>
-    <p
-      data-reveal
-      data-reveal-delay="160"
-      class="mt-6 font-display text-2xl font-bold uppercase tracking-wide text-paper sm:text-3xl"
-    >
-      {taglineLead}{' '}<span class="text-volt">{taglineAccent}</span>
-    </p>
+  <div
+    class="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 pb-16 pt-28 sm:px-8 sm:pb-24 lg:min-h-[100svh] lg:grid-cols-2 lg:gap-12 lg:px-12 lg:py-0"
+  >
+    <!-- Columna de texto -->
+    <div class="order-2 lg:order-1">
+      <p
+        data-reveal
+        class="mb-5 text-sm font-semibold uppercase tracking-[0.25em] text-amber"
+      >
+        {hero.eyebrow}
+      </p>
+      <h1
+        data-reveal
+        data-reveal-delay="80"
+        class="text-4xl uppercase leading-[0.95] sm:text-6xl lg:text-7xl"
+      >
+        {titlePrefix}
+        <span class="sr-only">{brand.name}</span>
+        <!--
+          La palabra "JULU" usa la lettering del logo, en su propia línea como
+          wordmark. Se pinta con el color `paper` del tema (no el blanco puro
+          del PNG) vía máscara CSS, para que matchee el texto.
+        -->
+        <span
+          aria-hidden="true"
+          class="mt-1 block h-[2.25em] w-[3em] bg-paper"
+          style={`-webkit-mask:url(${logoWhite.src}) left/contain no-repeat;mask:url(${logoWhite.src}) left/contain no-repeat;`}
+        ></span>
+      </h1>
+      <p
+        data-reveal
+        data-reveal-delay="160"
+        class="mt-6 font-display text-2xl font-bold uppercase tracking-wide text-paper sm:text-3xl"
+      >
+        {taglineLead}{' '}<span class="text-volt">{taglineAccent}</span>
+      </p>
+      <div
+        data-reveal
+        data-reveal-delay="240"
+        class="mt-9 flex flex-wrap items-center gap-4"
+      >
+        <Button href={hero.ctaPrimary.href} variant="primary">
+          {hero.ctaPrimary.label}
+        </Button>
+        <Button href={hero.ctaSecondary.href} variant="outline-dark">
+          {hero.ctaSecondary.label}
+        </Button>
+      </div>
+    </div>
+
+    <!-- Columna de imagen (retrato) -->
     <div
       data-reveal
-      data-reveal-delay="240"
-      class="mt-9 flex flex-wrap items-center gap-4"
+      data-reveal-delay="120"
+      class="order-1 lg:order-2 lg:flex lg:h-[100svh] lg:items-center lg:justify-end"
     >
-      <Button href={hero.ctaPrimary.href} variant="primary">
-        {hero.ctaPrimary.label}
-      </Button>
-      <Button href={hero.ctaSecondary.href} variant="outline-dark">
-        {hero.ctaSecondary.label}
-      </Button>
+      <div
+        class="hero-media relative mx-auto w-full max-w-md overflow-hidden rounded-card shadow-2xl shadow-black/40 ring-1 ring-paper/10 lg:mx-0 lg:max-w-none lg:h-[82svh] lg:w-auto"
+      >
+        <Image
+          src={hero.image}
+          alt={hero.imageAlt}
+          widths={[480, 720, 1122]}
+          sizes="(min-width: 1024px) 45vw, 100vw"
+          loading="eager"
+          fetchpriority="high"
+          class="h-full w-full object-cover"
+        />
+      </div>
     </div>
   </div>
 
   <!-- Indicador de scroll -->
   <div
-    class="absolute bottom-6 left-1/2 -translate-x-1/2 text-paper/60"
+    class="absolute bottom-6 left-1/2 hidden -translate-x-1/2 text-paper/60 lg:block"
     aria-hidden="true"
   >
     <svg
@@ -109,13 +129,14 @@ const taglineAccent = taglineWords[taglineWords.length - 1];
     const prefersReduced = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     ).matches;
-    const bg = document.querySelector('.hero-bg');
+    const media = document.querySelector('.hero-media');
     const hero = document.getElementById('top');
-    if (prefersReduced || !bg || !hero) return;
+    if (prefersReduced || !media || !hero) return;
 
+    // Float sutil de la imagen al hacer scroll (en vez del parallax full-bleed).
     scroll(
-      animate(bg, { y: [0, 140], scale: [1, 1.12] }, { ease: 'linear' }),
-      { target: hero, offset: ['start start', 'end start'] }
+      animate(media, { y: [40, -40] }, { ease: 'linear' }),
+      { target: hero, offset: ['start end', 'end start'] }
     );
   }
 
