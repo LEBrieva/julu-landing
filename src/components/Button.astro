@@ -8,6 +8,8 @@ interface Props {
   external?: boolean;
   class?: string;
   ariaLabel?: string;
+  /** Atributos extra (data-*, type, etc.) se reenvían al elemento. */
+  [key: string]: unknown;
 }
 
 const {
@@ -16,6 +18,7 @@ const {
   external = false,
   class: className = '',
   ariaLabel,
+  ...rest
 } = Astro.props;
 
 const base =
@@ -42,6 +45,7 @@ const Tag = href ? 'a' : 'button';
   rel={rel}
   class={classes}
   aria-label={ariaLabel}
+  {...rest}
 >
   <slot />
 </Tag>

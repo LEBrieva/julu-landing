@@ -220,6 +220,38 @@ export const creatorCta = {
   cta: { label: 'Fale com a gente', href: social.whatsapp.href },
 };
 
+/* ---------- Newsletter (popup) ----------
+   El popup junta e-mails para avisar de lançamentos y cupones.
+   ───────────────────────────────────────────────────────────
+   ENCHUFAR BREVO (cuando tengas la cuenta):
+   1. En Brevo creá un formulario de suscripción (Contactos → Formularios).
+   2. Copiá la "serve URL" del form (termina en sibforms.com/serve/...).
+   3. Pegala en `action` acá abajo. Listo, ya guarda los e-mails.
+   Mientras `action` esté vacío, el popup funciona en MODO DEMO:
+   valida y muestra el "gracias", pero no envía nada a ningún lado.
+   ─────────────────────────────────────────────────────────── */
+export const newsletter = {
+  /** Serve URL del form de Brevo. Vacío = modo demo (no envía). */
+  action: 'https://a9319d5d.sibforms.com/serve/MUIFAAIAMX5T6pXXKM9VO_h_3oMtT28K7z3aeL1hyqACMI3Y6TSjqFRz24l41usauXu15afOU5eGlTqk49nB0AbGyG6ZSmBamEhY9VOZ4d4l0dSPk4zDEufCEJRyVQ67xiNI2yNHuN-0bFc9sUZ43w_caIvtq43ZM4OfRI5yFLG_R46kJ_ntV_7e5ZA6Bo7GllyPSS4lSBf7FayZfg==',
+  /** Nombre del campo de e-mail que espera el form de Brevo. */
+  emailField: 'EMAIL',
+  /** Fracción de scroll (0–1) a partir de la cual aparece el popup. */
+  scrollTrigger: 0.45,
+  /** Días de espera para volver a mostrarlo si lo cerró sin suscribirse. */
+  remindAfterDays: 7,
+  eyebrow: 'Clube JULU',
+  title: 'Entra na ninhada',
+  text: 'Cadastre seu e-mail e seja a primeira pessoa a saber dos lançamentos, edições limitadas e cupons miados só pra você.',
+  emailPlaceholder: 'seu melhor e-mail',
+  submitLabel: 'Quero entrar',
+  consent:
+    'Ao se cadastrar, você aceita receber e-mails da JULU. Dá pra sair quando quiser.',
+  successTitle: 'Quase lá! 🐾',
+  successText:
+    'Enviamos um e-mail pra você confirmar a inscrição. Dá uma olhada na caixa de entrada (e no spam, por via das dúvidas).',
+  errorText: 'Ops, confere o e-mail e tenta de novo.',
+} as const;
+
 /* ---------- Footer ---------- */
 export const footer = {
   tagline: 'Design autoral para quem ama gatos.',
