@@ -15,6 +15,7 @@ const descId = 'newsletter-desc';
   class="pointer-events-none fixed inset-0 z-[60] hidden items-center justify-center p-4"
   data-error-text={newsletter.errorText}
   data-robot-error={newsletter.robotError}
+  data-send-error={newsletter.sendError}
   data-scroll-trigger={newsletter.scrollTrigger}
   data-remind-days={newsletter.remindAfterDays}
 >
@@ -143,6 +144,7 @@ const descId = 'newsletter-desc';
 
     const errorText = root.dataset.errorText || 'Ops, tenta de novo.';
     const robotError = root.dataset.robotError || errorText;
+    const sendError = root.dataset.sendError || errorText;
     const widget = root.querySelector<HTMLElement>('.cf-turnstile');
     const scrollTrigger = parseFloat(root.dataset.scrollTrigger || '0.45');
     const remindDays = parseInt(root.dataset.remindDays || '7', 10);
@@ -290,7 +292,9 @@ const descId = 'newsletter-desc';
         if (!res.ok || !data.ok) {
           resetCaptcha();
           if (submitLabel) submitLabel.textContent = originalLabel;
-          showError(data?.error === 'captcha' ? robotError : errorText);
+          if (data?.error === 'captcha') showError(robotError);
+          else if (data?.error === 'email') showError(errorText);
+          else showError(sendError);
           return;
         }
         remember('subscribed');
@@ -298,7 +302,7 @@ const descId = 'newsletter-desc';
       } catch {
         resetCaptcha();
         if (submitLabel) submitLabel.textContent = originalLabel;
-        showError(errorText);
+        showError(sendError);
       }
     });
 

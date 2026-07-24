@@ -17,6 +17,7 @@ const titleId = 'newsletter-section-title';
   class="bg-cream text-ink"
   data-error-text={newsletter.errorText}
   data-robot-error={newsletter.robotError}
+  data-send-error={newsletter.sendError}
 >
   <div class="mx-auto w-full max-w-2xl px-5 py-20 text-center sm:px-8 sm:py-28 lg:py-32">
     <Reveal as="p" class="text-xs font-semibold uppercase tracking-[0.2em] text-ink/55">
@@ -100,6 +101,7 @@ const titleId = 'newsletter-section-title';
 
     const errorText = root.dataset.errorText || 'Ops, tenta de novo.';
     const robotError = root.dataset.robotError || errorText;
+    const sendError = root.dataset.sendError || errorText;
     const widget = root.querySelector<HTMLElement>('.cf-turnstile');
 
     function isValidEmail(value: string): boolean {
@@ -169,7 +171,9 @@ const titleId = 'newsletter-section-title';
         if (!res.ok || !data.ok) {
           resetCaptcha();
           if (submitLabel) submitLabel.textContent = originalLabel;
-          showError(data?.error === 'captcha' ? robotError : errorText);
+          if (data?.error === 'captcha') showError(robotError);
+          else if (data?.error === 'email') showError(errorText);
+          else showError(sendError);
           return;
         }
         remember();
@@ -177,7 +181,7 @@ const titleId = 'newsletter-section-title';
       } catch {
         resetCaptcha();
         if (submitLabel) submitLabel.textContent = originalLabel;
-        showError(errorText);
+        showError(sendError);
       }
     });
   }

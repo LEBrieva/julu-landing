@@ -254,6 +254,7 @@ export const newsletter = {
     'Pronto, seu e-mail já está na lista. Fica de olho: lançamentos, edições limitadas e cupons miados chegam por aí.',
   errorText: 'Ops, confere o e-mail e tenta de novo.',
   robotError: 'Confirme que você não é um robô e tenta de novo.',
+  sendError: 'Ops, algo deu errado. Tenta de novo em instantes.',
 } as const;
 
 /* ---------- Footer ---------- */
