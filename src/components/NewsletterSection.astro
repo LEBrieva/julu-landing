@@ -1,0 +1,158 @@
+---
+import { newsletter } from '@/data/site';
+import Reveal from './Reveal.astro';
+import Button from './Button.astro';
+
+const titleId = 'newsletter-section-title';
+---
+
+{/* Sección fija de suscripción al newsletter (siempre visible, antes del footer).
+    Reusa el mismo Brevo (newsletter.action) y la misma copy que el popup.
+    Si alguien se suscribe acá, guardamos el mismo localStorage que usa el
+    popup para que no lo vuelva a molestar. */}
+<section
+  id="newsletter"
+  aria-labelledby={titleId}
+  class="bg-cream text-ink"
+  data-action={newsletter.action}
+  data-email-field={newsletter.emailField}
+>
+  <div class="mx-auto w-full max-w-2xl px-5 py-20 text-center sm:px-8 sm:py-28 lg:py-32">
+    <Reveal as="p" class="text-xs font-semibold uppercase tracking-[0.2em] text-ink/55">
+      {newsletter.eyebrow}
+    </Reveal>
+    <Reveal as="h2" delay={60} class="mx-auto mt-4 max-w-xl text-4xl sm:text-5xl">
+      <span id={titleId}>{newsletter.title}</span>
+    </Reveal>
+    <Reveal as="p" delay={120} class="mx-auto mt-5 max-w-xl text-lg text-muted">
+      {newsletter.text}
+    </Reveal>
+
+    {/* Estado: formulario */}
+    <div data-nls-form-state class="mt-9">
+      <form data-nls-form class="mx-auto flex max-w-md flex-col gap-3 sm:flex-row" novalidate>
+        <label for="newsletter-section-email" class="sr-only">E-mail</label>
+        <input
+          id="newsletter-section-email"
+          type="email"
+          name="email"
+          inputmode="email"
+          autocomplete="email"
+          required
+          placeholder={newsletter.emailPlaceholder}
+          class="w-full rounded-pill border-2 border-ink/15 bg-white px-5 py-3.5 text-base text-ink placeholder:text-muted/70 focus:border-volt focus:outline-none"
+        />
+        <Button variant="primary" class="shrink-0" ariaLabel={newsletter.submitLabel}>
+          <span data-nls-submit-label>{newsletter.submitLabel}</span>
+        </Button>
+      </form>
+
+      <p
+        data-nls-error
+        class="mt-3 hidden text-sm font-medium text-volt"
+        role="alert"
+      >
+        {newsletter.errorText}
+      </p>
+
+      <p class="mx-auto mt-4 max-w-md text-xs leading-relaxed text-muted">
+        {newsletter.consent}
+      </p>
+    </div>
+
+    {/* Estado: éxito */}
+    <div data-nls-success-state class="hidden py-4">
+      <div
+        class="mx-auto flex h-16 w-16 items-center justify-center rounded-pill bg-volt/20 text-3xl"
+        aria-hidden="true"
+      >
+        🐾
+      </div>
+      <h2 class="mt-5 text-3xl">{newsletter.successTitle}</h2>
+      <p class="mx-auto mt-3 max-w-md text-base text-muted">{newsletter.successText}</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Mismo key que el popup: suscribirse acá también silencia el popup.
+  const STORAGE_KEY = 'julu:newsletter';
+
+  function initNewsletterSection() {
+    const root = document.getElementById('newsletter');
+    if (!root || root.dataset.bound === 'true') return;
+    root.dataset.bound = 'true';
+
+    const form = root.querySelector<HTMLFormElement>('[data-nls-form]');
+    const input = root.querySelector<HTMLInputElement>('#newsletter-section-email');
+    const errorEl = root.querySelector<HTMLElement>('[data-nls-error]');
+    const submitLabel = root.querySelector<HTMLElement>('[data-nls-submit-label]');
+    const formState = root.querySelector<HTMLElement>('[data-nls-form-state]');
+    const successState = root.querySelector<HTMLElement>('[data-nls-success-state]');
+
+    if (!form || !input) return;
+
+    const action = root.dataset.action || '';
+    const emailField = root.dataset.emailField || 'EMAIL';
+
+    function isValidEmail(value: string): boolean {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    }
+
+    function showError() {
+      errorEl?.classList.remove('hidden');
+      input.setAttribute('aria-invalid', 'true');
+      input.focus();
+    }
+
+    function remember() {
+      try {
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify({ status: 'subscribed', at: Date.now() })
+        );
+      } catch {
+        /* localStorage no disponible — no rompemos */
+      }
+    }
+
+    function showSuccess() {
+      formState?.classList.add('hidden');
+      successState?.classList.remove('hidden');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl?.classList.add('hidden');
+      input.removeAttribute('aria-invalid');
+
+      const email = input.value.trim();
+      if (!isValidEmail(email)) {
+        showError();
+        return;
+      }
+
+      const originalLabel = submitLabel?.textContent ?? '';
+      if (submitLabel) submitLabel.textContent = 'Enviando…';
+
+      try {
+        if (action) {
+          // Brevo: posteamos a la "serve URL". no-cors evita el bloqueo CORS
+          // (la respuesta queda opaca, asumimos OK — igual que el popup).
+          const fd = new FormData();
+          fd.append(emailField, email);
+          await fetch(action, { method: 'POST', body: fd, mode: 'no-cors' });
+        } else {
+          await new Promise((r) => window.setTimeout(r, 500));
+        }
+        remember();
+        showSuccess();
+      } catch {
+        if (submitLabel) submitLabel.textContent = originalLabel;
+        showError();
+      }
+    });
+  }
+
+  document.addEventListener('astro:page-load', initNewsletterSection);
+</script>
