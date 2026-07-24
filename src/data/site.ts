@@ -246,9 +246,9 @@ export const newsletter = {
   submitLabel: 'Quero entrar',
   consent:
     'Ao se cadastrar, você aceita receber e-mails da JULU. Dá pra sair quando quiser.',
-  successTitle: 'Quase lá! 🐾',
+  successTitle: 'Agora você é da ninhada! 🐾',
   successText:
-    'Enviamos um e-mail pra você confirmar a inscrição. Dá uma olhada na caixa de entrada (e no spam, por via das dúvidas).',
+    'Pronto, seu e-mail já está na lista. Fica de olho: lançamentos, edições limitadas e cupons miados chegam por aí.',
   errorText: 'Ops, confere o e-mail e tenta de novo.',
 } as const;
 
