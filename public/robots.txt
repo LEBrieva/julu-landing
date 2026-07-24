@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://julu.example.com/sitemap-index.xml
+Sitemap: https://julu.clothing/sitemap-index.xml

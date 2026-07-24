@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // Cambiá esta URL por el dominio final de producción.
 // Se usa para el sitemap, las URLs canónicas y las meta tags Open Graph.
-const SITE_URL = 'https://julu.example.com';
+const SITE_URL = 'https://julu.clothing';
 
 // https://astro.build/config
 export default defineConfig({
