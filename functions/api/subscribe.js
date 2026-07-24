@@ -65,14 +65,34 @@ export async function onRequestPost(context) {
   }
   if (!outcome?.success) return json({ ok: false, error: 'captcha' }, 403);
 
-  // 2. Reenviar a Brevo (server-side, mismo serve URL que el form del navegador)
+  // 2. Reenviar a Brevo (server-side, mismo serve URL que el form del navegador).
+  //    Brevo tiene anti-abuso en el serve: rechaza (success:false) los POST
+  //    "pelados". Con headers de navegador (Origin/Referer/User-Agent) responde
+  //    success:true de forma consistente. Chequeamos el `success` del body,
+  //    no solo el status.
   try {
     const fd = new FormData();
     fd.append(EMAIL_FIELD, email);
-    const bres = await fetch(SERVE_URL, { method: 'POST', body: fd });
-    // El serve de Brevo responde 2xx (o redirige a su página de confirmación).
-    // Tratamos cualquier respuesta < 400 como alta OK.
-    if (bres.status < 400) return json({ ok: true });
+    fd.append('email_address_check', ''); // honeypot vacío (como el form real)
+    fd.append('locale', 'pt');
+    const bres = await fetch(SERVE_URL, {
+      method: 'POST',
+      headers: {
+        Origin: 'https://julu.clothing',
+        Referer: 'https://julu.clothing/',
+        'User-Agent':
+          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36',
+        Accept: 'application/json',
+      },
+      body: fd,
+    });
+    let bdata = null;
+    try {
+      bdata = await bres.json();
+    } catch {
+      /* respuesta no-JSON */
+    }
+    if (bres.ok && bdata && bdata.success === true) return json({ ok: true });
     return json({ ok: false, error: 'brevo' }, 502);
   } catch {
     return json({ ok: false, error: 'network' }, 502);
