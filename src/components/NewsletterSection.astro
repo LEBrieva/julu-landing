@@ -20,6 +20,8 @@ const titleId = 'newsletter-section-title';
   data-send-error={newsletter.sendError}
 >
   <div class="mx-auto w-full max-w-2xl px-5 py-20 text-center sm:px-8 sm:py-28 lg:py-32">
+    {/* Estado: default (encabezado + formulario) */}
+    <div data-nls-default>
     <Reveal as="p" class="text-xs font-semibold uppercase tracking-[0.2em] text-ink/55">
       {newsletter.eyebrow}
     </Reveal>
@@ -65,10 +67,14 @@ const titleId = 'newsletter-section-title';
       <p class="mx-auto mt-4 max-w-md text-xs leading-relaxed text-muted">
         {newsletter.consent}
       </p>
+      </div>
     </div>
 
-    {/* Estado: éxito */}
-    <div data-nls-success-state class="hidden py-4">
+    {/* Estado: éxito (tarjeta contenida, reemplaza al encabezado) */}
+    <div
+      data-nls-success-state
+      class="mx-auto hidden max-w-md rounded-card bg-paper px-8 py-10 shadow-xl ring-1 ring-ink/5"
+    >
       <div
         class="mx-auto flex h-16 w-16 items-center justify-center rounded-pill bg-volt/20 text-3xl"
         aria-hidden="true"
@@ -76,7 +82,7 @@ const titleId = 'newsletter-section-title';
         🐾
       </div>
       <h2 class="mt-5 text-3xl">{newsletter.successTitle}</h2>
-      <p class="mx-auto mt-3 max-w-md text-base text-muted">{newsletter.successText}</p>
+      <p class="mx-auto mt-3 text-base text-muted">{newsletter.successText}</p>
     </div>
   </div>
 </section>
@@ -94,7 +100,7 @@ const titleId = 'newsletter-section-title';
     const input = root.querySelector<HTMLInputElement>('#newsletter-section-email');
     const errorEl = root.querySelector<HTMLElement>('[data-nls-error]');
     const submitLabel = root.querySelector<HTMLElement>('[data-nls-submit-label]');
-    const formState = root.querySelector<HTMLElement>('[data-nls-form-state]');
+    const defaultState = root.querySelector<HTMLElement>('[data-nls-default]');
     const successState = root.querySelector<HTMLElement>('[data-nls-success-state]');
 
     if (!form || !input) return;
@@ -129,7 +135,7 @@ const titleId = 'newsletter-section-title';
     }
 
     function showSuccess() {
-      formState?.classList.add('hidden');
+      defaultState?.classList.add('hidden');
       successState?.classList.remove('hidden');
     }
 
