@@ -235,6 +235,9 @@ export const newsletter = {
   action: 'https://a9319d5d.sibforms.com/serve/MUIFAAIAMX5T6pXXKM9VO_h_3oMtT28K7z3aeL1hyqACMI3Y6TSjqFRz24l41usauXu15afOU5eGlTqk49nB0AbGyG6ZSmBamEhY9VOZ4d4l0dSPk4zDEufCEJRyVQ67xiNI2yNHuN-0bFc9sUZ43w_caIvtq43ZM4OfRI5yFLG_R46kJ_ntV_7e5ZA6Bo7GllyPSS4lSBf7FayZfg==',
   /** Nombre del campo de e-mail que espera el form de Brevo. */
   emailField: 'EMAIL',
+  /** Site key (pública) de Cloudflare Turnstile. El secret va en la env var
+   *  TURNSTILE_SECRET de Cloudflare Pages (lo usa functions/api/subscribe.js). */
+  turnstileSiteKey: '0x4AAAAAAD8m2yL6CpF7Gazr',
   /** Fracción de scroll (0–1) a partir de la cual aparece el popup. */
   scrollTrigger: 0.45,
   /** Días de espera para volver a mostrarlo si lo cerró sin suscribirse. */
@@ -250,6 +253,7 @@ export const newsletter = {
   successText:
     'Pronto, seu e-mail já está na lista. Fica de olho: lançamentos, edições limitadas e cupons miados chegam por aí.',
   errorText: 'Ops, confere o e-mail e tenta de novo.',
+  robotError: 'Confirme que você não é um robô e tenta de novo.',
 } as const;
 
 /* ---------- Footer ---------- */

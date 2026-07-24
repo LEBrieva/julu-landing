@@ -7,15 +7,16 @@ const titleId = 'newsletter-section-title';
 ---
 
 {/* Sección fija de suscripción al newsletter (siempre visible, antes del footer).
-    Reusa el mismo Brevo (newsletter.action) y la misma copy que el popup.
+    Reusa la misma copy que el popup. El envío pasa por la Pages Function
+    /api/subscribe (verifica Turnstile y reenvía a Brevo server-side).
     Si alguien se suscribe acá, guardamos el mismo localStorage que usa el
     popup para que no lo vuelva a molestar. */}
 <section
   id="newsletter"
   aria-labelledby={titleId}
   class="bg-cream text-ink"
-  data-action={newsletter.action}
-  data-email-field={newsletter.emailField}
+  data-error-text={newsletter.errorText}
+  data-robot-error={newsletter.robotError}
 >
   <div class="mx-auto w-full max-w-2xl px-5 py-20 text-center sm:px-8 sm:py-28 lg:py-32">
     <Reveal as="p" class="text-xs font-semibold uppercase tracking-[0.2em] text-ink/55">
@@ -30,21 +31,26 @@ const titleId = 'newsletter-section-title';
 
     {/* Estado: formulario */}
     <div data-nls-form-state class="mt-9">
-      <form data-nls-form class="mx-auto flex max-w-md flex-col gap-3 sm:flex-row" novalidate>
+      <form data-nls-form class="mx-auto max-w-md" novalidate>
         <label for="newsletter-section-email" class="sr-only">E-mail</label>
-        <input
-          id="newsletter-section-email"
-          type="email"
-          name="email"
-          inputmode="email"
-          autocomplete="email"
-          required
-          placeholder={newsletter.emailPlaceholder}
-          class="w-full rounded-pill border-2 border-ink/15 bg-white px-5 py-3.5 text-base text-ink placeholder:text-muted/70 focus:border-volt focus:outline-none"
-        />
-        <Button variant="primary" class="shrink-0" ariaLabel={newsletter.submitLabel}>
-          <span data-nls-submit-label>{newsletter.submitLabel}</span>
-        </Button>
+        <div class="flex flex-col gap-3 sm:flex-row">
+          <input
+            id="newsletter-section-email"
+            type="email"
+            name="email"
+            inputmode="email"
+            autocomplete="email"
+            required
+            placeholder={newsletter.emailPlaceholder}
+            class="w-full rounded-pill border-2 border-ink/15 bg-white px-5 py-3.5 text-base text-ink placeholder:text-muted/70 focus:border-volt focus:outline-none"
+          />
+          <Button variant="primary" class="shrink-0" ariaLabel={newsletter.submitLabel}>
+            <span data-nls-submit-label>{newsletter.submitLabel}</span>
+          </Button>
+        </div>
+        <div class="mt-4 flex justify-center">
+          <div class="cf-turnstile" data-sitekey={newsletter.turnstileSiteKey} data-theme="light"></div>
+        </div>
       </form>
 
       <p
@@ -92,15 +98,19 @@ const titleId = 'newsletter-section-title';
 
     if (!form || !input) return;
 
-    const action = root.dataset.action || '';
-    const emailField = root.dataset.emailField || 'EMAIL';
+    const errorText = root.dataset.errorText || 'Ops, tenta de novo.';
+    const robotError = root.dataset.robotError || errorText;
+    const widget = root.querySelector<HTMLElement>('.cf-turnstile');
 
     function isValidEmail(value: string): boolean {
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
     }
 
-    function showError() {
-      errorEl?.classList.remove('hidden');
+    function showError(message: string) {
+      if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.classList.remove('hidden');
+      }
       input.setAttribute('aria-invalid', 'true');
       input.focus();
     }
@@ -121,6 +131,14 @@ const titleId = 'newsletter-section-title';
       successState?.classList.remove('hidden');
     }
 
+    function resetCaptcha() {
+      try {
+        (window as any).turnstile?.reset(widget);
+      } catch {
+        /* noop */
+      }
+    }
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       errorEl?.classList.add('hidden');
@@ -128,7 +146,13 @@ const titleId = 'newsletter-section-title';
 
       const email = input.value.trim();
       if (!isValidEmail(email)) {
-        showError();
+        showError(errorText);
+        return;
+      }
+
+      const token = new FormData(form).get('cf-turnstile-response')?.toString() || '';
+      if (!token) {
+        showError(robotError);
         return;
       }
 
@@ -136,20 +160,24 @@ const titleId = 'newsletter-section-title';
       if (submitLabel) submitLabel.textContent = 'Enviando…';
 
       try {
-        if (action) {
-          // Brevo: posteamos a la "serve URL". no-cors evita el bloqueo CORS
-          // (la respuesta queda opaca, asumimos OK — igual que el popup).
-          const fd = new FormData();
-          fd.append(emailField, email);
-          await fetch(action, { method: 'POST', body: fd, mode: 'no-cors' });
-        } else {
-          await new Promise((r) => window.setTimeout(r, 500));
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, token }),
+        });
+        const data = await res.json().catch(() => ({ ok: res.ok }));
+        if (!res.ok || !data.ok) {
+          resetCaptcha();
+          if (submitLabel) submitLabel.textContent = originalLabel;
+          showError(data?.error === 'captcha' ? robotError : errorText);
+          return;
         }
         remember();
         showSuccess();
       } catch {
+        resetCaptcha();
         if (submitLabel) submitLabel.textContent = originalLabel;
-        showError();
+        showError(errorText);
       }
     });
   }
