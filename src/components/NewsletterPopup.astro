@@ -13,8 +13,9 @@ const descId = 'newsletter-desc';
 <div
   id="newsletter-popup"
   class="pointer-events-none fixed inset-0 z-[60] hidden items-center justify-center p-4"
-  data-action={newsletter.action}
-  data-email-field={newsletter.emailField}
+  data-error-text={newsletter.errorText}
+  data-robot-error={newsletter.robotError}
+  data-send-error={newsletter.sendError}
   data-scroll-trigger={newsletter.scrollTrigger}
   data-remind-days={newsletter.remindAfterDays}
 >
@@ -88,6 +89,10 @@ const descId = 'newsletter-desc';
             {newsletter.errorText}
           </p>
 
+          <div class="mt-4 flex justify-center">
+            <div class="cf-turnstile" data-sitekey={newsletter.turnstileSiteKey} data-theme="light"></div>
+          </div>
+
           <Button variant="primary" class="mt-4 w-full" ariaLabel={newsletter.submitLabel}>
             <span data-newsletter-submit-label>{newsletter.submitLabel}</span>
           </Button>
@@ -137,8 +142,10 @@ const descId = 'newsletter-desc';
 
     if (!panel || !form || !input) return;
 
-    const action = root.dataset.action || '';
-    const emailField = root.dataset.emailField || 'EMAIL';
+    const errorText = root.dataset.errorText || 'Ops, tenta de novo.';
+    const robotError = root.dataset.robotError || errorText;
+    const sendError = root.dataset.sendError || errorText;
+    const widget = root.querySelector<HTMLElement>('.cf-turnstile');
     const scrollTrigger = parseFloat(root.dataset.scrollTrigger || '0.45');
     const remindDays = parseInt(root.dataset.remindDays || '7', 10);
 
@@ -232,8 +239,11 @@ const descId = 'newsletter-desc';
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
     }
 
-    function showError() {
-      errorEl?.classList.remove('hidden');
+    function showError(message: string) {
+      if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.classList.remove('hidden');
+      }
       input.setAttribute('aria-invalid', 'true');
       input.focus();
     }
@@ -243,6 +253,14 @@ const descId = 'newsletter-desc';
       successState?.classList.remove('hidden');
     }
 
+    function resetCaptcha() {
+      try {
+        (window as any).turnstile?.reset(widget);
+      } catch {
+        /* noop */
+      }
+    }
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       errorEl?.classList.add('hidden');
@@ -250,7 +268,13 @@ const descId = 'newsletter-desc';
 
       const email = input.value.trim();
       if (!isValidEmail(email)) {
-        showError();
+        showError(errorText);
+        return;
+      }
+
+      const token = new FormData(form).get('cf-turnstile-response')?.toString() || '';
+      if (!token) {
+        showError(robotError);
         return;
       }
 
@@ -258,21 +282,27 @@ const descId = 'newsletter-desc';
       if (submitLabel) submitLabel.textContent = 'Enviando…';
 
       try {
-        if (action) {
-          // Brevo: posteamos el form a la "serve URL". no-cors evita el
-          // bloqueo CORS (la respuesta queda opaca, asumimos OK).
-          const fd = new FormData();
-          fd.append(emailField, email);
-          await fetch(action, { method: 'POST', body: fd, mode: 'no-cors' });
-        } else {
-          // Modo demo: sin endpoint, simulamos el envío.
-          await new Promise((r) => window.setTimeout(r, 500));
+        // /api/subscribe verifica el Turnstile y reenvía a Brevo server-side.
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, token }),
+        });
+        const data = await res.json().catch(() => ({ ok: res.ok }));
+        if (!res.ok || !data.ok) {
+          resetCaptcha();
+          if (submitLabel) submitLabel.textContent = originalLabel;
+          if (data?.error === 'captcha') showError(robotError);
+          else if (data?.error === 'email') showError(errorText);
+          else showError(sendError);
+          return;
         }
         remember('subscribed');
         showSuccess();
       } catch {
+        resetCaptcha();
         if (submitLabel) submitLabel.textContent = originalLabel;
-        showError();
+        showError(sendError);
       }
     });
 

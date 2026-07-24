@@ -46,6 +46,9 @@ const ogImage = new URL(seo.ogImage, Astro.site);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
+    <!-- Cloudflare Turnstile (captcha del newsletter) -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer is:inline></script>
+
     <ClientRouter />
   </head>
   <body>
