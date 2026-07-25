@@ -78,13 +78,10 @@ export const stores: StoreLinks = {
 
 /* ---------- Redes y contacto ---------- */
 export const social = {
-  instagram: { label: 'Instagram', href: 'https://instagram.com/julu' },
-  tiktok: { label: 'TikTok', href: 'https://tiktok.com/@julu' },
-  whatsapp: {
-    label: 'WhatsApp',
-    href: 'https://wa.me/5511900000000', // ← reemplazar por el número real (Brasil +55)
-  },
-  email: { label: 'Email', href: 'mailto:ola@julu.com' },
+  instagram: { label: 'Instagram', href: 'https://www.instagram.com/julu.brasil/' },
+  tiktok: { label: 'TikTok', href: 'https://www.tiktok.com/@julu.brasil' },
+  // WhatsApp oculto por ahora (se agrega cuando haya número comercial, para evitar spam inicial).
+  email: { label: 'Email', href: 'mailto:contact@julu.clothing' },
 } as const;
 
 /* ---------- Navegación ---------- */
@@ -217,7 +214,7 @@ export const creatorCta = {
   eyebrow: 'Colaborações',
   title: 'É criador de conteúdo?',
   text: 'Quer usar nossas roupas e mostrar para a sua comunidade? A gente ia adorar trabalhar com você. Manda mensagem e a gente cria algo juntos.',
-  cta: { label: 'Fale com a gente', href: social.whatsapp.href },
+  cta: { label: 'Fale com a gente', href: social.email.href },
 };
 
 /* ---------- Newsletter (popup) ----------
@@ -260,5 +257,5 @@ export const newsletter = {
 /* ---------- Footer ---------- */
 export const footer = {
   tagline: 'Design autoral para quem ama gatos.',
-  copyright: `© ${'2025'} JULU. Todos os direitos reservados.`,
+  copyright: `© ${new Date().getFullYear()} JULU. Todos os direitos reservados.`,
 };
