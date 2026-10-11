@@ -1,6 +1,6 @@
 /* =====================================================================
    JULU — CSS global de la tienda Nuvemshop
-   Versión: v9 (11/10/2026) — etiqueta de tarjeta: "Design autoral"
+   Versión: v8 (11/10/2026) — fix hover tarjetas, Ver todos arriba, gatito en Lançamentos
    Dónde vive: repo landing → public/nuvemshop.css (se sirve en https://julu.clothing/nuvemshop.css)
    En Nuvemshop (CSS personalizado) va SOLO: @import url('https://julu.clothing/nuvemshop.css?v=N');
    En cada cambio: editar este archivo, push a main y subir ?v=N en Nuvemshop.
@@ -414,9 +414,9 @@ body{ background:var(--julu-paper)!important; }
   background:#e4e4e2;
 }
 
-/* Etiqueta "Design autoral" sobre la foto (arriba a la izquierda) */
+/* Etiqueta "Edição limitada" sobre la foto (arriba a la izquierda) */
 .product-item .product-item-image-container::after{
-  content:"Design autoral";
+  content:"Edição limitada";
   position:absolute;
   top:14px; left:14px;
   z-index:2;
