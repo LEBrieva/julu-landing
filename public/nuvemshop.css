@@ -1,6 +1,6 @@
 /* =====================================================================
    JULU — CSS global de la tienda Nuvemshop
-   Versión: v15 (11/10/2026) — Aire debajo de Escolha seu caimento
+   Versión: v16 (11/10/2026) — Cinta sin "Edições limitadas"
    Dónde vive: repo landing → public/nuvemshop.css (se sirve en https://julu.clothing/nuvemshop.css)
    En Nuvemshop (CSS personalizado) va SOLO: @import url('https://julu.clothing/nuvemshop.css?v=N');
    En cada cambio: editar este archivo, push a main y subir ?v=N en Nuvemshop.
@@ -335,7 +335,7 @@ header nav a:hover::after{ width:100%; }
 
 /* franja negra con el texto que se mueve */
 [id^="ns-section-divider"] .divider-section::after{
-  content:"ENVIAMOS PARA TODO O BRASIL  ✦  5% OFF NO PIX  ✦  EDIÇÕES LIMITADAS: QUANDO ESGOTA, ESGOTOU  ✦  DESIGN AUTORAL  ✦  FEITO POR GATEIROS 🐾  ✦  ENVIAMOS PARA TODO O BRASIL  ✦  5% OFF NO PIX  ✦  EDIÇÕES LIMITADAS: QUANDO ESGOTA, ESGOTOU  ✦  DESIGN AUTORAL  ✦  FEITO POR GATEIROS 🐾  ✦  ";
+  content:"ENVIAMOS PARA TODO O BRASIL  ✦  5% OFF NO PIX  ✦  ESTAMPAS QUE SÓ QUEM TEM GATO ENTENDE  ✦  DESIGN AUTORAL  ✦  FEITO POR GATEIROS 🐾  ✦  ENVIAMOS PARA TODO O BRASIL  ✦  5% OFF NO PIX  ✦  ESTAMPAS QUE SÓ QUEM TEM GATO ENTENDE  ✦  DESIGN AUTORAL  ✦  FEITO POR GATEIROS 🐾  ✦  ";
   position:absolute;
   top:50%;
   left:0;
