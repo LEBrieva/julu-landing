@@ -1,6 +1,6 @@
 /* =====================================================================
    JULU — CSS global de la tienda Nuvemshop
-   Versión: v6 (11/10/2026) — fix 8% OFF y flechas centradas
+   Versión: v7 (11/10/2026) — tarjetas como el diseño (clases reales del tema)
    Dónde vive: repo landing → public/nuvemshop.css (se sirve en https://julu.clothing/nuvemshop.css)
    En Nuvemshop (CSS personalizado) va SOLO: @import url('https://julu.clothing/nuvemshop.css?v=N');
    En cada cambio: editar este archivo, push a main y subir ?v=N en Nuvemshop.
@@ -397,66 +397,106 @@ header nav a:hover::after{ width:100%; }
 
 /* =====================================================================
    6. TARJETAS DE PRODUCTO (home, categorías, "combina com")
+   Clases reales del tema (inspeccionadas 11/10/2026):
+   .product-item > .product-item-image-container + .product-item-information
    ===================================================================== */
+/* Fondo crema en toda la tienda, como el diseño */
+body{ background:var(--julu-paper)!important; }
+
+/* Contenedor de la tarjeta: referencia para posicionar etiqueta y colores */
+.js-item-product.product-item{ position:relative; }
+
 /* Foto con bordes redondeados */
-.js-item-product img{
-  border-radius:18px;
+.product-item .product-item-image-container{
+  border-radius:20px;
+  overflow:hidden;
+  background:#e4e4e2;
 }
 
-/* Nombre del producto */
-.js-item-product [class*="item-name"],
-.js-item-product [class*="item-name"] *{
+/* Etiqueta "Edição limitada" sobre la foto (arriba a la izquierda) */
+.product-item .product-item-image-container::after{
+  content:"Edição limitada";
+  position:absolute;
+  top:14px; left:14px;
+  z-index:2;
+  background:var(--julu-ink);
+  color:var(--julu-paper);
+  font-family:var(--julu-body);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:6px 10px;
+  border-radius:9999px;
+  pointer-events:none;
+}
+
+/* Bolitas de color: arriba a la derecha de la foto, con borde para que la blanca se vea */
+.product-item .product-item-colors-container{
+  position:absolute!important;
+  top:14px; right:14px;
+  z-index:2;
+  margin:0!important;
+}
+.product-item .product-item-colors{
+  display:flex; gap:6px;
+  background:rgba(244,240,230,.9);
+  padding:5px 7px;
+  border-radius:9999px;
+}
+.product-item .product-item-colors-bullet{
+  width:16px!important;
+  height:16px!important;
+  border-radius:9999px!important;
+  box-shadow:0 0 0 1.5px rgba(10,10,10,.35)!important;
+  border:none!important;
+  margin:0!important;
+}
+
+/* Nombre */
+.product-item .product-item-name{
   font-family:var(--julu-display)!important;
   font-weight:800!important;
-  font-size:17px!important;
-  line-height:1.2!important;
+  font-size:18px!important;
+  line-height:1.15!important;
   letter-spacing:-.01em!important;
   color:var(--julu-ink)!important;
 }
 
-/* Precio */
-.js-item-product [class*="item-price"]{
+/* Precio: actual grande, tachado gris chico, descuento naranja oscuro */
+.product-item .product-item-price-container{
+  display:flex!important;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:4px 10px;
+}
+.product-item .product-item-price{
   font-family:var(--julu-display)!important;
   font-weight:800!important;
+  font-size:18px!important;
   color:var(--julu-ink)!important;
 }
-/* Precio tachado */
-.js-item-product [class*="compare"]{
+.product-item .product-item-price-compare{
   font-family:var(--julu-body)!important;
   font-weight:500!important;
+  font-size:14px!important;
   color:var(--julu-muted)!important;
 }
-/* "8% OFF": solo texto naranja oscuro y en negrita (sin pastilla) */
-.js-item-product [class*="discount"],
-.js-item-product [class*="discount"] *{
+.product-item .product-item-discount,
+.product-item .product-item-discount *{
   color:#c23a00!important;
   font-family:var(--julu-body)!important;
   font-weight:700!important;
-}
-
-/* "Restam apenas X em estoque!" en naranja oscuro legible */
-.js-item-product [class*="stock"],
-.js-item-product [class*="last-units"]{
-  color:#c23a00!important;
-  font-family:var(--julu-body)!important;
-  font-weight:600!important;
   font-size:13px!important;
+  background:none!important;
+  padding:0!important;
 }
 
-/* Botón "Comprar" de la tarjeta: píldora negra (naranja al pasar) */
-.js-item-product .btn{
-  background-color:var(--julu-ink)!important;
-  border-color:var(--julu-ink)!important;
-  color:var(--julu-paper)!important;
-  border-radius:9999px!important;
-  font-family:var(--julu-body)!important;
-  font-weight:700!important;
-  padding:10px 22px!important;
-}
-.js-item-product .btn:hover{
-  background-color:var(--julu-volt)!important;
-  border-color:var(--julu-volt)!important;
-  color:var(--julu-ink)!important;
+/* En la tarjeta no mostramos stock ni botón "Comprar" (la tarjeta entera lleva al producto).
+   El stock y la compra quedan en la página de producto. */
+.product-item .product-item-stock-notice,
+.product-item .product-item-quick-shop-container{
+  display:none!important;
 }
 
 
