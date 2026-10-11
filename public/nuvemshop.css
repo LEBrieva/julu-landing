@@ -1,9 +1,9 @@
 /* =====================================================================
    JULU — CSS global de la tienda Nuvemshop
-   Versión: v5 (11/10/2026) — botones generales, tarjetas de producto y Lançamentos
-   Dónde va: Configurações do tema → CSS personalizado
-   Cómo se usa: reemplazar TODO el contenido, nunca pegar pedazos sueltos.
-   Copia maestra: proyecto JuLu MKT PLAN → claude/julu-css-global.css
+   Versión: v6 (11/10/2026) — fix 8% OFF y flechas centradas
+   Dónde vive: repo landing → public/nuvemshop.css (se sirve en https://julu.clothing/nuvemshop.css)
+   En Nuvemshop (CSS personalizado) va SOLO: @import url('https://julu.clothing/nuvemshop.css?v=N');
+   En cada cambio: editar este archivo, push a main y subir ?v=N en Nuvemshop.
 
    Índice
    0. Base (fuentes y colores)
@@ -230,6 +230,9 @@ header nav a:hover::after{ width:100%; }
   top:auto!important;
   bottom:32px!important;
   transition:border-color .2s, background .2s;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
 }
 #ns-section-slideshow .swiper-button-prev{ left:auto!important; right:96px!important; }
 #ns-section-slideshow .swiper-button-next{ right:36px!important; }
@@ -423,17 +426,12 @@ header nav a:hover::after{ width:100%; }
   font-weight:500!important;
   color:var(--julu-muted)!important;
 }
-/* "8% OFF": etiqueta naranja */
+/* "8% OFF": solo texto naranja oscuro y en negrita (sin pastilla) */
 .js-item-product [class*="discount"],
-.js-item-product [class*="percentage"]{
-  background:var(--julu-volt)!important;
-  color:var(--julu-ink)!important;
+.js-item-product [class*="discount"] *{
+  color:#c23a00!important;
   font-family:var(--julu-body)!important;
   font-weight:700!important;
-  font-size:11px!important;
-  letter-spacing:.06em!important;
-  padding:3px 8px!important;
-  border-radius:9999px!important;
 }
 
 /* "Restam apenas X em estoque!" en naranja oscuro legible */
@@ -487,6 +485,17 @@ header nav a:hover::after{ width:100%; }
   border:1.5px solid rgba(10,10,10,.2)!important;
   box-shadow:0 4px 14px rgba(10,10,10,.12);
   transition:background .2s ease;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:0!important;
+}
+.section-featured-home .swiper-button-prev svg,
+.section-featured-home .swiper-button-next svg{
+  width:20px!important;
+  height:20px!important;
+  margin:0!important;
+  position:static!important;
 }
 .section-featured-home .swiper-button-prev:hover,
 .section-featured-home .swiper-button-next:hover{
