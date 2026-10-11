@@ -1,6 +1,6 @@
 /* =====================================================================
    JULU — CSS global de la tienda Nuvemshop
-   Versión: v11 (11/10/2026) — Banners: ancho completo, altura fija y línea "Em preto ou branco"
+   Versión: v12 (11/10/2026) — Banners: pastilla crema para el texto descriptivo
    Dónde vive: repo landing → public/nuvemshop.css (se sirve en https://julu.clothing/nuvemshop.css)
    En Nuvemshop (CSS personalizado) va SOLO: @import url('https://julu.clothing/nuvemshop.css?v=N');
    En cada cambio: editar este archivo, push a main y subir ?v=N en Nuvemshop.
@@ -726,6 +726,25 @@ body{ background:var(--julu-paper)!important; }
   font-weight:700;
   font-size:22px;
 }
+/* Texto descriptivo del banner (bloque "Texto" agregado en el editor): pastilla crema arriba de la negra */
+#ns-section-banners_grid_3_vertical .media-content .text-block{
+  align-self:flex-start;
+  margin:0 0 10px!important;
+  padding:8px 14px!important;
+  background:var(--julu-paper);
+  border-radius:9999px;
+}
+#ns-section-banners_grid_3_vertical .media-content .text-block,
+#ns-section-banners_grid_3_vertical .media-content .text-block *{
+  font-family:var(--julu-body)!important;
+  font-size:14px!important;
+  font-weight:600!important;
+  line-height:1.3!important;
+  color:var(--julu-ink)!important;
+  text-align:left!important;
+  margin:0!important;
+}
+
 /* El botón del tema sobra: la tarjeta entera ya es clickeable */
 #ns-section-banners_grid_3_vertical .media-content .btn{ display:none!important; }
 
@@ -736,4 +755,6 @@ body{ background:var(--julu-paper)!important; }
   #ns-section-banners_grid_3_vertical .media-content{ padding:16px!important; }
   #ns-section-banners_grid_3_vertical .heading-block,
   #ns-section-banners_grid_3_vertical .heading-block *{ font-size:18px!important; }
+  #ns-section-banners_grid_3_vertical .media-content .text-block,
+  #ns-section-banners_grid_3_vertical .media-content .text-block *{ font-size:12px!important; }
 }
