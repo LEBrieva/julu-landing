@@ -68,3 +68,16 @@ Luego, en otra terminal, `npm run share` igual que antes.
 - La URL **cambia cada vez** que reiniciás ngrok (en el plan gratuito).
 - Al cerrar la terminal del túnel (o del servidor), el link deja de funcionar.
 - La primera vez que alguien entra, ngrok muestra una pantalla intermedia de advertencia — hacen clic en **"Visit Site"** y listo.
+
+## CSS de la tienda Nuvemshop
+
+El campo "CSS personalizado" de Nuvemshop tiene un límite de 15.000 caracteres, así que el CSS de la tienda se sirve desde esta landing.
+
+- El archivo vive en `public/nuvemshop.css` y queda publicado en `https://julu.clothing/nuvemshop.css`.
+- En Nuvemshop, el CSS personalizado es solo esta línea:
+
+  ```css
+  @import url('https://julu.clothing/nuvemshop.css?v=N');
+  ```
+
+- En cada cambio: editar `public/nuvemshop.css`, hacer deploy y subir el número de `?v=N` en Nuvemshop (para que no quede la versión vieja cacheada).
