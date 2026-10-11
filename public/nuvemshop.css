@@ -1,6 +1,6 @@
 /* =====================================================================
    JULU — CSS global de la tienda Nuvemshop
-   Versión: v8 (11/10/2026) — fix hover tarjetas, Ver todos arriba, gatito en Lançamentos
+   Versión: v10 (11/10/2026) — sección Banners "Escolha seu caimento"
    Dónde vive: repo landing → public/nuvemshop.css (se sirve en https://julu.clothing/nuvemshop.css)
    En Nuvemshop (CSS personalizado) va SOLO: @import url('https://julu.clothing/nuvemshop.css?v=N');
    En cada cambio: editar este archivo, push a main y subir ?v=N en Nuvemshop.
@@ -14,6 +14,7 @@
    5. Botones generales (variables del tema)
    6. Tarjetas de producto (toda la tienda)
    7. Sección Lançamentos (.section-featured-home)
+   8. Banners "Escolha seu caimento" (#ns-section-banners_grid_3_vertical)
    Imágenes decorativas: repo landing → public/nuvemshop/*.webp (rutas relativas a este CSS)
    ===================================================================== */
 
@@ -414,9 +415,9 @@ body{ background:var(--julu-paper)!important; }
   background:#e4e4e2;
 }
 
-/* Etiqueta "Edição limitada" sobre la foto (arriba a la izquierda) */
+/* Etiqueta "Design autoral" sobre la foto (arriba a la izquierda) */
 .product-item .product-item-image-container::after{
-  content:"Edição limitada";
+  content:"Design autoral";
   position:absolute;
   top:14px; left:14px;
   z-index:2;
@@ -607,4 +608,91 @@ body{ background:var(--julu-paper)!important; }
 .section-featured-home .swiper-pagination-bullet-active{
   background:var(--julu-volt)!important;
   border-color:var(--julu-volt)!important;
+}
+
+
+/* =====================================================================
+   8. BANNERS "ESCOLHA SEU CAIMENTO" (#ns-section-banners_grid_3_vertical)
+   Estructura del tema: .banner-block > .banner-image-container + .media-content
+   (.heading-block = título del banner, .btn = botón, a.media-link = link de toda la tarjeta)
+   ===================================================================== */
+/* Título de la sección (el tema no trae uno): "ESCOLHA SEU" negro + "CAIMENTO" naranja.
+   El corte de color va al 57.1% del ancho del texto (medido en vivo). */
+#ns-section-banners_grid_3_vertical .banners-section > .container::before{
+  content:"Escolha seu caimento";
+  display:inline-block;
+  white-space:nowrap;
+  margin:0 0 28px;
+  font-family:var(--julu-display);
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:-.03em;
+  line-height:.95;
+  font-size:clamp(34px, 3.6vw, 52px);
+  background:linear-gradient(90deg, var(--julu-ink) 57.1%, var(--julu-volt) 57.1%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+/* Tarjetas redondeadas, sin el velo gris del tema (solo una sombra suave abajo) */
+#ns-section-banners_grid_3_vertical .banner-block{
+  border-radius:24px;
+  overflow:hidden;
+}
+#ns-section-banners_grid_3_vertical .media-overlay{
+  background:linear-gradient(to top, rgba(10,10,10,.35), rgba(10,10,10,0) 45%)!important;
+  opacity:1!important;
+}
+#ns-section-banners_grid_3_vertical .banner-image-container img{ transition:transform .5s ease; }
+#ns-section-banners_grid_3_vertical .banner-block:hover .banner-image-container img{ transform:scale(1.04); }
+
+/* Texto abajo de todo, como píldora negra con flecha naranja (toda la tarjeta es el link) */
+#ns-section-banners_grid_3_vertical .media-content{
+  top:auto!important;
+  bottom:0!important;
+  left:0!important;
+  right:0!important;
+  transform:none!important;
+  width:auto!important;
+  padding:24px!important;
+  justify-content:flex-end!important;
+  align-items:stretch!important;
+  pointer-events:none;
+}
+#ns-section-banners_grid_3_vertical .heading-block{
+  display:flex!important;
+  justify-content:space-between;
+  align-items:center;
+  width:100%;
+  background:var(--julu-ink);
+  border-radius:9999px;
+  padding:14px 22px!important;
+  margin:0!important;
+}
+#ns-section-banners_grid_3_vertical .heading-block,
+#ns-section-banners_grid_3_vertical .heading-block *{
+  font-family:var(--julu-display)!important;
+  font-weight:800!important;
+  font-size:22px!important;
+  text-transform:uppercase!important;
+  letter-spacing:-.01em!important;
+  line-height:1.1!important;
+  color:var(--julu-paper)!important;
+}
+#ns-section-banners_grid_3_vertical .heading-block::after{
+  content:"→";
+  color:var(--julu-volt);
+  font-family:var(--julu-body);
+  font-weight:700;
+  font-size:22px;
+}
+/* El botón del tema sobra: la tarjeta entera ya es clickeable */
+#ns-section-banners_grid_3_vertical .media-content .btn{ display:none!important; }
+
+@media (max-width: 768px){
+  #ns-section-banners_grid_3_vertical .banners-section > .container::before{ font-size:24px; margin-bottom:18px; }
+  #ns-section-banners_grid_3_vertical .media-content{ padding:16px!important; }
+  #ns-section-banners_grid_3_vertical .heading-block,
+  #ns-section-banners_grid_3_vertical .heading-block *{ font-size:18px!important; }
 }
