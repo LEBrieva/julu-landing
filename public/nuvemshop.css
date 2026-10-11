@@ -1,6 +1,6 @@
 /* =====================================================================
    JULU — CSS global de la tienda Nuvemshop
-   Versión: v10 (11/10/2026) — sección Banners "Escolha seu caimento"
+   Versión: v11 (11/10/2026) — Banners: ancho completo, altura fija y línea "Em preto ou branco"
    Dónde vive: repo landing → public/nuvemshop.css (se sirve en https://julu.clothing/nuvemshop.css)
    En Nuvemshop (CSS personalizado) va SOLO: @import url('https://julu.clothing/nuvemshop.css?v=N');
    En cada cambio: editar este archivo, push a main y subir ?v=N en Nuvemshop.
@@ -635,6 +635,45 @@ body{ background:var(--julu-paper)!important; }
   color:transparent;
 }
 
+/* Mismo ancho que Lançamentos + línea de info a la derecha del título (con gatito durmiendo) */
+#ns-section-banners_grid_3_vertical .banners-section > .container{
+  max-width:none!important;
+  padding-left:32px!important;
+  padding-right:32px!important;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-end;
+  column-gap:24px;
+}
+#ns-section-banners_grid_3_vertical .banners-section > .container > .banners-slider-wrapper{
+  order:2;
+  flex:0 0 100%;
+  max-width:100%;
+}
+#ns-section-banners_grid_3_vertical .banners-section > .container::after{
+  content:"Em preto ou branco · do P ao GG";
+  order:1;
+  margin:0 0 34px auto;
+  padding:8px 14px 8px 46px;
+  border-radius:9999px;
+  background:var(--julu-cream) url('nuvemshop/gato-dormindo.webp') 8px center/30px auto no-repeat;
+  font-family:var(--julu-body);
+  font-size:15px;
+  font-weight:500;
+  color:#4f4a40;
+}
+/* Altura fija en compu: las fotos verticales a todo el ancho quedaban gigantes */
+@media (min-width: 769px){
+  #ns-section-banners_grid_3_vertical .banner-block{ height:620px; }
+  #ns-section-banners_grid_3_vertical .banner-image-container,
+  #ns-section-banners_grid_3_vertical .banner-image-container img{
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover;
+    object-position:50% 35%;
+  }
+}
+
 /* Tarjetas redondeadas, sin el velo gris del tema (solo una sombra suave abajo) */
 #ns-section-banners_grid_3_vertical .banner-block{
   border-radius:24px;
@@ -691,7 +730,9 @@ body{ background:var(--julu-paper)!important; }
 #ns-section-banners_grid_3_vertical .media-content .btn{ display:none!important; }
 
 @media (max-width: 768px){
-  #ns-section-banners_grid_3_vertical .banners-section > .container::before{ font-size:24px; margin-bottom:18px; }
+  #ns-section-banners_grid_3_vertical .banners-section > .container::before{ font-size:24px; margin-bottom:10px; }
+  #ns-section-banners_grid_3_vertical .banners-section > .container{ padding-left:16px!important; padding-right:16px!important; }
+  #ns-section-banners_grid_3_vertical .banners-section > .container::after{ margin:0 0 18px 0; font-size:13px; }
   #ns-section-banners_grid_3_vertical .media-content{ padding:16px!important; }
   #ns-section-banners_grid_3_vertical .heading-block,
   #ns-section-banners_grid_3_vertical .heading-block *{ font-size:18px!important; }
