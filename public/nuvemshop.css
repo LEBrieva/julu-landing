@@ -1,6 +1,6 @@
 /* =====================================================================
    JULU — CSS global de la tienda Nuvemshop
-   Versión: v16 (11/10/2026) — Cinta sin "Edições limitadas"
+   Versión: v17 (11/10/2026) — Nueva sección 10: Beneficios
    Dónde vive: repo landing → public/nuvemshop.css (se sirve en https://julu.clothing/nuvemshop.css)
    En Nuvemshop (CSS personalizado) va SOLO: @import url('https://julu.clothing/nuvemshop.css?v=N');
    En cada cambio: editar este archivo, push a main y subir ?v=N en Nuvemshop.
@@ -16,6 +16,7 @@
    7. Sección Lançamentos (.section-featured-home)
    8. Banners "Escolha seu caimento" (#ns-section-banners_grid_3_vertical)
    9. Universo JULU · Coleções (#ns-section-banners_1791760816670)
+  10. Beneficios (#ns-section-icon-text_1791762211238)
    Imágenes decorativas: repo landing → public/nuvemshop/*.webp (rutas relativas a este CSS)
    ===================================================================== */
 
@@ -853,4 +854,61 @@ body{ background:var(--julu-paper)!important; }
   #ns-section-banners_1791760816670 .heading-block{ font-size:22px!important; }
   #ns-section-banners_1791760816670 .text-block,
   #ns-section-banners_1791760816670 .text-block *{ font-size:14px!important; }
+}
+
+/* =====================================================================
+   10. BENEFICIOS (#ns-section-icon-text_1791762211238)
+   Sección "Ícones informativos": 4 tarjetas crema con ícono a la izquierda.
+   Se fuerza grilla (el tema usa un slider) — 4 columnas en compu, 2 en celular.
+   ===================================================================== */
+#ns-section-icon-text_1791762211238 .section-full-width{
+  max-width:1280px; margin:0 auto; padding:56px 24px!important;
+}
+#ns-section-icon-text_1791762211238 .swiper-wrapper{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:16px;
+  transform:none!important;
+}
+#ns-section-icon-text_1791762211238 .swiper-slide{
+  width:auto!important; margin:0!important; display:block!important;
+}
+#ns-section-icon-text_1791762211238 .swiper-pagination,
+#ns-section-icon-text_1791762211238 .swiper-button-prev,
+#ns-section-icon-text_1791762211238 .swiper-button-next{ display:none!important; }
+
+#ns-section-icon-text_1791762211238 .icon-text-item{
+  flex-direction:row!important;
+  align-items:flex-start!important;
+  gap:14px;
+  height:100%;
+  padding:22px;
+  border-radius:20px;
+  background:var(--julu-cream);
+  text-align:left;
+}
+#ns-section-icon-text_1791762211238 .icon-text-item-icon{ margin:0!important; }
+#ns-section-icon-text_1791762211238 .icon-text-item-icon svg{
+  width:28px!important; height:28px!important; fill:var(--julu-ink);
+}
+#ns-section-icon-text_1791762211238 .icon-text-item-content{ text-align:left!important; }
+#ns-section-icon-text_1791762211238 .icon-text-item-title{
+  margin:0!important;
+  font-family:var(--julu-display)!important;
+  font-weight:800!important; font-size:17px!important; line-height:1.2!important;
+  color:var(--julu-ink)!important;
+}
+#ns-section-icon-text_1791762211238 .icon-text-item-description{
+  margin-top:4px!important;
+  font-family:var(--julu-body)!important;
+  font-size:14px!important; line-height:1.4!important;
+  color:#4f4a40!important;
+}
+
+@media (max-width:767px){
+  #ns-section-icon-text_1791762211238 .section-full-width{ padding:40px 16px!important; }
+  #ns-section-icon-text_1791762211238 .swiper-wrapper{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+  #ns-section-icon-text_1791762211238 .icon-text-item{ flex-direction:column!important; gap:10px; padding:16px; }
+  #ns-section-icon-text_1791762211238 .icon-text-item-title{ font-size:15px!important; }
+  #ns-section-icon-text_1791762211238 .icon-text-item-description{ font-size:13px!important; }
 }
