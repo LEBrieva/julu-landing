@@ -1,6 +1,6 @@
 /* =====================================================================
    JULU — CSS global de la tienda Nuvemshop
-   Versión: v7 (11/10/2026) — tarjetas como el diseño (clases reales del tema)
+   Versión: v8 (11/10/2026) — fix hover tarjetas, Ver todos arriba, gatito en Lançamentos
    Dónde vive: repo landing → public/nuvemshop.css (se sirve en https://julu.clothing/nuvemshop.css)
    En Nuvemshop (CSS personalizado) va SOLO: @import url('https://julu.clothing/nuvemshop.css?v=N');
    En cada cambio: editar este archivo, push a main y subir ?v=N en Nuvemshop.
@@ -14,6 +14,7 @@
    5. Botones generales (variables del tema)
    6. Tarjetas de producto (toda la tienda)
    7. Sección Lançamentos (.section-featured-home)
+   Imágenes decorativas: repo landing → public/nuvemshop/*.webp (rutas relativas a este CSS)
    ===================================================================== */
 
 
@@ -492,6 +493,19 @@ body{ background:var(--julu-paper)!important; }
   padding:0!important;
 }
 
+/* Hover: el tema baja la opacidad del link y eso "esconde" las bolitas detrás de la foto.
+   Lo anulamos y marcamos el hover subrayando el nombre en naranja. */
+.product-item .product-item-link:hover{ opacity:1!important; }
+.product-item .product-item-link:hover .product-item-name{
+  text-decoration:underline;
+  text-decoration-color:var(--julu-volt);
+  text-decoration-thickness:2px;
+  text-underline-offset:4px;
+}
+/* Las bolitas son informativas (colores disponibles): no capturan el mouse,
+   así no hacen titilar la foto de hover. */
+.product-item .product-item-colors-container{ pointer-events:none; }
+
 /* En la tarjeta no mostramos stock ni botón "Comprar" (la tarjeta entera lleva al producto).
    El stock y la compra quedan en la página de producto. */
 .product-item .product-item-stock-notice,
@@ -544,6 +558,49 @@ body{ background:var(--julu-paper)!important; }
 .section-featured-home .swiper-button-prev:hover svg,
 .section-featured-home .swiper-button-next:hover svg{
   fill:var(--julu-paper)!important;
+}
+
+/* Título a la izquierda + gatito sticker al lado, "Ver todos →" arriba a la derecha (como el diseño) */
+.section-featured-home .group-block .group-content::after{
+  content:"";
+  width:84px; height:84px;
+  flex-shrink:0;
+  background:url('nuvemshop/gato-preto.webp') center/contain no-repeat;
+  transform:rotate(-8deg) translateY(-6px);
+}
+.section-featured-home a.btn[data-block-type="button"]{
+  background:none!important;
+  border:none!important;
+  border-bottom:2px solid var(--julu-volt)!important;
+  border-radius:0!important;
+  padding:0 0 4px!important;
+  color:var(--julu-ink)!important;
+  font-family:var(--julu-body)!important;
+  font-weight:700!important;
+  font-size:16px!important;
+}
+.section-featured-home a.btn[data-block-type="button"]::after{ content:" →"; }
+.section-featured-home a.btn[data-block-type="button"]:hover{
+  color:#c23a00!important;
+  background:none!important;
+}
+@media (min-width: 769px){
+  .section-featured-home{ position:relative; }
+  .section-featured-home .group-block,
+  .section-featured-home .group-block .group-content{
+    justify-content:flex-start!important;
+    align-items:center!important;
+    text-align:left!important;
+  }
+  .section-featured-home > .d-flex.flex-column{ align-items:stretch!important; }
+  .section-featured-home > .d-flex.flex-column > a.btn[data-block-type="button"]{
+    position:absolute;
+    top:64px; right:32px;
+    margin-top:28px;
+  }
+}
+@media (max-width: 768px){
+  .section-featured-home .group-block .group-content::after{ width:56px; height:56px; }
 }
 
 /* Puntitos de paginación con el naranja de la marca */
