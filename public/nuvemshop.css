@@ -1,6 +1,6 @@
 /* =====================================================================
    JULU — CSS global de la tienda Nuvemshop
-   Versión: v14 (11/10/2026) — Nueva sección 9: Universo JULU · Coleções
+   Versión: v15 (11/10/2026) — Aire debajo de Escolha seu caimento
    Dónde vive: repo landing → public/nuvemshop.css (se sirve en https://julu.clothing/nuvemshop.css)
    En Nuvemshop (CSS personalizado) va SOLO: @import url('https://julu.clothing/nuvemshop.css?v=N');
    En cada cambio: editar este archivo, push a main y subir ?v=N en Nuvemshop.
@@ -637,6 +637,9 @@ body{ background:var(--julu-paper)!important; }
 }
 
 /* Mismo ancho que Lançamentos + línea de info a la derecha del título (con gatito durmiendo) */
+/* Aire debajo de la sección (el tema la deja en 0 y pega con el bloque negro) */
+#ns-section-banners_grid_3_vertical .banners-section{ padding-bottom:80px!important; }
+@media (max-width:767px){ #ns-section-banners_grid_3_vertical .banners-section{ padding-bottom:48px!important; } }
 #ns-section-banners_grid_3_vertical .banners-section > .container{
   max-width:none!important;
   padding-left:32px!important;
