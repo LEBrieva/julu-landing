@@ -1,6 +1,6 @@
 /* =====================================================================
    JULU — CSS global de la tienda Nuvemshop
-   Versión: v12 (11/10/2026) — Banners: pastilla crema para el texto descriptivo
+   Versión: v13 (11/10/2026) — Banners: pastilla del texto ajustada al contenido
    Dónde vive: repo landing → public/nuvemshop.css (se sirve en https://julu.clothing/nuvemshop.css)
    En Nuvemshop (CSS personalizado) va SOLO: @import url('https://julu.clothing/nuvemshop.css?v=N');
    En cada cambio: editar este archivo, push a main y subir ?v=N en Nuvemshop.
@@ -728,7 +728,10 @@ body{ background:var(--julu-paper)!important; }
 }
 /* Texto descriptivo del banner (bloque "Texto" agregado en el editor): pastilla crema arriba de la negra */
 #ns-section-banners_grid_3_vertical .media-content .text-block{
-  align-self:flex-start;
+  width:auto!important;          /* el tema le pone ancho completo (block-fill) */
+  max-width:100%;
+  flex:0 0 auto!important;
+  align-self:flex-start!important;
   margin:0 0 10px!important;
   padding:8px 14px!important;
   background:var(--julu-paper);
