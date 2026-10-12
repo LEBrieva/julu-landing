@@ -1,6 +1,6 @@
 /* =====================================================================
    JULU — CSS global de la tienda Nuvemshop
-   Versión: v21 (11/10/2026) — Assim se vive: encabezado con bloques reales (Editorial de texto)
+   Versión: v22 (11/10/2026) — Títulos de Caimento, Coleções y Assim se vive como bloques reales
    Dónde vive: repo landing → public/nuvemshop.css (se sirve en https://julu.clothing/nuvemshop.css)
    En Nuvemshop (CSS personalizado) va SOLO: @import url('https://julu.clothing/nuvemshop.css?v=N');
    En cada cambio: editar este archivo, push a main y subir ?v=N en Nuvemshop.
@@ -14,6 +14,7 @@
    5. Botones generales (variables del tema)
    6. Tarjetas de producto (toda la tienda)
    7. Sección Lançamentos (.section-featured-home)
+   7b. Encabezados de sección (Editorial de texto, 3 secciones)
    8. Banners "Escolha seu caimento" (#ns-section-banners_grid_3_vertical)
    9. Universo JULU · Coleções (#ns-section-banners_1791760816670)
   10. Beneficios (#ns-section-icon-text_1791762211238)
@@ -615,58 +616,115 @@ body{ background:var(--julu-paper)!important; }
 
 
 /* =====================================================================
+   7b. ENCABEZADOS DE SECCIÓN (secciones "Editorial de texto" del editor)
+   Cada sección de la home lleva arriba un "Editorial de texto" con bloques reales
+   (Texto = kicker, Título, Botão opcional). Acá solo se acomodan.
+   La palabra que pintes de color en el título del editor sale naranja.
+   #ns-section-rich-text_1791765048836 → arriba de Escolha seu caimento
+   #ns-section-rich-text_1791765143533 → arriba de Coleções (fondo oscuro)
+   #ns-section-rich-text_1791764612382 → arriba de Assim se vive JULU
+   ===================================================================== */
+#ns-section-rich-text_1791765048836 .rich-text-section,
+#ns-section-rich-text_1791765143533 .rich-text-section,
+#ns-section-rich-text_1791764612382 .rich-text-section{ padding:24px 0 0!important; }
+#ns-section-rich-text_1791765048836 .container,
+#ns-section-rich-text_1791765143533 .container,
+#ns-section-rich-text_1791764612382 .container{ max-width:1280px; padding:0 24px; }
+#ns-section-rich-text_1791765048836 .rich-text,
+#ns-section-rich-text_1791765143533 .rich-text,
+#ns-section-rich-text_1791764612382 .rich-text{
+  display:flex!important; flex-direction:row!important; flex-wrap:wrap;
+  align-items:flex-end!important; justify-content:space-between!important;
+  column-gap:24px; row-gap:0;
+  text-align:left!important;
+}
+/* Kicker (bloque Texto): ocupa toda la fila, arriba */
+#ns-section-rich-text_1791765048836 .text-block,
+#ns-section-rich-text_1791765143533 .text-block,
+#ns-section-rich-text_1791764612382 .text-block{ flex:0 0 100%; width:100%!important; margin:0 0 10px!important; }
+#ns-section-rich-text_1791765048836 .text-block,
+#ns-section-rich-text_1791765143533 .text-block,
+#ns-section-rich-text_1791764612382 .text-block,
+#ns-section-rich-text_1791765048836 .text-block *,
+#ns-section-rich-text_1791765143533 .text-block *,
+#ns-section-rich-text_1791764612382 .text-block *{
+  color:#c23a00!important;
+  font-family:var(--julu-body)!important;
+  font-size:13px!important; font-weight:700!important; line-height:1.3!important;
+  letter-spacing:.24em!important; text-transform:uppercase;
+  text-align:left!important; margin:0!important;
+}
+/* Título */
+#ns-section-rich-text_1791765048836 .heading-block,
+#ns-section-rich-text_1791765143533 .heading-block,
+#ns-section-rich-text_1791764612382 .heading-block{
+  flex:0 1 auto; width:auto!important; margin:0!important;
+  font-family:var(--julu-display)!important;
+  font-weight:900!important; font-size:clamp(34px,3.6vw,52px)!important;
+  line-height:.95!important; letter-spacing:-.03em!important; text-transform:uppercase;
+  color:var(--julu-ink)!important;
+  text-align:left!important;
+}
+#ns-section-rich-text_1791765048836 .heading-block span,
+#ns-section-rich-text_1791765143533 .heading-block span,
+#ns-section-rich-text_1791764612382 .heading-block span{ color:var(--julu-volt)!important; }
+/* Botão como link subrayado a la derecha */
+#ns-section-rich-text_1791765048836 a.btn,
+#ns-section-rich-text_1791765143533 a.btn,
+#ns-section-rich-text_1791764612382 a.btn{
+  margin:0 0 0 auto!important;
+  padding:0 0 4px!important;
+  background:none!important; border:none!important; border-radius:0!important;
+  border-bottom:2px solid var(--julu-volt)!important;
+  color:var(--julu-ink)!important;
+  font-family:var(--julu-body)!important; font-weight:700!important; font-size:16px!important;
+  line-height:1.2!important; text-transform:none!important; letter-spacing:0!important;
+  white-space:nowrap; box-shadow:none!important;
+}
+#ns-section-rich-text_1791765048836 a.btn:hover,
+#ns-section-rich-text_1791765143533 a.btn:hover,
+#ns-section-rich-text_1791764612382 a.btn:hover{ color:var(--julu-volt)!important; background:none!important; }
+
+/* Escolha seu caimento: mismo ancho que Lançamentos + pastilla decorativa a la derecha */
+#ns-section-rich-text_1791765048836 .container{ max-width:none!important; padding:0 32px!important; }
+#ns-section-rich-text_1791765048836 .rich-text::after{
+  content:"Em preto ou branco · do P ao GG";
+  margin-left:auto;
+  padding:8px 14px 8px 46px;
+  border-radius:9999px;
+  background:var(--julu-cream) url('nuvemshop/gato-dormindo.webp') 8px center/30px auto no-repeat;
+  font-family:var(--julu-body); font-size:15px; font-weight:500; line-height:1.4;
+  color:#4f4a40;
+}
+/* Coleções: bloque oscuro, continúa en la sección de banners de abajo */
+#ns-section-rich-text_1791765143533{ background:var(--julu-ink); }
+#ns-section-rich-text_1791765143533 .rich-text-section{ padding-top:80px!important; }
+#ns-section-rich-text_1791765143533 .text-block,
+#ns-section-rich-text_1791765143533 .text-block *{ color:var(--julu-volt)!important; }
+#ns-section-rich-text_1791765143533 .heading-block{ color:var(--julu-paper)!important; }
+
+@media (max-width:767px){
+#ns-section-rich-text_1791765048836 .container, #ns-section-rich-text_1791765143533 .container, #ns-section-rich-text_1791764612382 .container{ padding:0 16px!important; }
+#ns-section-rich-text_1791765048836 .heading-block, #ns-section-rich-text_1791765143533 .heading-block, #ns-section-rich-text_1791764612382 .heading-block{ font-size:30px!important; }
+#ns-section-rich-text_1791765048836 a.btn, #ns-section-rich-text_1791765143533 a.btn, #ns-section-rich-text_1791764612382 a.btn{ margin:10px 0 0!important; font-size:14px!important; }
+  #ns-section-rich-text_1791765048836 .heading-block{ font-size:26px!important; }
+  #ns-section-rich-text_1791765048836 .rich-text::after{ margin:12px 0 0; font-size:13px; }
+  #ns-section-rich-text_1791765143533 .rich-text-section{ padding-top:56px!important; }
+}
+
+/* =====================================================================
    8. BANNERS "ESCOLHA SEU CAIMENTO" (#ns-section-banners_grid_3_vertical)
    Estructura del tema: .banner-block > .banner-image-container + .media-content
    (.heading-block = título del banner, .btn = botón, a.media-link = link de toda la tarjeta)
    ===================================================================== */
-/* Título de la sección (el tema no trae uno): "ESCOLHA SEU" negro + "CAIMENTO" naranja.
-   El corte de color va al 57.1% del ancho del texto (medido en vivo). */
-#ns-section-banners_grid_3_vertical .banners-section > .container::before{
-  content:"Escolha seu caimento";
-  display:inline-block;
-  white-space:nowrap;
-  margin:0 0 28px;
-  font-family:var(--julu-display);
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:-.03em;
-  line-height:.95;
-  font-size:clamp(34px, 3.6vw, 52px);
-  background:linear-gradient(90deg, var(--julu-ink) 57.1%, var(--julu-volt) 57.1%);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
-
-/* Mismo ancho que Lançamentos + línea de info a la derecha del título (con gatito durmiendo) */
 /* Aire debajo de la sección (el tema la deja en 0 y pega con el bloque negro) */
-#ns-section-banners_grid_3_vertical .banners-section{ padding-bottom:80px!important; }
+/* El título vive en la sección "Editorial de texto" de arriba (#ns-section-rich-text_1791765048836) */
+#ns-section-banners_grid_3_vertical .banners-section{ padding-top:28px!important; padding-bottom:80px!important; }
 @media (max-width:767px){ #ns-section-banners_grid_3_vertical .banners-section{ padding-bottom:48px!important; } }
 #ns-section-banners_grid_3_vertical .banners-section > .container{
   max-width:none!important;
   padding-left:32px!important;
   padding-right:32px!important;
-  display:flex;
-  flex-wrap:wrap;
-  align-items:flex-end;
-  column-gap:24px;
-}
-#ns-section-banners_grid_3_vertical .banners-section > .container > .banners-slider-wrapper{
-  order:2;
-  flex:0 0 100%;
-  max-width:100%;
-}
-#ns-section-banners_grid_3_vertical .banners-section > .container::after{
-  content:"Em preto ou branco · do P ao GG";
-  order:1;
-  margin:0 0 34px auto;
-  padding:8px 14px 8px 46px;
-  border-radius:9999px;
-  background:var(--julu-cream) url('nuvemshop/gato-dormindo.webp') 8px center/30px auto no-repeat;
-  font-family:var(--julu-body);
-  font-size:15px;
-  font-weight:500;
-  color:#4f4a40;
 }
 /* Altura fija en compu: las fotos verticales a todo el ancho quedaban gigantes */
 @media (min-width: 769px){
@@ -758,9 +816,7 @@ body{ background:var(--julu-paper)!important; }
 #ns-section-banners_grid_3_vertical .media-content .btn{ display:none!important; }
 
 @media (max-width: 768px){
-  #ns-section-banners_grid_3_vertical .banners-section > .container::before{ font-size:24px; margin-bottom:10px; }
   #ns-section-banners_grid_3_vertical .banners-section > .container{ padding-left:16px!important; padding-right:16px!important; }
-  #ns-section-banners_grid_3_vertical .banners-section > .container::after{ margin:0 0 18px 0; font-size:13px; }
   #ns-section-banners_grid_3_vertical .media-content{ padding:16px!important; }
   #ns-section-banners_grid_3_vertical .heading-block,
   #ns-section-banners_grid_3_vertical .heading-block *{ font-size:18px!important; }
@@ -774,29 +830,9 @@ body{ background:var(--julu-paper)!important; }
    Bloque oscuro. Orden de los banners: 1 Alvarás (disponible), 2 Tarot, 3 Terror (em breve).
    ===================================================================== */
 #ns-section-banners_1791760816670{ background:var(--julu-ink); color:var(--julu-paper); }
-#ns-section-banners_1791760816670 .banners-section{ padding:80px 0!important; }
+/* El kicker y el título viven en la sección "Editorial de texto" de arriba (#ns-section-rich-text_1791765143533) */
+#ns-section-banners_1791760816670 .banners-section{ padding:36px 0 80px!important; }
 #ns-section-banners_1791760816670 .banners-section > .container{ max-width:1280px; padding:0 24px; }
-
-/* Encabezado: kicker naranja + título grande */
-#ns-section-banners_1791760816670 .banners-section > .container::before{
-  content:"Universo JULU";
-  display:block;
-  margin-bottom:10px;
-  color:var(--julu-volt);
-  font-family:var(--julu-body);
-  font-size:13px; font-weight:700;
-  letter-spacing:.24em; text-transform:uppercase;
-}
-#ns-section-banners_1791760816670 .banners-slider-wrapper::before{
-  content:"Coleções";
-  display:block;
-  margin-bottom:36px;
-  font-family:var(--julu-display);
-  font-weight:900;
-  font-size:clamp(34px,3.6vw,52px);
-  line-height:.95; letter-spacing:-.03em; text-transform:uppercase;
-  color:var(--julu-paper);
-}
 
 /* Tarjeta */
 #ns-section-banners_1791760816670 .banner-block{ display:flex; flex-direction:column; gap:16px; }
@@ -848,9 +884,8 @@ body{ background:var(--julu-paper)!important; }
 #ns-section-banners_1791760816670 .media-content .btn{ display:none!important; }
 
 @media (max-width:767px){
-  #ns-section-banners_1791760816670 .banners-section{ padding:56px 0!important; }
+  #ns-section-banners_1791760816670 .banners-section{ padding:24px 0 56px!important; }
   #ns-section-banners_1791760816670 .banners-section > .container{ padding:0 16px; }
-  #ns-section-banners_1791760816670 .banners-slider-wrapper::before{ margin-bottom:24px; }
   #ns-section-banners_1791760816670 .banner-image-container{ height:320px; }
   #ns-section-banners_1791760816670 .heading-block{ font-size:22px!important; }
   #ns-section-banners_1791760816670 .text-block,
@@ -929,57 +964,11 @@ body{ background:var(--julu-paper)!important; }
 
 /* =====================================================================
    11. ASSIM SE VIVE JULU
-   Dos secciones pegadas:
-   - #ns-section-rich-text_1791764612382 (Editorial de texto): kicker + título + link "Marque @julu.brasil".
-     Los textos son bloques reales del editor; acá solo se acomodan.
+   El encabezado (kicker + título + link "Marque") es la sección #ns-section-rich-text_1791764612382,
+   estilizada en 7b. Acá solo la galería:
    - #ns-section-banners_1791763406187 (Banners, 4 columnas, sin textos): galería, foto 1 grande (2x2)
      + 4 chicas. Cada foto linkea al Instagram.
    ===================================================================== */
-/* --- Encabezado (Editorial de texto) --- */
-#ns-section-rich-text_1791764612382 .rich-text-section{ padding:24px 0 0!important; }
-#ns-section-rich-text_1791764612382 .container{ max-width:1280px; padding:0 24px; }
-#ns-section-rich-text_1791764612382 .rich-text{
-  display:grid!important;
-  grid-template-columns:minmax(0,1fr) auto;
-  align-items:end;
-  column-gap:16px; row-gap:10px;
-  text-align:left!important;
-}
-/* Kicker */
-#ns-section-rich-text_1791764612382 .text-block{ grid-column:1; grid-row:1; width:auto!important; margin:0!important; }
-#ns-section-rich-text_1791764612382 .text-block,
-#ns-section-rich-text_1791764612382 .text-block *{
-  margin:0!important;
-  color:#c23a00!important;
-  font-family:var(--julu-body)!important;
-  font-size:13px!important; font-weight:700!important;
-  letter-spacing:.24em!important; text-transform:uppercase;
-  text-align:left!important;
-}
-/* Título (la palabra que marques con color en el editor sale naranja) */
-#ns-section-rich-text_1791764612382 .heading-block{
-  grid-column:1; grid-row:2; width:auto!important; margin:0!important;
-  font-family:var(--julu-display)!important;
-  font-weight:900!important; font-size:clamp(34px,3.6vw,52px)!important;
-  line-height:.95!important; letter-spacing:-.03em!important; text-transform:uppercase;
-  color:var(--julu-ink)!important;
-  text-align:left!important;
-}
-#ns-section-rich-text_1791764612382 .heading-block span{ color:var(--julu-volt)!important; }
-/* Link "Marque @julu.brasil" como texto subrayado, a la derecha */
-#ns-section-rich-text_1791764612382 a.btn{
-  grid-column:2; grid-row:2; justify-self:end;
-  margin:0!important;
-  padding:0 0 4px!important;
-  background:none!important; border:none!important; border-radius:0!important;
-  border-bottom:2px solid var(--julu-volt)!important;
-  color:var(--julu-ink)!important;
-  font-family:var(--julu-body)!important; font-weight:700!important; font-size:16px!important;
-  line-height:1.2!important; text-transform:none!important; letter-spacing:0!important;
-  white-space:nowrap; box-shadow:none!important;
-}
-#ns-section-rich-text_1791764612382 a.btn:hover{ color:var(--julu-volt)!important; background:none!important; }
-
 /* --- Galería (Banners) --- */
 #ns-section-banners_1791763406187 .banners-section{ padding:28px 0 72px!important; }
 #ns-section-banners_1791763406187 .banners-section > .container{ max-width:1280px; padding:0 24px; }
@@ -1010,11 +999,6 @@ body{ background:var(--julu-paper)!important; }
 #ns-section-banners_1791763406187 .media-content{ display:none!important; }
 
 @media (max-width:767px){
-  #ns-section-rich-text_1791764612382 .rich-text-section{ padding:16px 0 0!important; }
-  #ns-section-rich-text_1791764612382 .container{ padding:0 16px; }
-  #ns-section-rich-text_1791764612382 .rich-text{ grid-template-columns:minmax(0,1fr); }
-  #ns-section-rich-text_1791764612382 .heading-block{ font-size:30px!important; }
-  #ns-section-rich-text_1791764612382 a.btn{ grid-column:1; grid-row:3; justify-self:start; font-size:14px!important; margin-top:4px!important; }
   #ns-section-banners_1791763406187 .banners-section{ padding:20px 0 48px!important; }
   #ns-section-banners_1791763406187 .banners-section > .container{ padding:0 16px; }
   #ns-section-banners_1791763406187 .flex-grid{
