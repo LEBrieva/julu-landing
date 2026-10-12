@@ -23,6 +23,7 @@
      - 12-quem-esta-por-tras.css
      - 13-newsletter.css
      - 14-footer.css
+     - 15-graffitis.css
    ===================================================================== */
 
 
@@ -1303,4 +1304,79 @@ body{ background:var(--julu-paper)!important; }
   #ns-section-footer .footer-menu-title{ margin:0!important; }
   #ns-section-footer .footer-menu-accordion svg{ fill:var(--julu-paper)!important; }
   #ns-section-footer .footer-secondary-info{ padding:20px 16px!important; flex-direction:column; align-items:flex-start; }
+}
+
+
+/* =====================================================================
+   15. GRAFITIS DE FONDO (stickers de gatos de public/nuvemshop/*.webp)
+   Decoración detrás del contenido, asomando por los bordes de la sección.
+   Se achican en celular para no tapar nada. No son clickeables.
+   (Van al final del CSS para no pisarse con otros ::before/::after de esas secciones.)
+   ===================================================================== */
+/* Base común: cada sección con grafitis recorta lo que se sale y deja el contenido arriba */
+#ns-section-banners_1791760816670 .banners-section,
+#ns-section-banners_1791763406187 .banners-section,
+#ns-section-image-with-text_1791766072535 > div:not(.js-nubesdk-slot){
+  position:relative; overflow:hidden;
+}
+#ns-section-banners_1791760816670 .banners-section > .container,
+#ns-section-banners_1791763406187 .banners-section > .container,
+#ns-section-image-with-text_1791766072535 .container{
+  position:relative; z-index:1;
+}
+#ns-section-banners_1791760816670 .banners-section::before,
+#ns-section-banners_1791760816670 .banners-section::after,
+#ns-section-banners_1791763406187 .banners-section::before,
+#ns-section-banners_1791763406187 .banners-section::after,
+#ns-section-image-with-text_1791766072535 > div:not(.js-nubesdk-slot)::before,
+#ns-section-image-with-text_1791766072535 > div:not(.js-nubesdk-slot)::after{
+  content:"";
+  position:absolute; z-index:0;
+  background:center/contain no-repeat;
+  pointer-events:none;
+}
+
+/* --- Coleções (fondo negro): asoman por los costados de las tarjetas --- */
+#ns-section-banners_1791760816670 .banners-section::before{
+  width:240px; height:240px; left:-100px; top:60px;
+  background-image:url('nuvemshop/gato-calico.webp');
+  transform:rotate(-14deg); opacity:.85;
+}
+#ns-section-banners_1791760816670 .banners-section::after{
+  width:240px; height:240px; right:-100px; bottom:20px;
+  background-image:url('nuvemshop/gato-copo.webp');
+  transform:rotate(10deg); opacity:.85;
+}
+
+/* --- Assim se vive JULU: asoman por los costados de la galería --- */
+#ns-section-banners_1791763406187 .banners-section::before{
+  width:260px; height:260px; left:-110px; top:60px;
+  background-image:url('nuvemshop/gato-preto.webp');
+  transform:rotate(-12deg); opacity:.9;
+}
+#ns-section-banners_1791763406187 .banners-section::after{
+  width:240px; height:240px; right:-100px; bottom:40px;
+  background-image:url('nuvemshop/gato-calico.webp');
+  transform:rotate(14deg); opacity:.9;
+}
+
+/* --- Uma família gateira: uno arriba a la derecha y otro abajo a la izquierda --- */
+#ns-section-image-with-text_1791766072535 > div:not(.js-nubesdk-slot)::before{
+  width:220px; height:220px; right:-90px; top:30px;
+  background-image:url('nuvemshop/gato-copo.webp');
+  transform:rotate(12deg); opacity:.9;
+}
+#ns-section-image-with-text_1791766072535 > div:not(.js-nubesdk-slot)::after{
+  width:200px; height:200px; left:-80px; bottom:20px;
+  background-image:url('nuvemshop/gato-dormindo.webp');
+  transform:rotate(-8deg); opacity:.9;
+}
+
+@media (max-width:767px){
+  #ns-section-banners_1791760816670 .banners-section::before{ width:140px; height:140px; left:-70px; top:30px; }
+  #ns-section-banners_1791760816670 .banners-section::after{ width:140px; height:140px; right:-70px; bottom:10px; }
+  #ns-section-banners_1791763406187 .banners-section::before,
+  #ns-section-banners_1791763406187 .banners-section::after{ display:none; }   /* la galería ocupa todo el ancho */
+  #ns-section-image-with-text_1791766072535 > div:not(.js-nubesdk-slot)::before{ width:130px; height:130px; right:-60px; top:10px; }
+  #ns-section-image-with-text_1791766072535 > div:not(.js-nubesdk-slot)::after{ width:120px; height:120px; left:-55px; bottom:10px; }
 }
