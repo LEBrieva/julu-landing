@@ -1,0 +1,62 @@
+/* =====================================================================
+   2. HEADER Y MENÚ
+   ===================================================================== */
+header{
+  background:rgba(244,240,230,.85)!important;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(10,10,10,.10)!important;
+  font-family:var(--julu-body)!important;
+}
+
+/* Logo con micro-animación */
+header img{ transition:transform .3s ease; }
+header a:hover img{ transform:rotate(-3deg) scale(1.03); }
+
+/* Buscar / Minha conta / total */
+header [class*="utilit"] span,
+header [class*="utilit"] a,
+header [class*="search"] span,
+header [class*="account"] span,
+header [class*="account"] a,
+header [class*="cart"] span{
+  font-family:var(--julu-body)!important;
+  font-size:14px!important;
+  font-weight:500!important;
+  color:rgba(10,10,10,.7)!important;
+}
+header svg{ fill:var(--julu-ink); }
+
+/* Contador del carrito: píldora naranja con número blanco */
+header [class*="cart"] [class*="count"],
+header [class*="cart"] [class*="badge"],
+header [class*="cart"] [class*="quantity"],
+header [class*="bubble"]{
+  background:var(--julu-volt)!important;
+  color:#fff!important;
+  font-size:11px!important;
+  font-weight:700!important;
+  border-radius:9999px!important;
+}
+
+/* Menú: Archivo grande y grueso, subrayado naranja al pasar el mouse */
+header nav a{
+  font-family:var(--julu-display)!important;
+  font-size:17px!important;
+  font-weight:700!important;
+  letter-spacing:-.01em!important;
+  text-transform:none!important;
+  color:var(--julu-ink)!important;
+  position:relative;
+  padding-bottom:6px;
+  text-decoration:none!important;
+  transition:color .2s ease;
+}
+header nav a::after{
+  content:"";
+  position:absolute; left:0; bottom:0;
+  width:0; height:2px;
+  background:var(--julu-volt);
+  transition:width .25s ease;
+}
+header nav a:hover::after{ width:100%; }

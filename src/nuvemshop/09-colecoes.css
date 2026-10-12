@@ -1,0 +1,67 @@
+/* =====================================================================
+   9. UNIVERSO JULU · COLEÇÕES (#ns-section-banners_1791760816670)
+   Sección Banners "imagen + título + descripción abajo", 3 columnas.
+   Bloque oscuro. Orden de los banners: 1 Alvarás (disponible), 2 Tarot, 3 Terror (em breve).
+   ===================================================================== */
+#ns-section-banners_1791760816670{ background:var(--julu-ink); color:var(--julu-paper); }
+/* El kicker y el título viven en la sección "Editorial de texto" de arriba (#ns-section-rich-text_1791765143533) */
+#ns-section-banners_1791760816670 .banners-section{ padding:36px 0 80px!important; }
+#ns-section-banners_1791760816670 .banners-section > .container{ max-width:1280px; padding:0 24px; }
+
+/* Tarjeta */
+#ns-section-banners_1791760816670 .banner-block{ display:flex; flex-direction:column; gap:16px; }
+#ns-section-banners_1791760816670 .banner-image-container{
+  height:380px; border-radius:24px; overflow:hidden; background:var(--julu-paper);
+}
+#ns-section-banners_1791760816670 .banner-image-container img{
+  width:100%; height:100%; object-fit:cover; object-position:50% 45%;
+  transition:transform .5s ease;
+}
+#ns-section-banners_1791760816670 .banner-item:not(:first-child) .banner-image-container img{ object-position:50% 28%; }
+#ns-section-banners_1791760816670 .banner-block:hover .banner-image-container img{ transform:scale(1.04); }
+
+/* Texto debajo, alineado a la izquierda */
+#ns-section-banners_1791760816670 .media-content{
+  position:static!important;
+  padding:0!important; margin:0!important;
+  text-align:left!important;
+  align-items:stretch!important;
+  gap:8px;
+}
+#ns-section-banners_1791760816670 .heading-block{
+  display:flex!important; justify-content:space-between; align-items:baseline; gap:12px;
+  margin:0!important;
+  font-family:var(--julu-display)!important;
+  font-weight:900!important; font-size:28px!important; line-height:1.05!important;
+  letter-spacing:-.01em!important; text-transform:uppercase;
+  color:var(--julu-paper)!important;
+}
+/* Etiqueta de estado al lado del nombre */
+#ns-section-banners_1791760816670 .heading-block::after{
+  content:"Em breve";
+  flex:0 0 auto;
+  font-family:var(--julu-body);
+  font-size:13px; font-weight:700; letter-spacing:.1em;
+  color:var(--julu-amber);
+}
+#ns-section-banners_1791760816670 .banner-item:first-child .heading-block::after{
+  content:"Disponível"; color:var(--julu-volt);
+}
+#ns-section-banners_1791760816670 .text-block,
+#ns-section-banners_1791760816670 .text-block *{
+  margin:0!important;
+  font-family:var(--julu-body)!important;
+  font-size:15px!important; font-weight:400!important; line-height:1.5!important;
+  text-align:left!important;
+  color:#c9c3b5!important;
+}
+#ns-section-banners_1791760816670 .media-content .btn{ display:none!important; }
+
+@media (max-width:767px){
+  #ns-section-banners_1791760816670 .banners-section{ padding:24px 0 56px!important; }
+  #ns-section-banners_1791760816670 .banners-section > .container{ padding:0 16px; }
+  #ns-section-banners_1791760816670 .banner-image-container{ height:320px; }
+  #ns-section-banners_1791760816670 .heading-block{ font-size:22px!important; }
+  #ns-section-banners_1791760816670 .text-block,
+  #ns-section-banners_1791760816670 .text-block *{ font-size:14px!important; }
+}

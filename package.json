@@ -9,7 +9,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "share": "ngrok http 4321",
-    "astro": "astro"
+    "astro": "astro",
+    "css:nuvemshop": "node scripts/build-nuvemshop-css.mjs",
+    "prebuild": "npm run css:nuvemshop"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

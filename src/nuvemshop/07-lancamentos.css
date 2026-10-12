@@ -1,0 +1,94 @@
+/* =====================================================================
+   7. SECCIÓN LANÇAMENTOS (.section-featured-home)
+   ===================================================================== */
+/* Título en Archivo, como el resto de la marca */
+.section-featured-home .heading-block,
+.section-featured-home .heading-block *{
+  font-family:var(--julu-display)!important;
+  font-weight:900!important;
+  text-transform:uppercase!important;
+  letter-spacing:-.03em!important;
+  line-height:.95!important;
+  font-size:clamp(34px, 3.6vw, 52px)!important;
+}
+
+/* Flechas del carrusel: a la altura de las fotos, círculo crema que se lee */
+.section-featured-home .swiper-button-prev,
+.section-featured-home .swiper-button-next{
+  top:38%!important;
+  width:46px!important;
+  height:46px!important;
+  border-radius:9999px!important;
+  background:rgba(244,240,230,.92)!important;
+  border:1.5px solid rgba(10,10,10,.2)!important;
+  box-shadow:0 4px 14px rgba(10,10,10,.12);
+  transition:background .2s ease;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:0!important;
+}
+.section-featured-home .swiper-button-prev svg,
+.section-featured-home .swiper-button-next svg{
+  width:20px!important;
+  height:20px!important;
+  margin:0!important;
+  position:static!important;
+}
+.section-featured-home .swiper-button-prev:hover,
+.section-featured-home .swiper-button-next:hover{
+  background:var(--julu-ink)!important;
+}
+.section-featured-home .swiper-button-prev:hover svg,
+.section-featured-home .swiper-button-next:hover svg{
+  fill:var(--julu-paper)!important;
+}
+
+/* Título a la izquierda + gatito sticker al lado, "Ver todos →" arriba a la derecha (como el diseño) */
+.section-featured-home .group-block .group-content::after{
+  content:"";
+  width:84px; height:84px;
+  flex-shrink:0;
+  background:url('nuvemshop/gato-preto.webp') center/contain no-repeat;
+  transform:rotate(-8deg) translateY(-6px);
+}
+.section-featured-home a.btn[data-block-type="button"]{
+  background:none!important;
+  border:none!important;
+  border-bottom:2px solid var(--julu-volt)!important;
+  border-radius:0!important;
+  padding:0 0 4px!important;
+  color:var(--julu-ink)!important;
+  font-family:var(--julu-body)!important;
+  font-weight:700!important;
+  font-size:16px!important;
+}
+.section-featured-home a.btn[data-block-type="button"]::after{ content:" →"; }
+.section-featured-home a.btn[data-block-type="button"]:hover{
+  color:#c23a00!important;
+  background:none!important;
+}
+@media (min-width: 769px){
+  .section-featured-home{ position:relative; }
+  .section-featured-home .group-block,
+  .section-featured-home .group-block .group-content{
+    justify-content:flex-start!important;
+    align-items:center!important;
+    text-align:left!important;
+  }
+  .section-featured-home > .d-flex.flex-column{ align-items:stretch!important; }
+  .section-featured-home > .d-flex.flex-column > a.btn[data-block-type="button"]{
+    position:absolute;
+    top:64px; right:32px;
+    margin-top:28px;
+  }
+}
+@media (max-width: 768px){
+  .section-featured-home .group-block .group-content::after{ width:56px; height:56px; }
+}
+
+/* Puntitos de paginación con el naranja de la marca */
+.section-featured-home .swiper-pagination-bullet-active{
+  background:var(--julu-volt)!important;
+  border-color:var(--julu-volt)!important;
+}

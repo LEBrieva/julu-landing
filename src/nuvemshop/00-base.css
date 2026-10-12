@@ -1,0 +1,15 @@
+/* =====================================================================
+   0. BASE
+   ===================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Inter:wght@400..700&display=swap');
+
+:root{
+  --julu-ink:#0a0a0a;
+  --julu-paper:#f4f0e6;
+  --julu-cream:#e7dcc4;
+  --julu-volt:#ff4d00;
+  --julu-amber:#f5a623;
+  --julu-muted:#6b6457;
+  --julu-display:'Archivo', system-ui, sans-serif;
+  --julu-body:'Inter', system-ui, sans-serif;
+}

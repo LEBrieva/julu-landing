@@ -1,0 +1,177 @@
+/* =====================================================================
+   3. HERO / CARROSSEL  (#ns-section-slideshow)
+   ===================================================================== */
+
+/* --- 3.1 Título --- */
+#ns-section-slideshow .heading-block,
+#ns-section-slideshow .heading-block *{
+  font-family:var(--julu-display)!important;
+  font-weight:900!important;
+  text-transform:uppercase!important;
+  letter-spacing:-.03em!important;
+  line-height:.92!important;
+  font-size:clamp(40px, 4.6vw, 88px)!important;
+}
+
+/* --- 3.2 Subtítulo --- */
+#ns-section-slideshow .text-content,
+#ns-section-slideshow .text-content *{
+  font-family:var(--julu-body)!important;
+  font-size:clamp(15px, 1.2vw, 20px)!important;
+  color:#4f4a40!important;
+  line-height:1.45!important;
+}
+#ns-section-slideshow .text-content strong,
+#ns-section-slideshow .text-content b{ color:var(--julu-ink)!important; }
+
+/* --- 3.3 Kicker naranja (primer texto del slide) --- */
+#ns-section-slideshow .media-content > .text-block:first-child .text-content,
+#ns-section-slideshow .media-content > .text-block:first-child .text-content *{
+  color:#c23a00!important; /* naranja más oscuro: se lee mejor sobre crema */
+  font-family:var(--julu-body)!important;
+  font-size:clamp(11px, 1vw, 14px)!important;
+  font-weight:700!important;
+  letter-spacing:.18em!important;
+  text-transform:uppercase!important;
+  line-height:1.2!important;
+}
+#ns-section-slideshow .media-content > .text-block:first-child .text-content{
+  display:flex!important;
+  align-items:center;
+  gap:12px;
+}
+#ns-section-slideshow .media-content > .text-block:first-child .text-content::before{
+  content:"";
+  width:36px;
+  height:3px;
+  background:var(--julu-volt);
+  flex-shrink:0;
+}
+
+/* --- 3.4 Botón píldora naranja --- */
+#ns-section-slideshow .btn-primary{
+  background:var(--julu-volt)!important;
+  color:var(--julu-ink)!important;
+  border:none!important;
+  border-radius:9999px!important;
+  font-family:var(--julu-body)!important;
+  font-weight:700!important;
+  padding:16px 34px!important;
+  transition:background .2s ease;
+}
+#ns-section-slideshow .btn-primary:hover{ background:var(--julu-amber)!important; }
+
+/* --- 3.4b Botón secundario ("Nossa história"): píldora con borde negro --- */
+#ns-section-slideshow .btn-secondary{
+  background:transparent!important;
+  color:var(--julu-ink)!important;
+  border:2px solid var(--julu-ink)!important;
+  border-radius:9999px!important;
+  font-family:var(--julu-body)!important;
+  font-weight:700!important;
+  padding:14px 32px!important;
+  box-shadow:none!important;
+  transition:background .2s ease, color .2s ease;
+}
+#ns-section-slideshow .btn-secondary:hover{
+  background:var(--julu-ink)!important;
+  color:var(--julu-paper)!important;
+}
+
+/* --- 3.4c Botones lado a lado: los textos ocupan toda la fila,
+        los botones se acomodan uno al lado del otro (y bajan si no entran) --- */
+#ns-section-slideshow .media-content{
+  flex-flow:row wrap!important;
+  column-gap:12px!important;
+}
+#ns-section-slideshow .media-content > *{
+  flex:0 0 100%!important;
+  max-width:100%!important;
+}
+#ns-section-slideshow .media-content > a.btn{
+  flex:0 0 auto!important;
+}
+
+/* --- 3.5 Flechas: discretas, abajo a la derecha --- */
+#ns-section-slideshow .swiper-button-prev,
+#ns-section-slideshow .swiper-button-next{
+  background:transparent!important;
+  border:1.5px solid rgba(10,10,10,.25)!important;
+  border-radius:9999px!important;
+  width:48px!important;
+  height:48px!important;
+  padding:0!important;
+  top:auto!important;
+  bottom:32px!important;
+  transition:border-color .2s, background .2s;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+#ns-section-slideshow .swiper-button-prev{ left:auto!important; right:96px!important; }
+#ns-section-slideshow .swiper-button-next{ right:36px!important; }
+#ns-section-slideshow .swiper-button-prev:hover,
+#ns-section-slideshow .swiper-button-next:hover{
+  background:var(--julu-ink)!important;
+  border-color:var(--julu-ink)!important;
+}
+#ns-section-slideshow .swiper-button-prev:hover svg,
+#ns-section-slideshow .swiper-button-next:hover svg{ fill:var(--julu-paper)!important; }
+
+/* --- 3.6 COMPUTADORA: caja crema semitransparente, centrada en vertical --- */
+@media (min-width: 769px){
+  #ns-section-slideshow .media-content{
+    left:6%!important;
+    right:auto!important;
+    top:50%!important;
+    bottom:auto!important;
+    height:auto!important;
+    min-height:0!important;
+    transform:translateY(-50%)!important;
+    width:auto!important;
+    max-width:min(48%, 660px)!important;
+    text-align:left!important;
+    align-items:flex-start!important;
+    align-content:center!important;
+    justify-content:flex-start!important;
+    padding:36px 40px 40px!important;
+    background:rgba(244,240,230,.86)!important;
+    backdrop-filter:blur(3px);
+    -webkit-backdrop-filter:blur(3px);
+    border-radius:28px!important;
+    box-shadow:0 1px 0 rgba(10,10,10,.06);
+  }
+}
+
+/* --- 3.7 CELULAR: texto abajo con un fundido crema detrás --- */
+@media (max-width: 768px){
+  #ns-section-slideshow .media-content{
+    justify-content:flex-start!important;
+    align-content:flex-end!important; /* texto abajo (en modo fila se usa align-content) */
+    padding-bottom:9%!important;
+    max-width:none!important;
+    right:0!important;
+    background:linear-gradient(
+      to top,
+      rgba(244,240,230,.94) 0%,
+      rgba(244,240,230,.88) 48%,
+      rgba(244,240,230,0) 64%
+    )!important;
+  }
+  #ns-section-slideshow .heading-block,
+  #ns-section-slideshow .heading-block *{ font-size:40px!important; }
+  #ns-section-slideshow .media-content > .text-block:first-child .text-content,
+  #ns-section-slideshow .media-content > .text-block:first-child .text-content *{
+    font-size:11px!important;
+    letter-spacing:.18em!important;
+  }
+  /* botones un poco más compactos para que entren lado a lado */
+  #ns-section-slideshow .btn-primary,
+  #ns-section-slideshow .btn-secondary{
+    padding:13px 20px!important;
+    font-size:15px!important;
+  }
+  /* sin flechas: se desliza con el dedo */
+  #ns-section-slideshow .swiper-button-prev,
+  #ns-section-slideshow .swiper-button-next{ display:none!important; }
+}

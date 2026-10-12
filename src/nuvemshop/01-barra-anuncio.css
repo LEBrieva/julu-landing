@@ -1,0 +1,24 @@
+/* =====================================================================
+   1. BARRA DE ANUNCIO (negra, mayúsculas)
+   ===================================================================== */
+[class*="adbar"],
+[class*="announcement"],
+[class*="topbar"],
+[class*="top-bar"]{
+  background:var(--julu-ink)!important;
+}
+[class*="adbar"] *,
+[class*="announcement"] *,
+[class*="topbar"] *,
+[class*="top-bar"] *{
+  color:var(--julu-paper)!important;
+  font-family:var(--julu-body)!important;
+  font-size:12px!important;
+  font-weight:600!important;
+  letter-spacing:.2em!important;
+  text-transform:uppercase!important;
+}
+[class*="adbar"] svg,
+[class*="announcement"] svg{
+  fill:var(--julu-volt)!important;
+}

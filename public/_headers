@@ -1,0 +1,4 @@
+# CSS de la tienda Nuvemshop: el navegador revalida siempre (respuesta 304 si no cambió),
+# así cada deploy se ve al instante sin tener que cambiar ?v= en Nuvemshop.
+/nuvemshop.css
+  Cache-Control: no-cache

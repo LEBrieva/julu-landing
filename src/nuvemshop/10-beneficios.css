@@ -1,0 +1,69 @@
+/* =====================================================================
+   10. BENEFICIOS (#ns-section-icon-text_1791762211238)
+   Sección "Ícones informativos": 4 tarjetas crema con ícono a la izquierda.
+   Se fuerza grilla (el tema usa un slider) — 4 columnas en compu, 2 en celular.
+   ===================================================================== */
+#ns-section-icon-text_1791762211238 .section-full-width{
+  max-width:1280px; margin:0 auto; padding:56px 24px!important;
+}
+#ns-section-icon-text_1791762211238 .swiper-wrapper{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:16px;
+  transform:none!important;
+}
+#ns-section-icon-text_1791762211238 .swiper-slide{
+  width:auto!important; margin:0!important; display:block!important;
+}
+#ns-section-icon-text_1791762211238 .swiper-pagination,
+#ns-section-icon-text_1791762211238 .swiper-button-prev,
+#ns-section-icon-text_1791762211238 .swiper-button-next{ display:none!important; }
+
+#ns-section-icon-text_1791762211238 .icon-text-item{
+  flex-direction:row!important;
+  align-items:center!important;
+  gap:14px;
+  height:100%;
+  padding:22px;
+  border-radius:20px;
+  background:var(--julu-cream);
+  text-align:left;
+}
+/* Ícono: acepta SVG del tema o las ilustraciones propias (imagen cuadrada).
+   La imagen se agranda un poco para esconder el marco fino que traen y
+   mix-blend-mode:multiply funde su fondo claro con el crema de la tarjeta. */
+#ns-section-icon-text_1791762211238 .icon-text-item-icon{
+  width:64px!important; height:64px!important; flex:0 0 64px;
+  margin:-6px 0 0 -6px!important;
+  overflow:hidden; border-radius:16px;
+  display:flex; align-items:center; justify-content:center;
+}
+#ns-section-icon-text_1791762211238 .icon-text-item-icon img{
+  width:100%!important; height:100%!important; object-fit:cover;
+  transform:scale(1.12); mix-blend-mode:multiply;
+}
+#ns-section-icon-text_1791762211238 .icon-text-item-icon svg{
+  width:28px!important; height:28px!important; fill:var(--julu-ink);
+}
+#ns-section-icon-text_1791762211238 .icon-text-item-content{ text-align:left!important; }
+#ns-section-icon-text_1791762211238 .icon-text-item-title{
+  margin:0!important;
+  font-family:var(--julu-display)!important;
+  font-weight:800!important; font-size:17px!important; line-height:1.2!important;
+  color:var(--julu-ink)!important;
+}
+#ns-section-icon-text_1791762211238 .icon-text-item-description{
+  margin-top:4px!important;
+  font-family:var(--julu-body)!important;
+  font-size:14px!important; line-height:1.4!important;
+  color:#4f4a40!important;
+}
+
+@media (max-width:767px){
+  #ns-section-icon-text_1791762211238 .section-full-width{ padding:40px 16px!important; }
+  #ns-section-icon-text_1791762211238 .swiper-wrapper{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+  #ns-section-icon-text_1791762211238 .icon-text-item{ flex-direction:column!important; align-items:flex-start!important; gap:10px; padding:16px; }
+  #ns-section-icon-text_1791762211238 .icon-text-item-icon{ width:56px!important; height:56px!important; flex-basis:56px; margin:0!important; }
+  #ns-section-icon-text_1791762211238 .icon-text-item-title{ font-size:15px!important; }
+  #ns-section-icon-text_1791762211238 .icon-text-item-description{ font-size:13px!important; }
+}

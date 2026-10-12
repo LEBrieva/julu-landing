@@ -1,25 +1,25 @@
 /* =====================================================================
-   JULU — CSS global de la tienda Nuvemshop
-   Versión: v22 (11/10/2026) — Títulos de Caimento, Coleções y Assim se vive como bloques reales
-   Dónde vive: repo landing → public/nuvemshop.css (se sirve en https://julu.clothing/nuvemshop.css)
-   En Nuvemshop (CSS personalizado) va SOLO: @import url('https://julu.clothing/nuvemshop.css?v=N');
-   En cada cambio: editar este archivo, push a main y subir ?v=N en Nuvemshop.
+   JULU — CSS de la tienda Nuvemshop
+   ARCHIVO GENERADO: no editar a mano. Se edita src/nuvemshop/*.css y se corre
+   `npm run css:nuvemshop` (también corre solo antes de `npm run build`).
+   En Nuvemshop (CSS personalizado) va SOLO:
+     @import url('https://julu.clothing/nuvemshop.css');
+   Imágenes decorativas: public/nuvemshop/*.webp (rutas relativas a este archivo)
 
-   Índice
-   0. Base (fuentes y colores)
-   1. Barra de anuncio
-   2. Header y menú
-   3. Hero / Carrossel   (#ns-section-slideshow)
-   4. Cinta animada      ([id^="ns-section-divider"])
-   5. Botones generales (variables del tema)
-   6. Tarjetas de producto (toda la tienda)
-   7. Sección Lançamentos (.section-featured-home)
-   7b. Encabezados de sección (Editorial de texto, 3 secciones)
-   8. Banners "Escolha seu caimento" (#ns-section-banners_grid_3_vertical)
-   9. Universo JULU · Coleções (#ns-section-banners_1791760816670)
-  10. Beneficios (#ns-section-icon-text_1791762211238)
-  11. Assim se vive JULU (#ns-section-rich-text_1791764612382 + #ns-section-banners_1791763406187)
-   Imágenes decorativas: repo landing → public/nuvemshop/*.webp (rutas relativas a este CSS)
+   Partes, en este orden:
+     - 00-base.css
+     - 01-barra-anuncio.css
+     - 02-header.css
+     - 03-hero.css
+     - 04-cinta.css
+     - 05-botones.css
+     - 06-tarjetas-producto.css
+     - 07-lancamentos.css
+     - 07b-encabezados.css
+     - 08-escolha-caimento.css
+     - 09-colecoes.css
+     - 10-beneficios.css
+     - 11-assim-se-vive.css
    ===================================================================== */
 
 
@@ -712,6 +712,7 @@ body{ background:var(--julu-paper)!important; }
   #ns-section-rich-text_1791765143533 .rich-text-section{ padding-top:56px!important; }
 }
 
+
 /* =====================================================================
    8. BANNERS "ESCOLHA SEU CAIMENTO" (#ns-section-banners_grid_3_vertical)
    Estructura del tema: .banner-block > .banner-image-container + .media-content
@@ -824,6 +825,7 @@ body{ background:var(--julu-paper)!important; }
   #ns-section-banners_grid_3_vertical .media-content .text-block *{ font-size:12px!important; }
 }
 
+
 /* =====================================================================
    9. UNIVERSO JULU · COLEÇÕES (#ns-section-banners_1791760816670)
    Sección Banners "imagen + título + descripción abajo", 3 columnas.
@@ -891,6 +893,7 @@ body{ background:var(--julu-paper)!important; }
   #ns-section-banners_1791760816670 .text-block,
   #ns-section-banners_1791760816670 .text-block *{ font-size:14px!important; }
 }
+
 
 /* =====================================================================
    10. BENEFICIOS (#ns-section-icon-text_1791762211238)
@@ -961,6 +964,7 @@ body{ background:var(--julu-paper)!important; }
   #ns-section-icon-text_1791762211238 .icon-text-item-title{ font-size:15px!important; }
   #ns-section-icon-text_1791762211238 .icon-text-item-description{ font-size:13px!important; }
 }
+
 
 /* =====================================================================
    11. ASSIM SE VIVE JULU

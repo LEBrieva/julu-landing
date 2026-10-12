@@ -1,0 +1,47 @@
+/* =====================================================================
+   11. ASSIM SE VIVE JULU
+   El encabezado (kicker + título + link "Marque") es la sección #ns-section-rich-text_1791764612382,
+   estilizada en 7b. Acá solo la galería:
+   - #ns-section-banners_1791763406187 (Banners, 4 columnas, sin textos): galería, foto 1 grande (2x2)
+     + 4 chicas. Cada foto linkea al Instagram.
+   ===================================================================== */
+/* --- Galería (Banners) --- */
+#ns-section-banners_1791763406187 .banners-section{ padding:28px 0 72px!important; }
+#ns-section-banners_1791763406187 .banners-section > .container{ max-width:1280px; padding:0 24px; }
+#ns-section-banners_1791763406187 .flex-grid{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  grid-template-rows:300px 300px;
+  gap:16px!important;
+  margin:0!important;
+}
+#ns-section-banners_1791763406187 .banner-item{
+  width:auto!important; max-width:none!important; flex:none!important;
+  padding:0!important; margin:0!important;
+}
+#ns-section-banners_1791763406187 .banner-item:first-child{ grid-column:1 / 3; grid-row:1 / 3; }
+#ns-section-banners_1791763406187 .banner-block,
+#ns-section-banners_1791763406187 .banner-image-container{
+  height:100%!important; padding:0!important;
+}
+#ns-section-banners_1791763406187 .banner-block{ border-radius:22px; overflow:hidden; }
+#ns-section-banners_1791763406187 .banner-image-container img{
+  position:absolute; inset:0;
+  width:100%!important; height:100%!important; object-fit:cover;
+  transition:transform .5s ease;
+}
+#ns-section-banners_1791763406187 .banner-item:nth-child(3) .banner-image-container img{ object-position:50% 40%; }
+#ns-section-banners_1791763406187 .banner-block:hover .banner-image-container img{ transform:scale(1.04); }
+#ns-section-banners_1791763406187 .media-content{ display:none!important; }
+
+@media (max-width:767px){
+  #ns-section-banners_1791763406187 .banners-section{ padding:20px 0 48px!important; }
+  #ns-section-banners_1791763406187 .banners-section > .container{ padding:0 16px; }
+  #ns-section-banners_1791763406187 .flex-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-rows:280px 180px 180px;
+    gap:10px!important;
+  }
+  #ns-section-banners_1791763406187 .banner-item:first-child{ grid-column:1 / 3; grid-row:1 / 2; }
+  #ns-section-banners_1791763406187 .banner-block{ border-radius:16px; }
+}

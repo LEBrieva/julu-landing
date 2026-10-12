@@ -1,0 +1,60 @@
+/* =====================================================================
+   4. CINTA ANIMADA (separador)  ([id^="ns-section-divider"])
+   ===================================================================== */
+[id^="ns-section-divider"]{
+  overflow:hidden!important; /* evita el scroll horizontal */
+}
+[id^="ns-section-divider"] .divider-section{
+  position:relative!important;
+  overflow:hidden!important;
+  height:90px!important;
+  padding:0!important;
+  margin:0!important;
+  transform:rotate(-1.2deg) scale(1.03);
+}
+[id^="ns-section-divider"] .divider-section hr{ display:none!important; }
+
+/* franja naranja de atrás */
+[id^="ns-section-divider"] .divider-section::before{
+  content:"";
+  position:absolute;
+  left:-5%; right:-5%;
+  top:50%;
+  height:44px;
+  background:var(--julu-volt);
+  transform:translateY(-50%) rotate(2.4deg);
+}
+
+/* franja negra con el texto que se mueve */
+[id^="ns-section-divider"] .divider-section::after{
+  content:"ENVIAMOS PARA TODO O BRASIL  ✦  5% OFF NO PIX  ✦  ESTAMPAS QUE SÓ QUEM TEM GATO ENTENDE  ✦  DESIGN AUTORAL  ✦  FEITO POR GATEIROS 🐾  ✦  ENVIAMOS PARA TODO O BRASIL  ✦  5% OFF NO PIX  ✦  ESTAMPAS QUE SÓ QUEM TEM GATO ENTENDE  ✦  DESIGN AUTORAL  ✦  FEITO POR GATEIROS 🐾  ✦  ";
+  position:absolute;
+  top:50%;
+  left:0;
+  width:max-content;
+  white-space:pre;
+  background:var(--julu-ink);
+  color:var(--julu-paper);
+  font-family:var(--julu-display);
+  font-weight:800;
+  font-size:16px;
+  letter-spacing:.14em;
+  padding:13px 0;
+  transform:translateY(-50%);
+  animation:julu-cinta 40s linear infinite;
+}
+
+@keyframes julu-cinta{
+  from{ transform:translateY(-50%) translateX(0); }
+  to  { transform:translateY(-50%) translateX(-50%); }
+}
+
+@media (max-width:768px){
+  [id^="ns-section-divider"] .divider-section{ height:72px!important; }
+  [id^="ns-section-divider"] .divider-section::before{ height:34px; }
+  [id^="ns-section-divider"] .divider-section::after{ font-size:13px; padding:10px 0; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  [id^="ns-section-divider"] .divider-section::after{ animation:none; }
+}
