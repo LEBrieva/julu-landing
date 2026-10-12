@@ -21,6 +21,7 @@
      - 10-beneficios.css
      - 11-assim-se-vive.css
      - 12-quem-esta-por-tras.css
+     - 13-newsletter.css
    ===================================================================== */
 
 
@@ -1082,4 +1083,119 @@ body{ background:var(--julu-paper)!important; }
   #ns-section-image-with-text_1791766072535 .heading-block{ font-size:32px!important; }
   #ns-section-image-with-text_1791766072535 .group-content > .text-block:not(:first-child),
   #ns-section-image-with-text_1791766072535 .group-content > .text-block:not(:first-child) *{ font-size:16px!important; }
+}
+
+
+/* =====================================================================
+   13. NEWSLETTER · CLUBE JULU (#ns-section-newsletter_1791504011655)
+   Bloque naranja: texto a la izquierda, formulario a la derecha, gatito abajo.
+   Bloques del editor: [Texto opcional = kicker] · Título · Texto · Formulario.
+   ===================================================================== */
+#ns-section-newsletter_1791504011655 .newsletter-section{
+  position:relative; overflow:hidden;
+  background:var(--julu-volt)!important;
+  padding:72px 0!important;
+}
+/* Gatito decorativo abajo a la derecha */
+#ns-section-newsletter_1791504011655 .newsletter-section::after{
+  content:"";
+  position:absolute; right:-40px; bottom:-60px;
+  width:220px; height:220px;
+  background:url('nuvemshop/gato-dormindo.webp') center/contain no-repeat;
+  mix-blend-mode:multiply; opacity:.9;
+  pointer-events:none;
+}
+#ns-section-newsletter_1791504011655 .media-content{
+  position:relative; z-index:1;
+  max-width:1280px!important; padding:0 24px!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  column-gap:48px; row-gap:12px;
+  align-items:center;
+  text-align:left!important;
+}
+#ns-section-newsletter_1791504011655 .media-content > *{ grid-column:1; margin:0!important; width:auto!important; }
+/* Kicker: si agregás un bloque Texto ANTES del título */
+#ns-section-newsletter_1791504011655 .media-content > .text-block:first-child,
+#ns-section-newsletter_1791504011655 .media-content > .text-block:first-child *{
+  font-family:var(--julu-body)!important;
+  font-size:13px!important; font-weight:700!important; line-height:1.3!important;
+  letter-spacing:.24em!important; text-transform:uppercase;
+  color:var(--julu-ink)!important;
+}
+/* Título */
+#ns-section-newsletter_1791504011655 .heading-block{
+  font-family:var(--julu-display)!important;
+  font-weight:900!important; font-size:clamp(36px,4vw,56px)!important;
+  line-height:.92!important; letter-spacing:-.03em!important; text-transform:uppercase;
+  color:var(--julu-ink)!important;
+  text-align:left!important;
+}
+/* Descripción (el bloque Texto después del título) */
+#ns-section-newsletter_1791504011655 .heading-block ~ .text-block,
+#ns-section-newsletter_1791504011655 .heading-block ~ .text-block *{
+  max-width:460px;
+  font-family:var(--julu-body)!important;
+  font-size:18px!important; font-weight:400!important; line-height:1.5!important;
+  color:var(--julu-ink)!important;
+  text-align:left!important;
+}
+/* Formulario a la derecha */
+#ns-section-newsletter_1791504011655 .newsletter-form-block{
+  grid-column:2!important; grid-row:1 / span 3;
+  align-self:center;
+}
+#ns-section-newsletter_1791504011655 .newsletter-form-wrapper{
+  display:flex!important; flex-wrap:wrap; gap:10px;
+  border:none!important; background:none!important;
+}
+#ns-section-newsletter_1791504011655 .newsletter-form-input{
+  flex:1 1 240px; min-width:0;
+  height:auto!important;
+  padding:16px 22px!important;
+  border-radius:9999px!important;
+  border:2px solid var(--julu-ink)!important;
+  background:var(--julu-paper)!important;
+  color:var(--julu-ink)!important;
+  font-family:var(--julu-body)!important; font-size:16px!important;
+  box-shadow:none!important;
+}
+#ns-section-newsletter_1791504011655 .newsletter-form-input::placeholder{ color:#6b6457; }
+#ns-section-newsletter_1791504011655 .newsletter-form-button{
+  flex:0 0 auto;
+  position:static!important;
+  padding:16px 28px!important;
+  border-radius:9999px!important;
+  border:none!important;
+  background:var(--julu-ink)!important;
+  color:var(--julu-paper)!important;
+  font-family:var(--julu-body)!important; font-weight:700!important; font-size:16px!important;
+  text-transform:none!important; letter-spacing:0!important;
+  transition:transform .15s ease;
+}
+#ns-section-newsletter_1791504011655 .newsletter-form-button:hover{ transform:translateY(-1px); }
+/* Texto del botón: "Quero entrar" (el tema no deja cambiar "Enviar") */
+#ns-section-newsletter_1791504011655 .js-newsletter-form-submit-label{ font-size:0!important; }
+#ns-section-newsletter_1791504011655 .js-newsletter-form-submit-label::after{
+  content:"Quero entrar";
+  font-size:16px;
+}
+/* Nota debajo del formulario */
+#ns-section-newsletter_1791504011655 .newsletter-form::after{
+  content:"Dá pra sair quando quiser.";
+  display:block;
+  margin:10px 0 0 8px;
+  font-family:var(--julu-body); font-size:13px;
+  color:#2a1505;
+}
+
+@media (max-width:767px){
+  #ns-section-newsletter_1791504011655 .newsletter-section{ padding:56px 0 72px!important; }
+  #ns-section-newsletter_1791504011655 .newsletter-section::after{ width:180px; height:180px; right:-30px; bottom:-40px; }
+  #ns-section-newsletter_1791504011655 .media-content{ grid-template-columns:minmax(0,1fr); padding:0 16px!important; }
+  #ns-section-newsletter_1791504011655 .newsletter-form-block{ grid-column:1!important; grid-row:auto; margin-top:12px!important; }
+  #ns-section-newsletter_1791504011655 .heading-block{ font-size:38px!important; }
+  #ns-section-newsletter_1791504011655 .heading-block ~ .text-block,
+  #ns-section-newsletter_1791504011655 .heading-block ~ .text-block *{ font-size:16px!important; }
+  #ns-section-newsletter_1791504011655 .newsletter-form-button{ flex:1 1 100%; }
 }
