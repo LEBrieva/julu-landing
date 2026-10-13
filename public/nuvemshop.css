@@ -510,9 +510,10 @@ body{ background:var(--julu-paper)!important; }
   text-decoration-thickness:2px;
   text-underline-offset:4px;
 }
-/* Las bolitas son informativas (colores disponibles): no capturan el mouse,
-   así no hacen titilar la foto de hover. */
-.product-item .product-item-colors-container{ pointer-events:none; }
+/* Las bolitas cambian la foto de la tarjeta al color elegido
+   (requiere asignar una imagen a cada variante de color en el admin). */
+.product-item .product-item-colors-bullet{ cursor:pointer; transition:transform .15s ease; }
+.product-item .product-item-colors-bullet:hover{ transform:scale(1.15); }
 
 /* En la tarjeta no mostramos stock ni botón "Comprar" (la tarjeta entera lleva al producto).
    El stock y la compra quedan en la página de producto. */
