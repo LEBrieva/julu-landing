@@ -1321,7 +1321,9 @@ body{ background:var(--julu-paper)!important; }
    Si la categoría tiene imagen cargada en el admin (Produtos → Categorias),
    la cabecera se arma como en el diseño: bloque negro redondeado con el texto
    a la izquierda y la foto de la categoría a la derecha.
-   Texto: título = nombre de la categoría · párrafo = descripción de la categoría.
+   Todo el contenido sale del admin: título = nombre de la categoría,
+   párrafo = descripción, foto = imagen. Una colección nueva solo necesita su
+   categoría con imagen y descripción; no hay que tocar este CSS.
    Sin imagen, la página queda con el encabezado simple del tema.
    ===================================================================== */
 .template-category main:has(#ns-section-category_hero img){ display:flex; flex-direction:column; }
@@ -1357,14 +1359,6 @@ body{ background:var(--julu-paper)!important; }
   color:var(--julu-ink)!important; font-weight:600!important;
 }
 .template-category main:has(#ns-section-category_hero img) #ns-section-heading .page-header-title-inner{ display:block!important; }
-/* Kicker */
-.template-category main:has(#ns-section-category_hero img) #ns-section-heading .page-header-title-inner::before{
-  content:"Coleção · Disponível";
-  display:block; margin-bottom:16px;
-  font-family:var(--julu-body); font-size:13px; font-weight:700;
-  letter-spacing:.24em; text-transform:uppercase;
-  color:var(--julu-volt);
-}
 /* Título */
 .template-category main:has(#ns-section-category_hero img) #ns-section-heading .page-header-title{
   margin:0 0 16px!important;
