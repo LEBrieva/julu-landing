@@ -23,6 +23,7 @@
      - 12-quem-esta-por-tras.css
      - 13-newsletter.css
      - 14-footer.css
+     - 16-categoria-cabecera.css
    ===================================================================== */
 
 
@@ -1312,4 +1313,100 @@ body{ background:var(--julu-paper)!important; }
   #ns-section-footer .footer-menu-title{ margin:0!important; }
   #ns-section-footer .footer-menu-accordion svg{ fill:var(--julu-paper)!important; }
   #ns-section-footer .footer-secondary-info{ padding:20px 16px!important; flex-direction:column; align-items:flex-start; }
+}
+
+
+/* =====================================================================
+   16. CATEGORÍA · CABECERA (template-category)
+   Si la categoría tiene imagen cargada en el admin (Produtos → Categorias),
+   la cabecera se arma como en el diseño: bloque negro redondeado con el texto
+   a la izquierda y la foto de la categoría a la derecha.
+   Texto: título = nombre de la categoría · párrafo = descripción de la categoría.
+   Sin imagen, la página queda con el encabezado simple del tema.
+   ===================================================================== */
+.template-category main:has(#ns-section-category_hero img){ display:flex; flex-direction:column; }
+.template-category main:has(#ns-section-category_hero img) > *{ order:4; }
+.template-category main:has(#ns-section-category_hero img) > #ns-section-heading{ order:1; }
+.template-category main:has(#ns-section-category_hero img) > #ns-section-category_hero{ order:2; }
+.template-category main:has(#ns-section-category_hero img) > #ns-section-product_list{ order:3; }
+
+/* Bloque negro con el texto */
+.template-category main:has(#ns-section-category_hero img) #ns-section-heading .page-header{ padding:24px 0 0!important; }
+.template-category main:has(#ns-section-category_hero img) #ns-section-heading .container{
+  /* mismo ancho que la grilla de productos (container del tema: 1320px, 16px de margen) */
+  position:relative; box-sizing:border-box; width:100%; max-width:1320px!important;
+  margin:0 auto; padding:36px 16px 0!important;   /* arriba: lugar para las migas de pan */
+}
+.template-category main:has(#ns-section-category_hero img) #ns-section-heading .page-header-title-row{
+  box-sizing:border-box;
+  margin-top:0!important;
+  height:460px;
+  padding:48px calc(50% + 48px) 48px 48px;
+  display:flex; align-items:center;
+  background:var(--julu-ink); color:var(--julu-paper);
+  border-radius:28px;
+}
+.template-category main:has(#ns-section-category_hero img) #ns-section-heading .breadcrumbs{
+  position:absolute; top:4px; left:16px; margin:0!important;
+}
+.template-category main:has(#ns-section-category_hero img) #ns-section-heading .breadcrumbs,
+.template-category main:has(#ns-section-category_hero img) #ns-section-heading .breadcrumbs *{
+  font-family:var(--julu-body)!important; font-size:14px!important; color:var(--julu-muted)!important;
+}
+.template-category main:has(#ns-section-category_hero img) #ns-section-heading .breadcrumbs .crumb.active{
+  color:var(--julu-ink)!important; font-weight:600!important;
+}
+.template-category main:has(#ns-section-category_hero img) #ns-section-heading .page-header-title-inner{ display:block!important; }
+/* Kicker */
+.template-category main:has(#ns-section-category_hero img) #ns-section-heading .page-header-title-inner::before{
+  content:"Coleção · Disponível";
+  display:block; margin-bottom:16px;
+  font-family:var(--julu-body); font-size:13px; font-weight:700;
+  letter-spacing:.24em; text-transform:uppercase;
+  color:var(--julu-volt);
+}
+/* Título */
+.template-category main:has(#ns-section-category_hero img) #ns-section-heading .page-header-title{
+  margin:0 0 16px!important;
+  font-family:var(--julu-display)!important;
+  font-weight:900!important; font-size:clamp(48px,5.2vw,76px)!important;
+  line-height:.9!important; letter-spacing:-.035em!important; text-transform:uppercase;
+  color:var(--julu-paper)!important;
+}
+.template-category main:has(#ns-section-category_hero img) #ns-section-heading .page-header-count{ display:none!important; }
+/* Descripción */
+.template-category main:has(#ns-section-category_hero img) #ns-section-heading .page-header-description{
+  margin:0!important; max-width:440px;
+  font-family:var(--julu-body)!important;
+  font-size:18px!important; line-height:1.55!important;
+  color:#c9c3b5!important;
+}
+
+/* Foto de la categoría: se sube a la mitad derecha del bloque */
+.template-category main:has(#ns-section-category_hero img) #ns-section-category_hero{ position:relative; z-index:2; }
+/* -484px = alto del bloque (460) + 24px de aire que el tema deja debajo del encabezado */
+.template-category main:has(#ns-section-category_hero img) #ns-section-category_hero .category-hero{
+  box-sizing:border-box; width:100%;
+  max-width:1320px!important; margin:-484px auto 32px!important; padding:0 16px!important;
+  pointer-events:none;
+}
+.template-category main:has(#ns-section-category_hero img) #ns-section-category_hero .category-banner{
+  margin-left:50%;
+  height:460px;
+  border-radius:0 28px 28px 0; overflow:hidden;
+}
+.template-category main:has(#ns-section-category_hero img) #ns-section-category_hero .category-banner img{
+  width:100%!important; height:100%!important; object-fit:cover; object-position:50% 30%;
+}
+
+@media (max-width:767px){
+  .template-category main:has(#ns-section-category_hero img) #ns-section-heading .page-header-title-row{
+    height:auto; padding:32px 24px;
+    border-radius:24px 24px 0 0;
+  }
+  .template-category main:has(#ns-section-category_hero img) #ns-section-heading .page-header-description{ font-size:16px!important; }
+  .template-category main:has(#ns-section-category_hero img) #ns-section-category_hero .category-hero{ margin:-24px auto 24px!important; }
+  .template-category main:has(#ns-section-category_hero img) #ns-section-category_hero .category-banner{
+    margin-left:0; height:260px; border-radius:0 0 24px 24px;
+  }
 }
