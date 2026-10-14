@@ -1,7 +1,10 @@
 /* =====================================================================
    17. CATEGORÍA · FILTROS Y ORDEN + MENÚ ACTIVO
-   - Filtros de la barra lateral como pastillas (marcada = negra).
-   - "Marca" oculto: solo existe JULU.
+   - Escritorio: filtros en una barra horizontal arriba de la grilla
+     (como el diseño), orden a la derecha, productos a todo el ancho.
+   - Solo queda "Cor" en pastillas (marcada = negra; se desmarca tocándola).
+   - Ocultos: Marca (solo existe JULU), Tamanho y Preço (con 5 estampas
+     a R$120 no aportan, y el conteo de talles no cruza con el color).
    - Menú: la sección donde estás queda subrayada en naranja.
    ===================================================================== */
 
@@ -14,13 +17,13 @@ html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[h
   width:100%;
 }
 
-/* --- Filtros (escritorio) --- */
-#ns-section-product_list .filters-desktop-heading{
-  margin:0 0 20px!important;
-  font-family:var(--julu-display)!important; font-weight:800!important; font-size:20px!important;
-  color:var(--julu-ink)!important;
-}
-#ns-section-product_list .js-filter-container{ margin-bottom:22px; }
+/* --- Filtros ocultos (escritorio y modal del celular) ---
+   Para volver a mostrar uno, borrá su línea. */
+#ns-section-product_list [data-component="list.filter-brand"],
+#ns-section-product_list [data-component="list.filter-size"],
+#ns-section-product_list [data-component="list.filter-price"]{ display:none!important; }
+
+/* --- Título y opciones (sirve para escritorio y para el modal) --- */
 #ns-section-product_list .filters-title{
   margin:0 0 10px!important;
   font-family:var(--julu-body)!important; font-size:13px!important; font-weight:700!important;
@@ -28,32 +31,28 @@ html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[h
   color:var(--julu-muted)!important;
 }
 #ns-section-product_list .filters-options{
-  display:flex!important; flex-wrap:wrap; gap:8px;
-  padding-bottom:22px!important;
-  border-bottom:1px solid rgba(10,10,10,.12)!important;
+  display:flex!important; flex-wrap:wrap; gap:10px;
 }
 /* Cada opción = pastilla */
-#ns-section-product_list .filters-options .checkbox-container{
-  margin:0!important; cursor:pointer;
-}
+#ns-section-product_list .filters-options .checkbox-container{ margin:0!important; cursor:pointer; }
 #ns-section-product_list .filters-options .checkbox-container input{ position:absolute; opacity:0; pointer-events:none; }
 #ns-section-product_list .filters-options .checkbox{
   display:inline-flex!important; align-items:center; gap:8px;
-  min-height:40px; box-sizing:border-box;
-  margin:0!important; padding:8px 16px!important;
+  min-height:44px; box-sizing:border-box;
+  margin:0!important; padding:10px 20px!important;
   border:2px solid rgba(10,10,10,.25); border-radius:9999px;
-  background:transparent;
+  background:transparent; color:var(--julu-ink);
   transition:border-color .15s ease, background .15s ease, color .15s ease;
 }
 #ns-section-product_list .filters-options .checkbox-icon{ display:none!important; }
 #ns-section-product_list .filters-options .checkbox-text{
   margin:0!important; padding:0!important;
-  font-family:var(--julu-body)!important; font-size:14px!important; font-weight:700!important;
+  font-family:var(--julu-body)!important; font-size:15px!important; font-weight:700!important;
   color:inherit!important;
 }
 #ns-section-product_list .filters-options .checkbox-color{
   order:-1; margin:0!important;
-  width:14px!important; height:14px!important; border-radius:9999px!important;
+  width:14px!important; height:14px!important; border-radius:9999px!important; border:0!important;
   box-shadow:0 0 0 1.5px rgba(10,10,10,.35);
 }
 #ns-section-product_list .filters-options .checkbox-container:hover .checkbox{ border-color:var(--julu-ink); }
@@ -65,11 +64,7 @@ html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[h
   box-shadow:0 0 0 1.5px var(--julu-paper);
 }
 
-/* "Marca": solo existe JULU, no sirve como filtro */
-#ns-section-product_list [data-component="list.filter-brand"],
-.js-filter-container[data-component="list.filter-brand"]{ display:none!important; }
-
-/* --- Orden (arriba a la derecha) --- */
+/* --- Orden --- */
 #ns-section-product_list .js-sort-by-private{
   height:auto!important;
   padding:10px 40px 10px 16px!important;
@@ -80,20 +75,41 @@ html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[h
 }
 #ns-section-product_list .js-sort-by-private:hover{ border-color:var(--julu-ink)!important; }
 
-/* --- Precio: campos y botón redondeados --- */
-#ns-section-product_list .filter-input-price{
-  height:40px!important;
-  border:1.5px solid rgba(10,10,10,.25)!important; border-radius:9999px!important;
-  background:var(--julu-paper)!important;
-  padding:0 14px!important;
-  font-family:var(--julu-body)!important; font-size:14px!important; color:var(--julu-ink)!important;
+/* --- Escritorio: barra horizontal arriba de la grilla --- */
+@media (min-width:768px){
+  #ns-section-product_list .grid.grid-md-auto-4{ display:block!important; position:relative; }
+  #ns-section-product_list .grid.grid-md-auto-4 > *{ width:100%!important; max-width:none!important; }
+
+  #ns-section-product_list .filters-controls-content{
+    box-sizing:border-box;
+    min-height:65px;
+    margin:0 0 32px!important; padding:0 300px 20px 0!important;   /* derecha: lugar para "Ordenar" */
+    border-bottom:1px solid rgba(10,10,10,.12);
+  }
+  /* "Filtrar por" / "Filtro aplicado" + chips: la pastilla negra ya muestra qué está activo */
+  #ns-section-product_list .filters-desktop-heading,
+  #ns-section-product_list .filters-controls-content > div:has(.filters-applied-heading){ display:none!important; }
+
+  #ns-section-product_list .filters-properties-container{
+    display:flex; flex-wrap:wrap; align-items:center; gap:16px 32px;
+  }
+  #ns-section-product_list .filters-desktop-content .js-filter-container{
+    display:flex; align-items:center; gap:12px; margin:0!important; padding:0!important;
+  }
+  #ns-section-product_list .filters-desktop-content .filters-title{ margin:0!important; }
+  #ns-section-product_list .filters-desktop-content .filters-options{
+    padding:0!important; margin:0!important; border:0!important;
+  }
+
+  /* Orden: sube a la misma línea que los filtros, a la derecha */
+  #ns-section-product_list .product-list-sort-by{
+    position:absolute; top:0; right:0; width:auto!important;
+  }
+  #ns-section-product_list .product-list-sort-by .form-group{
+    display:flex!important; align-items:center; gap:12px; margin:0!important;
+  }
+  #ns-section-product_list .product-list-sort-by label{
+    margin:0!important; font-family:var(--julu-body)!important; font-size:14px!important; font-weight:600!important;
+    color:var(--julu-ink)!important;
+  }
 }
-#ns-section-product_list .filter-input-price-container{ margin-right:6px!important; }
-#ns-section-product_list .price-filter-btn{
-  width:40px; height:40px; padding:0!important;
-  border-radius:9999px!important;
-  background:var(--julu-ink)!important; border:none!important;
-  display:inline-flex!important; align-items:center; justify-content:center;
-}
-#ns-section-product_list .price-filter-btn svg{ fill:var(--julu-paper)!important; }
-#ns-section-product_list .price-filter-btn.disabled{ opacity:.35; }
