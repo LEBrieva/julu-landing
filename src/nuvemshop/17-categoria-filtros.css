@@ -113,3 +113,15 @@ html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[h
     color:var(--julu-ink)!important;
   }
 }
+
+/* --- Alvarás: sin filtros, solo "Ordenar por" ---
+   Con 5 estampas el filtro no aporta y cada filtro recarga la página
+   (comportamiento de Nuvemshop). Para volver a mostrarlos, borrá este bloque. */
+html:has(link[rel="canonical"][href$="/alvaras/"]) #ns-section-product_list .filters-controls-content,
+html:has(link[rel="canonical"][href$="/alvaras/"]) #ns-section-product_list .category-filter-button{ display:none!important; }
+@media (min-width:768px){
+  html:has(link[rel="canonical"][href$="/alvaras/"]) #ns-section-product_list .product-list-sort-by{
+    position:static; width:100%!important; display:flex; justify-content:flex-end;
+    margin:0 0 32px; padding:0 0 20px; border-bottom:1px solid rgba(10,10,10,.12);
+  }
+}
