@@ -521,6 +521,10 @@ body{ background:var(--julu-paper)!important; }
 .product-item .product-item-quick-shop-container{
   display:none!important;
 }
+/* Etiqueta amarilla de envío (solo un camioncito sin texto) que el tema muestra
+   al elegir un color: no aporta y ensucia la foto. */
+.product-item .js-shipping-label-private,
+.product-item .js-free-shipping-minimum-label{ display:none!important; }
 
 
 /* =====================================================================
