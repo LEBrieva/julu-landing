@@ -108,6 +108,10 @@ body{ background:var(--julu-paper)!important; }
    (requiere asignar una imagen a cada variante de color en el admin). */
 .product-item .product-item-colors-bullet{ cursor:pointer; transition:transform .15s ease; }
 .product-item .product-item-colors-bullet:hover{ transform:scale(1.15); }
+/* En el carrusel de la home (Lançamentos) las bolitas son solo informativas:
+   el carrusel en loop usa copias de las tarjetas que no responden a los clics. */
+.section-featured-home .product-item .product-item-colors-container{ pointer-events:none; }
+.section-featured-home .product-item .product-item-colors-bullet{ cursor:default; }
 
 /* En la tarjeta no mostramos stock ni botón "Comprar" (la tarjeta entera lleva al producto).
    El stock y la compra quedan en la página de producto. */
