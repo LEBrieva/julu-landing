@@ -61,9 +61,10 @@ header nav a::after{
 }
 header nav a:hover::after{ width:100%; }
 
-/* Desplegable de "Camisetas": fondo crema, una sola fila centrada.
-   Primero los calces (Oversized, Cropped), una rayita, después las colecciones. */
+/* Desplegable de "Camisetas": fondo crema, una fila centrada y baja.
+   El orden de los ítems es el de Produtos → Categorias en el admin. */
 header .desktop-dropdown{
+  padding:0!important;
   background:var(--julu-paper)!important;
   border-top:1px solid rgba(10,10,10,.08);
   border-bottom:1px solid rgba(10,10,10,.10);
@@ -71,16 +72,11 @@ header .desktop-dropdown{
 }
 header .desktop-dropdown-container{
   display:block!important; box-sizing:border-box;
-  max-width:1320px; margin:0 auto; padding:18px 16px!important;
+  max-width:1320px; margin:0 auto!important; padding:14px 16px!important;
 }
 header .desktop-list-subitems{
   display:flex!important; justify-content:center; align-items:center;
   flex-wrap:wrap; gap:10px 36px; margin:0!important;
 }
-header .desktop-list-subitems > li{ order:3; margin:0!important; padding:0!important; }
-header .desktop-list-subitems > li:has(> a[href$="/oversized/"]),
-header .desktop-list-subitems > li:has(> a[href$="/cropped/"]){ order:1; }
-header .desktop-list-subitems::before{
-  content:""; order:2; width:1px; height:22px; background:rgba(10,10,10,.2);
-}
-header .desktop-list-subitems .nav-list-link{ font-size:16px!important; padding:0 0 4px!important; }
+header .desktop-list-subitems > li{ margin:0!important; padding:0!important; }
+header .desktop-list-subitems .nav-list-link{ font-size:16px!important; margin:0!important; padding:0 0 4px!important; }

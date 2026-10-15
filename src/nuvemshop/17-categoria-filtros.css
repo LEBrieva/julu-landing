@@ -1,10 +1,10 @@
 /* =====================================================================
    17. CATEGORÍA · FILTROS Y ORDEN + MENÚ ACTIVO
-   - Escritorio: filtros en una barra horizontal arriba de la grilla
-     (como el diseño), orden a la derecha, productos a todo el ancho.
-   - Solo queda "Cor" en pastillas (marcada = negra; se desmarca tocándola).
-   - Ocultos: Marca (solo existe JULU), Tamanho y Preço (con 5 estampas
-     a R$120 no aportan, y el conteo de talles no cruza con el color).
+   - Escritorio: barra lateral izquierda (la del tema), con estilo JULU.
+     Categorias (colecciones) = links en pastilla.
+     Caimento y Cor = filtros en pastilla (marcada = negra; se desmarca tocándola).
+   - Marca y Preço se desactivan en el admin (Loja online → Filtros).
+   - Tamanho oculto acá: el conteo de talles no cruza con el color.
    - Menú: la sección donde estás queda subrayada en naranja.
    ===================================================================== */
 
@@ -17,11 +17,8 @@ html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[h
   width:100%;
 }
 
-/* --- Filtros ocultos (escritorio y modal del celular) ---
-   Para volver a mostrar uno, borrá su línea. */
-#ns-section-product_list [data-component="list.filter-brand"],
-#ns-section-product_list [data-component="list.filter-size"],
-#ns-section-product_list [data-component="list.filter-price"]{ display:none!important; }
+/* --- Tamanho oculto (escritorio y modal del celular) --- */
+#ns-section-product_list [data-component="list.filter-size"]{ display:none!important; }
 
 /* --- Título y opciones (sirve para escritorio y para el modal) --- */
 #ns-section-product_list .filters-title{
@@ -75,83 +72,46 @@ html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[h
 }
 #ns-section-product_list .js-sort-by-private:hover{ border-color:var(--julu-ink)!important; }
 
-/* --- Escritorio: barra horizontal arriba de la grilla --- */
+/* --- Barra lateral (escritorio) --- */
 @media (min-width:768px){
-  #ns-section-product_list .grid.grid-md-auto-4{ display:block!important; position:relative; }
-  #ns-section-product_list .grid.grid-md-auto-4 > *{ width:100%!important; max-width:none!important; }
-
-  #ns-section-product_list .filters-controls-content{
-    box-sizing:border-box;
-    min-height:65px;
-    margin:0 0 32px!important; padding:0 300px 20px 0!important;   /* derecha: lugar para "Ordenar" */
+  #ns-section-product_list .grid.grid-md-auto-4{ column-gap:40px!important; }
+  #ns-section-product_list .filters-desktop-heading{
+    margin:0 0 24px!important;
+    font-family:var(--julu-display)!important; font-weight:800!important; font-size:20px!important;
+    color:var(--julu-ink)!important;
+  }
+  #ns-section-product_list .filters-desktop-content .js-filter-container,
+  #ns-section-product_list .filters-categories-container{
+    margin:0 0 22px!important; padding:0 0 22px!important;
     border-bottom:1px solid rgba(10,10,10,.12);
   }
-  /* "Filtrar por" / "Filtro aplicado" + chips: la pastilla negra ya muestra qué está activo */
-  #ns-section-product_list .filters-desktop-heading,
-  #ns-section-product_list .filters-controls-content > div:has(.filters-applied-heading){ display:none!important; }
-
-  #ns-section-product_list .filters-properties-container{
-    display:flex; flex-wrap:wrap; align-items:center; gap:16px 32px;
-  }
-  #ns-section-product_list .filters-desktop-content .js-filter-container{
-    display:flex; align-items:center; gap:12px; margin:0!important; padding:0!important;
-  }
-  #ns-section-product_list .filters-desktop-content .filters-title{ margin:0!important; }
   #ns-section-product_list .filters-desktop-content .filters-options{
     padding:0!important; margin:0!important; border:0!important;
   }
-
-  /* Orden: sube a la misma línea que los filtros, a la derecha */
-  #ns-section-product_list .product-list-sort-by{
-    position:absolute; top:0; right:0; width:auto!important;
-  }
-  #ns-section-product_list .product-list-sort-by .form-group{
-    display:flex!important; align-items:center; gap:12px; margin:0!important;
-  }
-  #ns-section-product_list .product-list-sort-by label{
-    margin:0!important; font-family:var(--julu-body)!important; font-size:14px!important; font-weight:600!important;
-    color:var(--julu-ink)!important;
-  }
 }
 
-/* --- Alvarás: sin filtros, solo "Ordenar por" ---
-   Con 5 estampas el filtro no aporta y cada filtro recarga la página
-   (comportamiento de Nuvemshop). Para volver a mostrarlos, borrá este bloque. */
-html:has(link[rel="canonical"][href$="/alvaras/"]) #ns-section-product_list .filters-controls-content,
-html:has(link[rel="canonical"][href$="/alvaras/"]) #ns-section-product_list .category-filter-button{ display:none!important; }
-@media (min-width:768px){
-  html:has(link[rel="canonical"][href$="/alvaras/"]) #ns-section-product_list .product-list-sort-by{
-    position:static; width:100%!important; display:flex; justify-content:flex-end;
-    margin:0 0 32px; padding:0 0 20px; border-bottom:1px solid rgba(10,10,10,.12);
-  }
+/* --- Filtros aplicados: chip + "Limpar filtros" --- */
+#ns-section-product_list .filters-applied-heading{
+  font-family:var(--julu-display)!important; font-weight:800!important; font-size:20px!important;
+  color:var(--julu-ink)!important;
+}
+#ns-section-product_list .chip{
+  border:1.5px solid var(--julu-ink)!important; border-radius:9999px!important;
+  background:transparent!important; padding:4px 12px!important;
+  font-family:var(--julu-body)!important; font-size:13px!important; font-weight:600!important;
+  color:var(--julu-ink)!important;
+}
+#ns-section-product_list .filter-remove-all{
+  font-family:var(--julu-body)!important; font-size:13px!important; font-weight:600!important;
+  color:var(--julu-ink)!important; text-decoration:underline!important; text-underline-offset:3px;
 }
 
-/* --- Subcategorías como pastillas (ej. en Camisetas) ---
-   Nuvemshop lista las subcategorías de la página. Las ordeno en dos grupos:
-   "Caimento" (Oversized, Cropped) y "Coleção" (todas las demás).
-   Son links: llevan a la subcategoría (ej. /camisetas/alvaras/). */
-#ns-section-product_list .filters-desktop-content{
-  display:flex; flex-wrap:wrap; align-items:center; gap:16px 32px;
-}
-#ns-section-product_list .filters-desktop-content > .filters-categories-container{ display:contents; }
-#ns-section-product_list .filters-categories-container > .filters-title{ display:none!important; }
+/* --- Categorias (colecciones) como pastillas-link --- */
 #ns-section-product_list .filters-categories-container > ul{
-  display:flex!important; flex-wrap:wrap; align-items:center; gap:10px;
+  display:flex!important; flex-wrap:wrap; gap:10px;
   margin:0!important; padding:0!important; border:0!important;
 }
-#ns-section-product_list .filters-categories-container li{ order:3; margin:0!important; }
-#ns-section-product_list .filters-categories-container li:has(a[href$="/oversized/"]),
-#ns-section-product_list .filters-categories-container li:has(a[href$="/cropped/"]){ order:1; }
-#ns-section-product_list .filters-categories-container > ul::before,
-#ns-section-product_list .filters-categories-container > ul::after{
-  font-family:var(--julu-body); font-size:13px; font-weight:700;
-  letter-spacing:.1em; text-transform:uppercase; color:var(--julu-muted);
-}
-#ns-section-product_list .filters-categories-container > ul::before{ content:"Caimento"; order:0; margin-right:2px; }
-#ns-section-product_list .filters-categories-container > ul::after{ content:"Coleção"; order:2; margin:0 2px 0 22px; }
-/* Si un grupo no tiene ítems, no muestro su título */
-#ns-section-product_list .filters-categories-container > ul:not(:has(a[href$="/oversized/"], a[href$="/cropped/"]))::before{ display:none; }
-#ns-section-product_list .filters-categories-container > ul:not(:has(a:not([href$="/oversized/"]):not([href$="/cropped/"])))::after{ display:none; }
+#ns-section-product_list .filters-categories-container li{ margin:0!important; }
 #ns-section-product_list .filters-categories-container li a{
   display:inline-flex!important; align-items:center;
   min-height:44px; box-sizing:border-box; padding:10px 20px!important;

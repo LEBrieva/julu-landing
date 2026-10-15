@@ -86,3 +86,16 @@
     margin-left:0; height:260px; border-radius:0 0 24px 24px;
   }
 }
+
+/* Con un filtro activo (ej. Caimento o Cor) la página recarga y vuelve arriba:
+   la cabecera se achica a una franja para que los productos queden a la vista. */
+@media (min-width:768px){
+  .template-category main:has(#ns-section-category_hero img):has(#ns-section-product_list .filters-desktop-content input:checked) #ns-section-category_hero{ display:none!important; }
+  .template-category main:has(#ns-section-category_hero img):has(#ns-section-product_list .filters-desktop-content input:checked) #ns-section-heading .page-header-title-row{
+    height:auto; padding:28px 40px; margin-bottom:32px!important;
+  }
+  .template-category main:has(#ns-section-category_hero img):has(#ns-section-product_list .filters-desktop-content input:checked) #ns-section-heading .page-header-title{
+    margin:0!important; font-size:40px!important;
+  }
+  .template-category main:has(#ns-section-category_hero img):has(#ns-section-product_list .filters-desktop-content input:checked) #ns-section-heading .page-header-description{ display:none!important; }
+}
