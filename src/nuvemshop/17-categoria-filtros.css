@@ -10,7 +10,7 @@
 
 /* --- Menú activo (según la URL canónica de la página) ---
    Si agregás un ítem nuevo al menú principal, sumá su línea acá. */
-html:has(link[rel="canonical"][href*="/camisetas/"]) header .nav-main-item > a[href$="/camisetas/"]::after,
+html:has(link[rel="canonical"][href*="/camisetas/"]):not(:has(link[rel="canonical"][href$="/alvaras/"])) header .nav-main-item > a[href$="/camisetas/"]::after,
 html:has(link[rel="canonical"][href$="/alvaras/"])   header .nav-main-item > a[href$="/alvaras/"]::after,
 html:has(link[rel="canonical"][href$="/quem-somos/"]) header .nav-main-item > a[href$="/quem-somos/"]::after,
 html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[href$="/contato/"]::after{
@@ -125,3 +125,39 @@ html:has(link[rel="canonical"][href$="/alvaras/"]) #ns-section-product_list .cat
     margin:0 0 32px; padding:0 0 20px; border-bottom:1px solid rgba(10,10,10,.12);
   }
 }
+
+/* --- Subcategorías como pastillas (ej. en Camisetas) ---
+   Nuvemshop lista las subcategorías de la página. Las ordeno en dos grupos:
+   "Caimento" (Oversized, Cropped) y "Coleção" (todas las demás).
+   Son links: llevan a la subcategoría (ej. /camisetas/alvaras/). */
+#ns-section-product_list .filters-desktop-content{
+  display:flex; flex-wrap:wrap; align-items:center; gap:16px 32px;
+}
+#ns-section-product_list .filters-desktop-content > .filters-categories-container{ display:contents; }
+#ns-section-product_list .filters-categories-container > .filters-title{ display:none!important; }
+#ns-section-product_list .filters-categories-container > ul{
+  display:flex!important; flex-wrap:wrap; align-items:center; gap:10px;
+  margin:0!important; padding:0!important; border:0!important;
+}
+#ns-section-product_list .filters-categories-container li{ order:3; margin:0!important; }
+#ns-section-product_list .filters-categories-container li:has(a[href$="/oversized/"]),
+#ns-section-product_list .filters-categories-container li:has(a[href$="/cropped/"]){ order:1; }
+#ns-section-product_list .filters-categories-container > ul::before,
+#ns-section-product_list .filters-categories-container > ul::after{
+  font-family:var(--julu-body); font-size:13px; font-weight:700;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--julu-muted);
+}
+#ns-section-product_list .filters-categories-container > ul::before{ content:"Caimento"; order:0; margin-right:2px; }
+#ns-section-product_list .filters-categories-container > ul::after{ content:"Coleção"; order:2; margin:0 2px 0 22px; }
+/* Si un grupo no tiene ítems, no muestro su título */
+#ns-section-product_list .filters-categories-container > ul:not(:has(a[href$="/oversized/"], a[href$="/cropped/"]))::before{ display:none; }
+#ns-section-product_list .filters-categories-container > ul:not(:has(a:not([href$="/oversized/"]):not([href$="/cropped/"])))::after{ display:none; }
+#ns-section-product_list .filters-categories-container li a{
+  display:inline-flex!important; align-items:center;
+  min-height:44px; box-sizing:border-box; padding:10px 20px!important;
+  border:2px solid rgba(10,10,10,.25); border-radius:9999px;
+  font-family:var(--julu-body)!important; font-size:15px!important; font-weight:700!important;
+  color:var(--julu-ink)!important; text-decoration:none!important;
+  transition:border-color .15s ease;
+}
+#ns-section-product_list .filters-categories-container li a:hover{ border-color:var(--julu-ink); }
