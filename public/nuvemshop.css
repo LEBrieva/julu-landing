@@ -1950,3 +1950,43 @@ html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[h
   font-size:clamp(30px,3vw,40px)!important; line-height:1!important;
   letter-spacing:-.03em!important; text-transform:uppercase; color:var(--julu-ink)!important;
 }
+
+/* La galería no queda pegada al hacer scroll: el tema le calcula un "sticky"
+   con JS y salta cuando se abre el acordeón de la descripción. */
+.template-product .js-product-images{ position:static!important; top:auto!important; }
+
+/* Flechas de la foto grande y link "Guia de medidas":
+   los crea el bloque "Código" del editor (Produto → Informação do produto).
+   Acá solo va el estilo. */
+.template-product .product-images-slider{ position:relative; }
+.julu-arrow{
+  position:absolute; top:50%; z-index:5;
+  width:44px; height:44px; margin-top:-22px; padding:0;
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+  background:var(--julu-paper); border:2px solid var(--julu-ink); border-radius:9999px;
+  box-shadow:3px 3px 0 var(--julu-ink);
+  opacity:0; transition:opacity .2s ease, transform .15s ease, background-color .15s ease, box-shadow .15s ease;
+}
+.julu-arrow-prev{ left:16px; }
+.julu-arrow-next{ right:16px; }
+.product-images-slider:hover .julu-arrow,
+.julu-arrow:focus-visible{ opacity:1; }
+.julu-arrow::before{
+  content:""; width:20px; height:20px; background:var(--julu-ink);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15M13 5.5l6.5 6.5-6.5 6.5'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15M13 5.5l6.5 6.5-6.5 6.5'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.julu-arrow-prev::before{ transform:scaleX(-1); }
+.julu-arrow:hover{ background:var(--julu-volt); transform:translate(-1px,-1px) rotate(-6deg); box-shadow:4px 4px 0 var(--julu-ink); }
+.julu-arrow:active{ transform:translate(2px,2px); box-shadow:1px 1px 0 var(--julu-ink); }
+@media (hover:none){ .julu-arrow{ opacity:1; } }
+
+.julu-guia-medidas{
+  float:right;
+  font-family:var(--julu-body); font-size:14px; font-weight:600;
+  color:var(--julu-ink)!important; text-decoration:underline;
+  text-decoration-color:var(--julu-volt); text-decoration-thickness:2px; text-underline-offset:3px;
+}
+.julu-guia-medidas:hover{ color:var(--julu-volt)!important; }
+/* Si el bloque Código deja su contenedor vacío a la vista, no ocupa lugar */
+.template-product [data-block-type="code"]:not(:has(:not(script))){ display:none; }
