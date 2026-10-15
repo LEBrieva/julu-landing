@@ -1696,12 +1696,21 @@ html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[h
 /* =====================================================================
    19. PÁGINA DE PRODUTO (template-product)
    Galería en carrusel (editor → Multimídia → Carrossel), info a la derecha.
-   Orden de la columna derecha: datos y compra → 3 tarjetas (Ícones
-   informativos) → Descrição. Todo el contenido sale del admin/editor.
+   Orden de la columna derecha: datos y compra → tarjeta de beneficios
+   (Ícones informativos) → Descrição. Todo el contenido sale del admin/editor.
    ===================================================================== */
+
+/* --- Columnas: galería ~540px + info ~520px, centradas --- */
+@media (min-width:768px){
+  .template-product .product-columns{ justify-content:center; gap:64px!important; }
+  .template-product .product-columns > .product-images{ flex:0 1 540px!important; max-width:540px; }
+  .template-product .product-columns > .product-info{ flex:0 1 520px!important; max-width:520px; }
+}
 
 /* --- Galería --- */
 .template-product .product-images-slider{ border-radius:24px; overflow:hidden; background:#e4e4e2; }
+.template-product .product-images-slider .js-product-slide{ aspect-ratio:4/5; }
+.template-product .product-images-slider img{ width:100%!important; height:100%!important; object-fit:cover; object-position:50% 30%; }
 .template-product .js-product-slider-pagination{
   top:16px!important; right:16px!important; width:auto!important; left:auto!important;
   padding:6px 12px; border-radius:9999px;
@@ -1709,34 +1718,57 @@ html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[h
   font-family:var(--julu-body); font-size:12px; font-weight:700; letter-spacing:.06em;
 }
 .template-product .js-product-slider-pagination *{ color:var(--julu-paper)!important; }
-.template-product .product-images-thumbs{ margin-top:14px!important; }
+
+/* Miniaturas: cuadradas, recortadas desde arriba (no cortan la cabeza) */
+.template-product .product-images-thumbs{ margin-top:14px!important; position:relative; }
 .template-product .product-thumb{
-  display:block; border-radius:14px!important; overflow:hidden;
+  display:block; aspect-ratio:1; border-radius:14px!important; overflow:hidden;
   border:2px solid transparent!important; opacity:.7; transition:opacity .15s ease, border-color .15s ease;
 }
+.template-product .product-thumb img{ width:100%!important; height:100%!important; object-fit:cover; object-position:50% 0; }
 .template-product .product-thumb:hover{ opacity:1; }
 .template-product .product-thumb.selected{ border-color:var(--julu-ink)!important; opacity:1; }
-.template-product .product-images-thumbs .slider-arrow-inline svg{ fill:var(--julu-ink)!important; }
+/* Flechas de las miniaturas: mismo sticker que las tarjetas, más chico */
+.template-product .product-images-thumbs .slider-arrow-inline{
+  width:34px!important; height:34px!important; padding:0!important;
+  display:flex!important; align-items:center; justify-content:center;
+  background:var(--julu-paper)!important; border:2px solid var(--julu-ink)!important; border-radius:9999px!important;
+  box-shadow:2px 2px 0 var(--julu-ink);
+  transition:opacity .2s ease, transform .15s ease, background-color .15s ease;
+}
+.template-product .product-images-thumbs .slider-arrow-inline svg{ display:none!important; }
+.template-product .product-images-thumbs .slider-arrow-inline::before{
+  content:""; width:16px; height:16px; background:var(--julu-ink);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15M13 5.5l6.5 6.5-6.5 6.5'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15M13 5.5l6.5 6.5-6.5 6.5'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.template-product .product-images-thumbs .swiper-button-prev::before{ transform:scaleX(-1); }
+.template-product .product-images-thumbs .slider-arrow-inline:hover{ background:var(--julu-volt)!important; transform:rotate(-6deg); }
 
 /* --- Columna de info --- */
-@media (min-width:768px){
-  .template-product .product-info{ padding-left:24px; }
-}
 .template-product #ns-block-product_info > .product-content{ order:0; }
 .template-product #ns-block-purchase_info{ order:1; }
 .template-product #ns-block-description{ order:2; }
 
-.template-product .product-content .breadcrumbs,
-.template-product .product-content .breadcrumbs *{
-  font-family:var(--julu-body)!important; font-size:13px!important; color:var(--julu-muted)!important;
+/* Migas de pan → kicker de la colección.
+   Se ve solo el link de la colección (el último antes del producto, si no es
+   "Camisetas"), en naranja y mayúsculas: "COLEÇÃO · ALVARÁS". */
+.template-product .product-content .breadcrumbs{ font-size:0!important; margin:0!important; }
+.template-product .product-content .breadcrumbs > *{ display:none!important; }
+.template-product .product-content .breadcrumbs > a.crumb:nth-last-of-type(1):not([href$="/camisetas/"]){
+  display:inline-block!important;
+  font-family:var(--julu-body)!important; font-size:13px!important; font-weight:700!important;
+  letter-spacing:.24em!important; text-transform:uppercase!important;
+  color:#c23a00!important; text-decoration:none!important;
 }
-.template-product .product-content .breadcrumbs .crumb.active{ color:var(--julu-ink)!important; font-weight:600!important; }
+.template-product .product-content .breadcrumbs > a.crumb:nth-last-of-type(1)::before{ content:"Coleção · "; }
+.template-product .product-content .breadcrumbs > a.crumb:nth-last-of-type(1):hover{ color:var(--julu-volt)!important; }
 .template-product .product-sku{ display:none!important; }
 
 .template-product .product-name{
-  margin:14px 0 18px!important;
+  margin:10px 0 18px!important;
   font-family:var(--julu-display)!important; font-weight:900!important;
-  font-size:clamp(32px,3.2vw,46px)!important; line-height:.95!important;
+  font-size:clamp(32px,3.2vw,44px)!important; line-height:.95!important;
   letter-spacing:-.03em!important; text-transform:uppercase;
   color:var(--julu-ink)!important;
 }
@@ -1761,7 +1793,7 @@ html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[h
   color:#c23a00!important;
 }
 
-/* Variantes: título "Cor: Branco" */
+/* Variantes */
 .template-product .product-detail-variants-group{ margin-bottom:22px!important; }
 .template-product .product-detail-variants-group .form-label{
   margin-bottom:10px!important;
@@ -1769,8 +1801,12 @@ html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[h
   color:var(--julu-ink)!important;
 }
 .template-product .product-detail-variants-group .form-label strong{ font-weight:500!important; color:#4f4a40!important; }
+/* El valor elegido solo se repite en Cor (la bolita no tiene texto) */
+.template-product .product-detail-variants-group:not(.js-color-variants-container) .form-label strong{ display:none!important; }
+/* Grupos con una sola opción (ej. Caimento: Oversized) no se muestran: no hay nada que elegir */
+.template-product .product-detail-variants-group:not(:has(.btn-variant ~ .btn-variant)){ display:none!important; }
 
-/* Tamanho / Caimento: pastillas */
+/* Tamanho: pastillas */
 .template-product .btn-variant:not(.btn-variant-color){
   min-width:52px; min-height:44px; box-sizing:border-box;
   margin:0 8px 8px 0!important; padding:10px 18px!important;
@@ -1788,19 +1824,20 @@ html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[h
   background:var(--julu-ink)!important; border-color:var(--julu-ink)!important; color:var(--julu-paper)!important;
 }
 
-/* Cor: bolitas */
+/* Cor: bolita centrada con aro */
 .template-product .btn-variant-color{
   width:40px!important; height:40px!important; padding:4px!important; margin:0 10px 8px 0!important;
+  display:inline-flex!important; align-items:center; justify-content:center; box-sizing:border-box;
   border:0!important; border-radius:9999px!important; background:transparent!important;
-  box-shadow:0 0 0 1.5px rgba(10,10,10,.25);
+  box-shadow:0 0 0 1.5px rgba(10,10,10,.2);
   transition:box-shadow .15s ease;
 }
 .template-product .btn-variant-color .btn-variant-content{
-  width:100%!important; height:100%!important; border-radius:9999px!important;
-  box-shadow:inset 0 0 0 1px rgba(10,10,10,.2);
+  width:100%!important; height:100%!important; margin:0!important;
+  border-radius:9999px!important; box-shadow:inset 0 0 0 1px rgba(10,10,10,.25);
 }
-.template-product .btn-variant-color:hover{ box-shadow:0 0 0 2px var(--julu-ink); }
-.template-product .btn-variant-color.selected{ box-shadow:0 0 0 3px var(--julu-ink); }
+.template-product .btn-variant-color:hover{ box-shadow:0 0 0 2px rgba(10,10,10,.5); }
+.template-product .btn-variant-color.selected{ box-shadow:0 0 0 2.5px var(--julu-ink); }
 
 /* "Restam apenas X em estoque": etiqueta ámbar */
 .template-product .product-stock-alert{
@@ -1827,9 +1864,7 @@ html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[h
   letter-spacing:0!important; text-transform:none!important;
   transition:background .15s ease, color .15s ease, transform .15s ease;
 }
-.template-product .product-actions input.btn-primary:hover{
-  background:var(--julu-ink)!important; color:var(--julu-paper)!important;
-}
+.template-product .product-actions input.btn-primary:hover{ background:var(--julu-ink)!important; color:var(--julu-paper)!important; }
 .template-product .product-actions input.btn-primary:active{ transform:scale(.98); }
 
 /* Calcular frete */
@@ -1849,31 +1884,30 @@ html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[h
 .template-product .shipping-calculator .js-calculate-shipping:hover{ background:var(--julu-ink)!important; color:var(--julu-paper)!important; }
 .template-product .shipping-calculator .btn-link{ color:var(--julu-muted)!important; }
 
-/* 3 tarjetas (Ícones informativos) */
+/* Beneficios (Ícones informativos): una tarjeta crema con filas */
 .template-product #ns-block-purchase_info{
-  display:grid!important; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px!important;
-  margin:28px 0 8px;
+  display:flex!important; flex-direction:column; gap:0!important;
+  margin:24px 0 0; padding:4px 18px; border-radius:18px; background:var(--julu-cream);
 }
 .template-product #ns-block-purchase_info .icon-text-item{
-  display:flex!important; flex-direction:column; align-items:flex-start; gap:8px;
-  margin:0!important; padding:14px!important;
-  border-radius:16px; background:var(--julu-cream);
+  display:flex!important; flex-direction:row; align-items:center; gap:14px;
+  margin:0!important; padding:12px 0!important;
 }
-.template-product #ns-block-purchase_info .icon-text-item-icon{ width:36px!important; min-width:36px!important; }
-.template-product #ns-block-purchase_info .icon-text-item-icon img{ mix-blend-mode:multiply; }
+.template-product #ns-block-purchase_info .icon-text-item + .icon-text-item{ border-top:1px solid rgba(10,10,10,.1); }
+.template-product #ns-block-purchase_info .icon-text-item-icon{ width:32px!important; min-width:32px!important; }
+.template-product #ns-block-purchase_info .icon-text-item-icon img{ mix-blend-mode:multiply; border-radius:6px; }
+.template-product #ns-block-purchase_info .icon-text-item-content{ display:flex; flex-wrap:wrap; align-items:baseline; gap:2px 8px; }
 .template-product #ns-block-purchase_info .icon-text-item-title{
-  font-family:var(--julu-display)!important; font-weight:800!important; font-size:14px!important;
+  font-family:var(--julu-display)!important; font-weight:800!important; font-size:15px!important;
   line-height:1.2!important; color:var(--julu-ink)!important;
 }
 .template-product #ns-block-purchase_info .icon-text-item-description{
-  margin-top:2px; font-family:var(--julu-body)!important; font-size:13px!important; line-height:1.35!important;
+  margin:0!important; font-family:var(--julu-body)!important; font-size:14px!important; line-height:1.35!important;
   color:#4f4a40!important;
 }
 
 /* Descrição */
-.template-product #ns-block-description{
-  margin-top:24px; padding-top:24px; border-top:1px solid rgba(10,10,10,.15);
-}
+.template-product #ns-block-description{ margin-top:28px; }
 .template-product .product-description-heading{
   margin:0 0 14px!important;
   font-family:var(--julu-display)!important; font-weight:800!important; font-size:20px!important;
@@ -1889,6 +1923,25 @@ html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[h
   font-family:var(--julu-display)!important; font-weight:800!important; color:var(--julu-ink)!important;
   letter-spacing:.02em;
 }
+/* Acordeón: si la descripción usa <details><summary>…</summary>…</details> */
+.template-product .product-description-content details{ border-top:1px solid rgba(10,10,10,.15); }
+.template-product .product-description-content details:last-of-type{ border-bottom:1px solid rgba(10,10,10,.15); }
+.template-product .product-description-content summary{
+  list-style:none; cursor:pointer;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:18px 0;
+  font-family:var(--julu-display)!important; font-weight:800!important; font-size:17px!important;
+  color:var(--julu-ink)!important;
+}
+.template-product .product-description-content summary::-webkit-details-marker{ display:none; }
+.template-product .product-description-content summary::after{
+  content:"+"; font-family:var(--julu-body); font-size:24px; font-weight:500; line-height:1;
+  color:var(--julu-volt); transition:transform .2s ease;
+}
+.template-product .product-description-content details[open] > summary::after{ transform:rotate(45deg); }
+.template-product .product-description-content details > :not(summary){ margin-top:0; }
+.template-product .product-description-content details[open]{ padding-bottom:16px; }
+
 .template-product .social-share svg{ fill:var(--julu-ink)!important; }
 
 /* "Combina com" (productos relacionados) */
@@ -1896,9 +1949,4 @@ html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[h
   font-family:var(--julu-display)!important; font-weight:900!important;
   font-size:clamp(30px,3vw,40px)!important; line-height:1!important;
   letter-spacing:-.03em!important; text-transform:uppercase; color:var(--julu-ink)!important;
-}
-
-@media (max-width:767px){
-  .template-product #ns-block-purchase_info{ grid-template-columns:1fr; }
-  .template-product #ns-block-purchase_info .icon-text-item{ flex-direction:row; align-items:center; }
 }
