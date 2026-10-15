@@ -1,0 +1,209 @@
+/* =====================================================================
+   19. PÁGINA DE PRODUTO (template-product)
+   Galería en carrusel (editor → Multimídia → Carrossel), info a la derecha.
+   Orden de la columna derecha: datos y compra → 3 tarjetas (Ícones
+   informativos) → Descrição. Todo el contenido sale del admin/editor.
+   ===================================================================== */
+
+/* --- Galería --- */
+.template-product .product-images-slider{ border-radius:24px; overflow:hidden; background:#e4e4e2; }
+.template-product .js-product-slider-pagination{
+  top:16px!important; right:16px!important; width:auto!important; left:auto!important;
+  padding:6px 12px; border-radius:9999px;
+  background:var(--julu-ink); color:var(--julu-paper)!important;
+  font-family:var(--julu-body); font-size:12px; font-weight:700; letter-spacing:.06em;
+}
+.template-product .js-product-slider-pagination *{ color:var(--julu-paper)!important; }
+.template-product .product-images-thumbs{ margin-top:14px!important; }
+.template-product .product-thumb{
+  display:block; border-radius:14px!important; overflow:hidden;
+  border:2px solid transparent!important; opacity:.7; transition:opacity .15s ease, border-color .15s ease;
+}
+.template-product .product-thumb:hover{ opacity:1; }
+.template-product .product-thumb.selected{ border-color:var(--julu-ink)!important; opacity:1; }
+.template-product .product-images-thumbs .slider-arrow-inline svg{ fill:var(--julu-ink)!important; }
+
+/* --- Columna de info --- */
+@media (min-width:768px){
+  .template-product .product-info{ padding-left:24px; }
+}
+.template-product #ns-block-product_info > .product-content{ order:0; }
+.template-product #ns-block-purchase_info{ order:1; }
+.template-product #ns-block-description{ order:2; }
+
+.template-product .product-content .breadcrumbs,
+.template-product .product-content .breadcrumbs *{
+  font-family:var(--julu-body)!important; font-size:13px!important; color:var(--julu-muted)!important;
+}
+.template-product .product-content .breadcrumbs .crumb.active{ color:var(--julu-ink)!important; font-weight:600!important; }
+.template-product .product-sku{ display:none!important; }
+
+.template-product .product-name{
+  margin:14px 0 18px!important;
+  font-family:var(--julu-display)!important; font-weight:900!important;
+  font-size:clamp(32px,3.2vw,46px)!important; line-height:.95!important;
+  letter-spacing:-.03em!important; text-transform:uppercase;
+  color:var(--julu-ink)!important;
+}
+
+/* Precio */
+.template-product .product-price-display{
+  font-family:var(--julu-display)!important; font-weight:800!important;
+  font-size:32px!important; line-height:1!important; color:var(--julu-ink)!important;
+}
+.template-product .product-price-compare{
+  font-family:var(--julu-body)!important; font-size:15px!important;
+  color:var(--julu-muted)!important; text-decoration:line-through;
+}
+.template-product .product-offer-label,
+.template-product .product-offer-label *{
+  font-family:var(--julu-body)!important; font-size:14px!important; font-weight:700!important;
+  color:#c23a00!important;
+}
+.template-product .product-payment-discount-price,
+.template-product .product-payment-discount-price *{
+  font-family:var(--julu-body)!important; font-size:15px!important; font-weight:700!important;
+  color:#c23a00!important;
+}
+
+/* Variantes: título "Cor: Branco" */
+.template-product .product-detail-variants-group{ margin-bottom:22px!important; }
+.template-product .product-detail-variants-group .form-label{
+  margin-bottom:10px!important;
+  font-family:var(--julu-body)!important; font-size:14px!important; font-weight:700!important;
+  color:var(--julu-ink)!important;
+}
+.template-product .product-detail-variants-group .form-label strong{ font-weight:500!important; color:#4f4a40!important; }
+
+/* Tamanho / Caimento: pastillas */
+.template-product .btn-variant:not(.btn-variant-color){
+  min-width:52px; min-height:44px; box-sizing:border-box;
+  margin:0 8px 8px 0!important; padding:10px 18px!important;
+  display:inline-flex!important; align-items:center; justify-content:center;
+  border:2px solid rgba(10,10,10,.25)!important; border-radius:9999px!important;
+  background:transparent!important; color:var(--julu-ink)!important;
+  transition:border-color .15s ease, background .15s ease, color .15s ease;
+}
+.template-product .btn-variant:not(.btn-variant-color) .btn-variant-content{
+  padding:0!important; font-family:var(--julu-body)!important; font-size:15px!important; font-weight:700!important;
+  color:inherit!important;
+}
+.template-product .btn-variant:not(.btn-variant-color):hover{ border-color:var(--julu-ink)!important; }
+.template-product .btn-variant:not(.btn-variant-color).selected{
+  background:var(--julu-ink)!important; border-color:var(--julu-ink)!important; color:var(--julu-paper)!important;
+}
+
+/* Cor: bolitas */
+.template-product .btn-variant-color{
+  width:40px!important; height:40px!important; padding:4px!important; margin:0 10px 8px 0!important;
+  border:0!important; border-radius:9999px!important; background:transparent!important;
+  box-shadow:0 0 0 1.5px rgba(10,10,10,.25);
+  transition:box-shadow .15s ease;
+}
+.template-product .btn-variant-color .btn-variant-content{
+  width:100%!important; height:100%!important; border-radius:9999px!important;
+  box-shadow:inset 0 0 0 1px rgba(10,10,10,.2);
+}
+.template-product .btn-variant-color:hover{ box-shadow:0 0 0 2px var(--julu-ink); }
+.template-product .btn-variant-color.selected{ box-shadow:0 0 0 3px var(--julu-ink); }
+
+/* "Restam apenas X em estoque": etiqueta ámbar */
+.template-product .product-stock-alert{
+  width:fit-content; margin:0 0 16px!important; padding:6px 12px!important;
+  border-radius:9999px; background:rgba(245,166,35,.22);
+  font-family:var(--julu-body)!important; font-size:13px!important; font-weight:700!important;
+  color:#7a4d00!important;
+}
+
+/* Cantidad + botón de compra */
+.template-product .product-actions{ gap:12px!important; }
+.template-product .form-quantity{
+  height:56px; box-sizing:border-box;
+  border:2px solid rgba(10,10,10,.25)!important; border-radius:9999px!important; background:transparent!important;
+}
+.template-product .form-quantity .form-control{
+  background:transparent!important; border:0!important;
+  font-family:var(--julu-body)!important; font-size:16px!important; font-weight:700!important;
+}
+.template-product .product-actions input.btn-primary{
+  height:56px!important; border:0!important; border-radius:9999px!important;
+  background:var(--julu-volt)!important; color:var(--julu-ink)!important;
+  font-family:var(--julu-display)!important; font-weight:800!important; font-size:18px!important;
+  letter-spacing:0!important; text-transform:none!important;
+  transition:background .15s ease, color .15s ease, transform .15s ease;
+}
+.template-product .product-actions input.btn-primary:hover{
+  background:var(--julu-ink)!important; color:var(--julu-paper)!important;
+}
+.template-product .product-actions input.btn-primary:active{ transform:scale(.98); }
+
+/* Calcular frete */
+.template-product .shipping-calculator{ margin-top:8px; }
+.template-product .shipping-calculator .js-shipping-input{
+  height:48px!important; padding:0 18px!important;
+  border:1.5px solid rgba(10,10,10,.3)!important; border-radius:9999px!important;
+  background:var(--julu-paper)!important;
+  font-family:var(--julu-body)!important; font-size:15px!important; color:var(--julu-ink)!important;
+}
+.template-product .shipping-calculator .js-calculate-shipping{
+  height:48px!important; margin-left:8px!important; padding:0 22px!important;
+  border:2px solid var(--julu-ink)!important; border-radius:9999px!important;
+  background:transparent!important; color:var(--julu-ink)!important;
+  font-family:var(--julu-body)!important; font-size:15px!important; font-weight:700!important;
+}
+.template-product .shipping-calculator .js-calculate-shipping:hover{ background:var(--julu-ink)!important; color:var(--julu-paper)!important; }
+.template-product .shipping-calculator .btn-link{ color:var(--julu-muted)!important; }
+
+/* 3 tarjetas (Ícones informativos) */
+.template-product #ns-block-purchase_info{
+  display:grid!important; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px!important;
+  margin:28px 0 8px;
+}
+.template-product #ns-block-purchase_info .icon-text-item{
+  display:flex!important; flex-direction:column; align-items:flex-start; gap:8px;
+  margin:0!important; padding:14px!important;
+  border-radius:16px; background:var(--julu-cream);
+}
+.template-product #ns-block-purchase_info .icon-text-item-icon{ width:36px!important; min-width:36px!important; }
+.template-product #ns-block-purchase_info .icon-text-item-icon img{ mix-blend-mode:multiply; }
+.template-product #ns-block-purchase_info .icon-text-item-title{
+  font-family:var(--julu-display)!important; font-weight:800!important; font-size:14px!important;
+  line-height:1.2!important; color:var(--julu-ink)!important;
+}
+.template-product #ns-block-purchase_info .icon-text-item-description{
+  margin-top:2px; font-family:var(--julu-body)!important; font-size:13px!important; line-height:1.35!important;
+  color:#4f4a40!important;
+}
+
+/* Descrição */
+.template-product #ns-block-description{
+  margin-top:24px; padding-top:24px; border-top:1px solid rgba(10,10,10,.15);
+}
+.template-product .product-description-heading{
+  margin:0 0 14px!important;
+  font-family:var(--julu-display)!important; font-weight:800!important; font-size:20px!important;
+  color:var(--julu-ink)!important;
+}
+.template-product .product-description-content,
+.template-product .product-description-content p,
+.template-product .product-description-content li{
+  font-family:var(--julu-body)!important; font-size:15px!important; line-height:1.6!important;
+  color:#4f4a40!important;
+}
+.template-product .product-description-content strong{
+  font-family:var(--julu-display)!important; font-weight:800!important; color:var(--julu-ink)!important;
+  letter-spacing:.02em;
+}
+.template-product .social-share svg{ fill:var(--julu-ink)!important; }
+
+/* "Combina com" (productos relacionados) */
+.template-product .section-related-products .heading-block{
+  font-family:var(--julu-display)!important; font-weight:900!important;
+  font-size:clamp(30px,3vw,40px)!important; line-height:1!important;
+  letter-spacing:-.03em!important; text-transform:uppercase; color:var(--julu-ink)!important;
+}
+
+@media (max-width:767px){
+  .template-product #ns-block-purchase_info{ grid-template-columns:1fr; }
+  .template-product #ns-block-purchase_info .icon-text-item{ flex-direction:row; align-items:center; }
+}
