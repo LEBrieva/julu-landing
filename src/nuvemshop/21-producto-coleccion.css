@@ -1,0 +1,64 @@
+/* =====================================================================
+   21. PRODUCTO · "POR TRÁS DA COLEÇÃO"
+   Sección "Editorial de imagem e texto" agregada en la plantilla de producto,
+   antes de "Combina com". Bloque negro, texto a la izquierda, foto a la derecha.
+   Bloques: Texto (kicker) · Título (palabra pintada = naranja) · Texto.
+   Por ahora es de Alvarás: en productos que no son de Alvarás no se muestra.
+   Cuando haya Tarot/Terror: una sección por colección y una línea por cada una.
+   ===================================================================== */
+.template-product [id^="ns-section-image-with-text"]{ background:var(--julu-ink); color:var(--julu-paper); }
+.template-product [id^="ns-section-image-with-text"] > div:not(.js-nubesdk-slot){
+  padding:80px 0!important; background:transparent!important;
+}
+.template-product [id^="ns-section-image-with-text"] .container{ box-sizing:border-box; max-width:1320px!important; padding:0 16px!important; }
+.template-product [id^="ns-section-image-with-text"] .media-grid{ align-items:center!important; column-gap:56px!important; }
+.template-product [id^="ns-section-image-with-text"] .media-visual,
+.template-product [id^="ns-section-image-with-text"] .media-visual picture{ background:none!important; }
+.template-product [id^="ns-section-image-with-text"] .media-visual{
+  max-width:440px; justify-self:center; border-radius:24px; overflow:hidden;
+}
+.template-product [id^="ns-section-image-with-text"] .media-visual img{
+  aspect-ratio:4/5; width:100%!important; height:100%!important; object-fit:cover!important; border-radius:24px;
+}
+.template-product [id^="ns-section-image-with-text"] .group-content{ gap:16px!important; max-width:540px; }
+.template-product [id^="ns-section-image-with-text"] .group-content > *{ margin:0!important; }
+
+/* Kicker = primer texto */
+.template-product [id^="ns-section-image-with-text"] .group-content > .text-block:first-child,
+.template-product [id^="ns-section-image-with-text"] .group-content > .text-block:first-child *{
+  font-family:var(--julu-body)!important; font-size:13px!important; font-weight:700!important;
+  line-height:1.3!important; letter-spacing:.24em!important; text-transform:uppercase;
+  color:var(--julu-volt)!important;
+}
+/* Título */
+.template-product [id^="ns-section-image-with-text"] .heading-block{
+  font-family:var(--julu-display)!important; font-weight:900!important;
+  font-size:clamp(34px,3.6vw,48px)!important; line-height:.95!important;
+  letter-spacing:-.03em!important; text-transform:uppercase;
+  color:var(--julu-paper)!important;
+}
+.template-product [id^="ns-section-image-with-text"] .heading-block span{ color:var(--julu-volt)!important; }
+/* Párrafo */
+.template-product [id^="ns-section-image-with-text"] .group-content > .text-block:not(:first-child),
+.template-product [id^="ns-section-image-with-text"] .group-content > .text-block:not(:first-child) *{
+  font-family:var(--julu-body)!important; font-size:17px!important; font-weight:400!important;
+  line-height:1.6!important; color:#c9c3b5!important;
+}
+.template-product [id^="ns-section-image-with-text"] a.btn{
+  align-self:flex-start; padding:14px 26px!important; border-radius:9999px!important;
+  border:2px solid var(--julu-paper)!important; background:transparent!important; color:var(--julu-paper)!important;
+  font-family:var(--julu-body)!important; font-weight:700!important; font-size:16px!important;
+  text-transform:none!important; letter-spacing:0!important;
+}
+.template-product [id^="ns-section-image-with-text"] a.btn:hover{ background:var(--julu-paper)!important; color:var(--julu-ink)!important; }
+
+/* Solo en productos de Alvarás (según el link de la colección en la página) */
+.template-product:not(:has(#ns-section-main_product .breadcrumbs a[href$="/alvaras/"])) [id^="ns-section-image-with-text"]{ display:none!important; }
+
+@media (max-width:767px){
+  .template-product [id^="ns-section-image-with-text"] > div:not(.js-nubesdk-slot){ padding:56px 0!important; }
+  .template-product [id^="ns-section-image-with-text"] .media-grid{ row-gap:28px!important; }
+  .template-product [id^="ns-section-image-with-text"] .heading-block{ font-size:32px!important; }
+  .template-product [id^="ns-section-image-with-text"] .group-content > .text-block:not(:first-child),
+  .template-product [id^="ns-section-image-with-text"] .group-content > .text-block:not(:first-child) *{ font-size:16px!important; }
+}
