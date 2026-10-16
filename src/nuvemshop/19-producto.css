@@ -295,3 +295,14 @@
 .julu-guia-medidas:hover{ color:var(--julu-volt)!important; }
 /* Si el bloque Código deja su contenedor vacío a la vista, no ocupa lugar */
 .template-product [data-block-type="code"]:not(:has(:not(script))){ display:none; }
+
+/* Sección "Personalizada" que solo tiene el bloque Código (flechas + link):
+   no muestra nada, así que no ocupa lugar. Si la borrás y creás otra, cambia el ID. */
+#ns-section-custom_1792108952896{ display:none!important; }
+
+/* "Economize: R$10,00" cuando hay descuento */
+.template-product .saved-amount-container,
+.template-product .saved-amount-container *{
+  font-family:var(--julu-body)!important; font-size:14px!important; font-weight:600!important;
+  color:#c23a00!important;
+}
