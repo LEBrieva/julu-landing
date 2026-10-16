@@ -189,26 +189,65 @@
 .template-product .shipping-calculator .js-calculate-shipping:hover{ background:var(--julu-ink)!important; color:var(--julu-paper)!important; }
 .template-product .shipping-calculator .btn-link{ color:var(--julu-muted)!important; }
 
-/* Beneficios (Ícones informativos): una tarjeta crema con filas */
+/* Beneficios (Ícones informativos): 3 tarjetas crema iguales, como en el diseño.
+   Sin ícono: título + texto. */
 .template-product #ns-block-purchase_info{
-  display:flex!important; flex-direction:column; gap:0!important;
-  margin:24px 0 0; padding:4px 18px; border-radius:18px; background:var(--julu-cream);
+  display:grid!important; grid-template-columns:repeat(3,minmax(0,1fr)); align-items:stretch;
+  gap:10px!important; margin:24px 0 0;
 }
 .template-product #ns-block-purchase_info .icon-text-item{
-  display:flex!important; flex-direction:row; align-items:center; gap:14px;
-  margin:0!important; padding:12px 0!important;
+  display:block!important; height:100%; box-sizing:border-box;
+  margin:0!important; padding:14px!important;
+  border-radius:16px; background:var(--julu-cream);
 }
-.template-product #ns-block-purchase_info .icon-text-item + .icon-text-item{ border-top:1px solid rgba(10,10,10,.1); }
-.template-product #ns-block-purchase_info .icon-text-item-icon{ width:32px!important; min-width:32px!important; }
-.template-product #ns-block-purchase_info .icon-text-item-icon img{ mix-blend-mode:multiply; border-radius:6px; }
-.template-product #ns-block-purchase_info .icon-text-item-content{ display:flex; flex-wrap:wrap; align-items:baseline; gap:2px 8px; }
+.template-product #ns-block-purchase_info .icon-text-item-icon{ display:none!important; }
 .template-product #ns-block-purchase_info .icon-text-item-title{
-  font-family:var(--julu-display)!important; font-weight:800!important; font-size:15px!important;
+  display:block; margin-bottom:4px;
+  font-family:var(--julu-display)!important; font-weight:800!important; font-size:14px!important;
   line-height:1.2!important; color:var(--julu-ink)!important;
 }
 .template-product #ns-block-purchase_info .icon-text-item-description{
-  margin:0!important; font-family:var(--julu-body)!important; font-size:14px!important; line-height:1.35!important;
+  margin:0!important; font-family:var(--julu-body)!important; font-size:13px!important; line-height:1.35!important;
   color:#4f4a40!important;
+}
+@media (max-width:480px){
+  .template-product #ns-block-purchase_info{ grid-template-columns:1fr; }
+}
+
+/* Resultado del cálculo de frete: opciones como tarjetas */
+.template-product .shipping-calculator .form-swap-value-label,
+.template-product .shipping-calculator .form-swap-value-label *{
+  font-family:var(--julu-body)!important; font-size:14px!important; color:var(--julu-ink)!important;
+}
+.template-product .product-shipping-wrapper{ width:100%!important; max-width:none!important; }
+.template-product .shipping-calculator-response{ margin-top:16px; }
+.template-product .shipping-options-heading{
+  display:flex; align-items:center; gap:8px; margin:0 0 10px!important;
+  font-family:var(--julu-display)!important; font-weight:800!important; font-size:15px!important;
+  color:var(--julu-ink)!important;
+}
+.template-product .shipping-options-heading *{ font:inherit!important; color:inherit!important; }
+.template-product .shipping-calculator-response .radio-button-item{ margin:0 0 8px!important; }
+.template-product .shipping-calculator-response .radio-button.box{
+  margin:0!important; padding:14px 18px!important;
+  border:1.5px solid rgba(10,10,10,.18)!important; border-radius:16px!important;
+  background:transparent!important;
+}
+.template-product .shipping-calculator-response .shipping-option-details > div:first-child{
+  font-family:var(--julu-body)!important; font-size:15px!important; font-weight:700!important;
+  color:var(--julu-ink)!important;
+}
+.template-product .shipping-calculator-response .shipping-option-date{
+  margin-top:2px; font-family:var(--julu-body)!important; font-size:13px!important; color:var(--julu-muted)!important;
+}
+.template-product .shipping-calculator-response .shipping-option-price{
+  align-self:center;
+  font-family:var(--julu-display)!important; font-weight:800!important; font-size:18px!important;
+  color:var(--julu-ink)!important;
+}
+.template-product .shipping-calculator-response,
+.template-product .shipping-calculator-response > *:not(.shipping-options){
+  font-family:var(--julu-body)!important; font-size:13px!important; color:var(--julu-muted)!important;
 }
 
 /* Descrição */
