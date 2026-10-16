@@ -1,0 +1,146 @@
+<!--
+  JULU · Bloque "Código" de la página de producto
+  (Editor → Produto → sección Personalizada → Código).
+  Pegar TODO este archivo en el bloque y "Salvar e publicar".
+  Hace 3 cosas:
+    1. Flechas sobre la foto grande (mueven el carrusel).
+    2. Link "Guia de medidas" al lado de "Tamanho".
+    3. Popup con la guía de medidas (Oversized / Cropped).
+  El estilo vive en src/nuvemshop/20-guia-medidas.css (y 19-producto.css).
+-->
+<a class="julu-guia-medidas" href="#guia-de-medidas">Guia de medidas</a>
+
+<dialog class="julu-guia" id="julu-guia" aria-labelledby="julu-guia-titulo" data-fit="oversized">
+  <button type="button" class="julu-guia-x" data-guia-close aria-label="Fechar">×</button>
+
+  <div class="julu-guia-head">
+    <span class="julu-guia-kicker">Guia de medidas</span>
+    <h2 id="julu-guia-titulo">Qual é o seu tamanho?</h2>
+    <p>Medidas da camiseta esticada numa mesa, em centímetros.</p>
+  </div>
+
+  <div class="julu-guia-tabs" role="tablist" aria-label="Caimento">
+    <button type="button" role="tab" data-fit-btn="oversized">Oversized</button>
+    <button type="button" role="tab" data-fit-btn="cropped">Cropped</button>
+  </div>
+
+  <!-- OVERSIZED -->
+  <section class="julu-guia-panel" data-panel="oversized">
+    <div class="julu-guia-grid">
+      <figure class="julu-guia-fig">
+        <svg viewBox="0 0 300 300" role="img" aria-label="Camiseta oversized com as medidas A (largura), B (comprimento) e C (manga)">
+          <path class="t" d="M118 38 Q150 62 182 38 L214 44 L286 92 L258 150 L226 132 L226 278 L74 278 L74 132 L42 150 L14 92 L86 44 Z"/>
+          <path class="n" d="M118 38 Q150 62 182 38"/>
+          <line class="m" x1="80" y1="160" x2="220" y2="160"/>
+          <line class="m" x1="150" y1="58" x2="150" y2="272"/>
+          <line class="m" x1="222" y1="36" x2="294" y2="84"/>
+          <circle class="b" cx="112" cy="160" r="13"/><text x="112" y="165">A</text>
+          <circle class="b" cx="150" cy="222" r="13"/><text x="150" y="227">B</text>
+          <circle class="b" cx="262" cy="56" r="13"/><text x="262" y="61">C</text>
+        </svg>
+      </figure>
+      <div class="julu-guia-tablewrap">
+        <table class="julu-guia-table">
+          <thead><tr><th>Tam.</th><th><i>A</i> Largura</th><th><i>B</i> Compr.</th><th><i>C</i> Manga</th></tr></thead>
+          <tbody>
+            <tr><th>P</th><td>53</td><td>76</td><td>25</td></tr>
+            <tr><th>M</th><td>56</td><td>77</td><td>26</td></tr>
+            <tr><th>G</th><td>58</td><td>79</td><td>28</td></tr>
+            <tr><th>GG</th><td>61</td><td>82,5</td><td>30</td></tr>
+          </tbody>
+        </table>
+        <p class="julu-guia-estampa">Estampa: <b>25 × 15 cm</b> nas costas e <b>8,5 × 8,5 cm</b> no peito, em todos os tamanhos.</p>
+      </div>
+    </div>
+    <p class="julu-guia-tip"><b>Oversized é larga de propósito:</b> ombro caído e sobra no corpo. Se você prefere menos folgada, vá um tamanho abaixo do que usa normalmente.</p>
+  </section>
+
+  <!-- CROPPED -->
+  <section class="julu-guia-panel" data-panel="cropped">
+    <div class="julu-guia-grid">
+      <figure class="julu-guia-fig">
+        <svg viewBox="0 0 300 300" role="img" aria-label="Camiseta cropped com as medidas A (largura) e B (comprimento)">
+          <path class="t" d="M120 58 Q150 80 180 58 L208 62 L268 100 L246 146 L218 132 L218 228 L82 228 L82 132 L54 146 L32 100 L92 62 Z"/>
+          <path class="n" d="M120 58 Q150 80 180 58"/>
+          <line class="m" x1="88" y1="160" x2="212" y2="160"/>
+          <line class="m" x1="150" y1="76" x2="150" y2="222"/>
+          <circle class="b" cx="118" cy="160" r="13"/><text x="118" y="165">A</text>
+          <circle class="b" cx="150" cy="200" r="13"/><text x="150" y="205">B</text>
+        </svg>
+      </figure>
+      <div class="julu-guia-tablewrap">
+        <table class="julu-guia-table">
+          <thead><tr><th>Tam.</th><th><i>A</i> Largura</th><th><i>B</i> Compr.</th></tr></thead>
+          <tbody>
+            <tr><th>P</th><td>45</td><td>41</td></tr>
+            <tr><th>M</th><td>49</td><td>43</td></tr>
+            <tr><th>G</th><td>50</td><td>45</td></tr>
+            <tr><th>GG</th><td>55</td><td>46</td></tr>
+          </tbody>
+        </table>
+        <p class="julu-guia-estampa">Estampa nas costas: <b>18 × 11 cm</b> (P e M) e <b>21 × 13 cm</b> (G e GG).</p>
+      </div>
+    </div>
+    <p class="julu-guia-tip"><b>Cropped é curtinha:</b> termina acima do umbigo. Combina com cintura alta.</p>
+  </section>
+
+  <div class="julu-guia-foot">
+    <p><b>Como medir:</b> pegue uma camiseta que você já ama, estique numa mesa e compare com a tabela.</p>
+    <p class="julu-guia-small">As medidas podem variar até 5%. Errou o tamanho? Você tem 30 dias para trocar.</p>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  function ready(fn){ if(document.readyState!='loading') fn(); else document.addEventListener('DOMContentLoaded',fn); }
+  ready(function init(){
+    /* 1. Flechas en la foto grande */
+    var s=document.querySelector('.js-product-slider');
+    if(!s||!s.swiper){ return setTimeout(init,300); }
+    var w=s.closest('.product-images-slider');
+    if(w && !w.querySelector('.julu-arrow')){
+      ['prev','next'].forEach(function(d){
+        var b=document.createElement('button'); b.type='button';
+        b.className='julu-arrow julu-arrow-'+d;
+        b.setAttribute('aria-label', d=='prev'?'Foto anterior':'Próxima foto');
+        b.onclick=function(){ d=='prev'?s.swiper.slidePrev():s.swiper.slideNext(); };
+        w.appendChild(b);
+      });
+    }
+
+    /* 2. Link "Guia de medidas" al lado de "Tamanho" (el visible) */
+    var l=document.querySelector('.julu-guia-medidas');
+    var g=[].filter.call(document.querySelectorAll('#ns-section-main_product .product-detail-variants-group .form-label'),function(x){
+      return /^\s*Tamanho/.test(x.textContent) && x.offsetWidth>0;
+    });
+    if(l && g[0] && !g[0].contains(l)) g[0].appendChild(l);
+
+    /* 3. Popup */
+    var dlg=document.getElementById('julu-guia');
+    if(!dlg || dlg.dataset.ready) return;
+    dlg.dataset.ready='1';
+    document.body.appendChild(dlg);               /* sale de la sección oculta */
+    var name=(document.querySelector('.js-product-name')||{}).textContent||'';
+    function setFit(f){
+      dlg.setAttribute('data-fit',f);
+      [].forEach.call(dlg.querySelectorAll('[data-fit-btn]'),function(b){
+        b.setAttribute('aria-selected', b.getAttribute('data-fit-btn')==f ? 'true':'false');
+      });
+    }
+    setFit(/cropped/i.test(name) ? 'cropped' : 'oversized');
+    [].forEach.call(dlg.querySelectorAll('[data-fit-btn]'),function(b){
+      b.addEventListener('click',function(){ setFit(b.getAttribute('data-fit-btn')); });
+    });
+    function open(e){ if(e) e.preventDefault(); if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open',''); }
+    function close(){ if(dlg.close) dlg.close(); else dlg.removeAttribute('open'); }
+    document.addEventListener('click',function(e){
+      var a=e.target.closest && e.target.closest('a[href="#guia-de-medidas"], a[href*="/guia-de-medidas"]');
+      if(a) open(e);
+    });
+    dlg.addEventListener('click',function(e){
+      if(e.target===dlg || (e.target.closest && e.target.closest('[data-guia-close]'))) close();
+    });
+    if(location.hash=='#guia-de-medidas') open();
+  });
+})();
+</script>
