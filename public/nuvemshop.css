@@ -34,6 +34,7 @@
      - 24-buscar.css
      - 25-minha-conta.css
      - 26-carrito.css
+     - 27-carrito-panel.css
    ===================================================================== */
 
 
@@ -2612,3 +2613,144 @@ html:has(link[rel="canonical"][href$="/guia-de-medidas/"]) main .user-content p 
   text-align:center; transform:rotate(8deg);
 }
 .header-cart .js-modal-open-private.header-utility:hover .js-cart-widget-amount.badge{ background:var(--julu-paper)!important; }
+
+
+/* =====================================================================
+   27. PANEL DEL CARRITO (#modal-cart, se abre desde el header)
+   ===================================================================== */
+#modal-cart{
+  background:var(--julu-paper)!important; color:var(--julu-ink);
+  border-left:2px solid var(--julu-ink)!important;
+  font-family:var(--julu-body);
+}
+/* Que el aviso de cookies no quede encima del panel abierto */
+body.modal-show .js-notification-cookie-private{ opacity:0!important; pointer-events:none!important; }
+
+/* Cabecera */
+#modal-cart .modal-header{
+  align-items:center; padding:22px 24px!important;
+  background:var(--julu-volt)!important; border-bottom:2px solid var(--julu-ink)!important;
+}
+#modal-cart .modal-title{
+  flex:1; text-align:left!important;
+  font-family:var(--julu-display)!important; font-weight:900!important; font-size:24px!important;
+  line-height:1!important; letter-spacing:-.02em; text-transform:uppercase; color:var(--julu-ink)!important;
+}
+#modal-cart .modal-close{
+  width:40px!important; height:40px!important; padding:0!important; margin:0!important;
+  display:flex!important; align-items:center; justify-content:center;
+  border:2px solid var(--julu-ink)!important; border-radius:9999px!important;
+  background:var(--julu-paper)!important; box-shadow:3px 3px 0 var(--julu-ink);
+  transition:transform .15s ease, background-color .15s ease;
+}
+#modal-cart .modal-close:hover{ background:var(--julu-amber)!important; transform:rotate(-8deg); }
+#modal-cart .modal-close svg{ width:16px!important; height:16px!important; fill:var(--julu-ink)!important; }
+
+#modal-cart .modal-body{ padding:20px 24px 28px!important; }
+
+/* Carrito vacío */
+#modal-cart .js-empty-ajax-cart .alert-info{
+  margin:24px 0 0!important; padding:170px 16px 8px!important; mix-blend-mode:multiply;
+  border:0!important; background:url('nuvemshop/gato-dormindo.webp') center top / 170px auto no-repeat!important;
+  text-align:center; font-size:15px!important; color:#4f4a40!important;
+}
+#modal-cart .js-empty-ajax-cart .alert-info::before{
+  content:"Tá vazio por aqui"; display:block; margin-bottom:6px;
+  font-family:var(--julu-display); font-weight:900; font-size:26px; line-height:1;
+  letter-spacing:-.02em; text-transform:uppercase; color:var(--julu-ink);
+}
+
+/* Productos */
+#modal-cart .cart-item{
+  gap:14px; padding:0 0 18px!important; margin:0 0 18px!important;
+  border:0!important; border-bottom:1px solid rgba(10,10,10,.14)!important;
+}
+#modal-cart .cart-item-image-container{ flex:0 0 84px; max-width:84px!important; }
+#modal-cart .cart-item-image{
+  width:84px!important; aspect-ratio:4/5; height:auto!important; object-fit:cover; object-position:50% 0; box-sizing:border-box;
+  border:2px solid var(--julu-ink); border-radius:14px;
+}
+#modal-cart .cart-item-name{
+  font-family:var(--julu-body)!important; font-size:15px!important; font-weight:700!important; line-height:1.3!important;
+  color:var(--julu-ink)!important; text-decoration:none!important;
+}
+#modal-cart .cart-item-name:hover{ color:#c23a00!important; }
+#modal-cart .cart-item-variant{ display:block; margin-top:2px; font-size:13px!important; color:var(--julu-muted)!important; }
+#modal-cart .cart-item-delete-button{
+  padding:0!important; font-size:13px!important; font-weight:600!important; color:var(--julu-ink)!important;
+  text-decoration:underline!important; text-decoration-color:var(--julu-volt)!important;
+  text-decoration-thickness:2px!important; text-underline-offset:3px;
+}
+/* Cantidad: píldora */
+#modal-cart .form-quantity{
+  margin:0!important; border:2px solid var(--julu-ink)!important; border-radius:9999px!important;
+  background:#fff!important; overflow:hidden; height:40px; box-sizing:border-box;
+}
+#modal-cart .form-quantity .grid{ height:100%; }
+#modal-cart .cart-quantity-btn{ height:36px!important; padding:0 12px!important; border:0!important; display:flex!important; align-items:center; }
+#modal-cart .cart-quantity-btn:hover{ background:var(--julu-cream)!important; }
+#modal-cart .cart-quantity-btn svg{ width:12px!important; height:12px!important; fill:var(--julu-ink)!important; }
+#modal-cart .cart-quantity-input{
+  height:36px!important; border:0!important; background:transparent!important; box-shadow:none!important;
+  font-family:var(--julu-display)!important; font-weight:900!important; font-size:15px!important; color:var(--julu-ink)!important;
+}
+/* Precio */
+#modal-cart .js-cart-item-subtotal{
+  font-family:var(--julu-display)!important; font-weight:900!important; font-size:17px!important; color:var(--julu-ink)!important;
+}
+#modal-cart .price-compare{ font-size:13px!important; color:var(--julu-muted)!important; }
+#modal-cart .cart-item-discount-badge{
+  padding:2px 8px; border-radius:9999px; background:var(--julu-amber)!important;
+  font-size:11px!important; font-weight:800!important; color:var(--julu-ink)!important;
+}
+
+/* Envío */
+#modal-cart .shipping-calculator{ margin:0!important; }
+#modal-cart .js-shipping-calculator-change-zipcode,
+#modal-cart .cart-continue-shopping .btn-link{
+  color:var(--julu-ink)!important; font-weight:700!important;
+  text-decoration:underline!important; text-decoration-color:var(--julu-volt)!important;
+  text-decoration-thickness:2px!important; text-underline-offset:3px;
+}
+#modal-cart .js-shipping-input{
+  height:48px!important; padding:0 20px!important; border:2px solid var(--julu-ink)!important; border-radius:9999px!important;
+  background:#fff!important; box-shadow:none!important;
+}
+#modal-cart .js-calculate-shipping{
+  height:48px!important; padding:0 22px!important; border:2px solid var(--julu-ink)!important; border-radius:9999px!important;
+  background:var(--julu-ink)!important; color:var(--julu-paper)!important; font-weight:700!important;
+}
+#modal-cart .shipping-options-heading{ font-family:var(--julu-body); font-weight:700; }
+#modal-cart .radio-button.box{
+  border:2px solid rgba(10,10,10,.18)!important; border-radius:16px!important; background:#fff!important;
+  transition:border-color .15s ease;
+}
+#modal-cart .radio-button.box:hover{ border-color:var(--julu-ink)!important; }
+#modal-cart .radio-button.box.selected{ border-color:var(--julu-ink)!important; box-shadow:3px 3px 0 var(--julu-ink); }
+#modal-cart .shipping-option-price{ font-family:var(--julu-display)!important; font-weight:900!important; font-size:17px!important; }
+
+/* Totales */
+#modal-cart .cart-subtotals-container{ margin-top:8px; }
+#modal-cart .cart-totals-row{ font-size:14px!important; color:#4f4a40; }
+#modal-cart .cart-totals-subtotal{ font-size:15px!important; color:var(--julu-ink)!important; }
+#modal-cart .cart-totals-total{
+  margin-top:12px!important; padding-top:14px!important; border-top:2px solid var(--julu-ink)!important;
+  align-items:baseline;
+}
+#modal-cart .cart-totals-total span{
+  font-family:var(--julu-display)!important; font-weight:900!important; font-size:26px!important;
+  letter-spacing:-.02em; text-transform:uppercase; color:var(--julu-ink)!important;
+}
+
+/* Botón de compra */
+#modal-cart .js-ajax-cart-submit .btn-primary{
+  height:56px!important; margin-top:16px!important; border:2px solid var(--julu-ink)!important; border-radius:9999px!important;
+  background:var(--julu-volt)!important; color:var(--julu-ink)!important;
+  font-family:var(--julu-body)!important; font-size:17px!important; font-weight:800!important;
+  text-transform:none!important; letter-spacing:0!important; box-shadow:4px 4px 0 var(--julu-ink);
+  transition:background-color .15s ease, color .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+#modal-cart .js-ajax-cart-submit .btn-primary:hover{
+  background:var(--julu-ink)!important; color:var(--julu-paper)!important; transform:translate(2px,2px); box-shadow:2px 2px 0 var(--julu-ink);
+}
+#modal-cart .cart-continue-shopping{ margin-top:14px!important; text-align:center; }
