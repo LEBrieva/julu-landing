@@ -30,6 +30,7 @@
      - 20-guia-medidas.css
      - 21-producto-coleccion.css
      - 22-newsletter-popup.css
+     - 23-cookies.css
    ===================================================================== */
 
 
@@ -79,12 +80,18 @@
 /* =====================================================================
    2. HEADER Y MENÚ
    ===================================================================== */
+/* El fondo con blur va en ::before: si el blur está en el header mismo, los
+   avisos fijos que el tema pone adentro (cookies) quedan pegados al header. */
 header{
-  background:rgba(244,240,230,.85)!important;
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
+  background:transparent!important;
+  isolation:isolate;
   border-bottom:1px solid rgba(10,10,10,.10)!important;
   font-family:var(--julu-body)!important;
+}
+header.js-header::before{
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:rgba(244,240,230,.85);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
 }
 
 /* Logo con micro-animación */
@@ -2376,4 +2383,49 @@ html:has(link[rel="canonical"][href$="/guia-de-medidas/"]) main .user-content p 
   .julu-news-step{ padding:36px 20px 32px; }
   .julu-news-step::before{ right:16px; font-size:12px; }
   .julu-news-form button, .julu-news-back{ flex:1 1 100%; }
+}
+
+
+/* =====================================================================
+   23. AVISO DE COOKIES (lo pone el tema, abajo a la izquierda)
+   Tarjeta negra tipo sticker, botón naranja. El texto es del tema.
+   ===================================================================== */
+.js-notification-cookie-private.notification-fixed{
+  top:auto!important; bottom:20px!important; left:20px!important; right:auto!important;
+  width:min(380px, calc(100vw - 40px))!important; max-width:none!important; box-sizing:border-box;
+  display:flex!important; flex-wrap:wrap; align-items:center; gap:14px 16px;
+  margin:0!important; padding:20px 22px!important;
+  border:2px solid var(--julu-ink)!important; border-radius:22px!important;
+  background:var(--julu-ink)!important; color:var(--julu-paper)!important;
+  box-shadow:5px 5px 0 var(--julu-volt)!important;
+  font-family:var(--julu-body)!important; text-align:left!important;
+  animation:juluCookieIn .35s ease-out .6s both;
+}
+@keyframes juluCookieIn{ from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:none; } }
+.js-notification-cookie-private.notification-fixed::before{
+  content:"🍪 Cookies, não biscoitos de gato";
+  flex:1 1 100%;
+  font-family:var(--julu-body); font-size:12px; font-weight:700;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--julu-volt);
+}
+.js-notification-cookie-private .notification-message{
+  flex:1 1 100%; margin:0!important;
+  font-size:14px!important; line-height:1.5!important; color:#c9c3b5!important;
+}
+.js-notification-cookie-private .notification-message strong{ color:var(--julu-paper)!important; font-weight:700; }
+.js-notification-cookie-private .notification-accept-btn{
+  margin:0!important; padding:10px 22px!important;
+  border:2px solid var(--julu-volt)!important; border-radius:9999px!important;
+  background:var(--julu-volt)!important; color:var(--julu-ink)!important;
+  font-family:var(--julu-body)!important; font-size:14px!important; font-weight:700!important;
+  text-decoration:none!important; text-transform:none!important; letter-spacing:0!important;
+  transition:background-color .15s ease, color .15s ease, transform .15s ease;
+}
+.js-notification-cookie-private .notification-accept-btn:hover{
+  background:var(--julu-paper)!important; border-color:var(--julu-paper)!important; transform:rotate(-3deg);
+}
+@media (prefers-reduced-motion:reduce){ .js-notification-cookie-private.notification-fixed{ animation:none; } }
+@media (max-width:640px){
+  .js-notification-cookie-private.notification-fixed{ left:12px!important; right:12px!important; bottom:12px!important; width:auto!important; }
+  .js-notification-cookie-private .notification-accept-btn{ flex:1 1 100%; }
 }

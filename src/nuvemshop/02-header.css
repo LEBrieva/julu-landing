@@ -1,12 +1,18 @@
 /* =====================================================================
    2. HEADER Y MENÚ
    ===================================================================== */
+/* El fondo con blur va en ::before: si el blur está en el header mismo, los
+   avisos fijos que el tema pone adentro (cookies) quedan pegados al header. */
 header{
-  background:rgba(244,240,230,.85)!important;
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
+  background:transparent!important;
+  isolation:isolate;
   border-bottom:1px solid rgba(10,10,10,.10)!important;
   font-family:var(--julu-body)!important;
+}
+header.js-header::before{
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:rgba(244,240,230,.85);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
 }
 
 /* Logo con micro-animación */
