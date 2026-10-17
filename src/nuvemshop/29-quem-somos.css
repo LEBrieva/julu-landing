@@ -1,0 +1,18 @@
+/* =====================================================================
+   29. PÁGINA QUEM SOMOS (/quem-somos/)
+   El contenido es HTML con estilos inline, pegado en Nuvemshop → Páginas
+   (copia en src/nuvemshop/bloques/quem-somos.html). Acá solo: ocultar el
+   título del tema, ancho del contenedor y ajustes de celular.
+   ===================================================================== */
+html:has(link[rel="canonical"][href$="/quem-somos/"]) #ns-section-heading{ display:none!important; }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content{
+  max-width:1280px; margin:0 auto; padding:0 0 88px!important;
+  font-family:var(--julu-body); overflow-x:clip;
+}
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content img{ max-width:100%; }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content a:hover{ opacity:.85; }
+@media (max-width:767px){
+  /* Gatito decorativo del título: fuera en celular */
+  html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:first-child > img{ display:none; }
+  html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content img[style*="height:380px"]{ height:260px!important; }
+}
