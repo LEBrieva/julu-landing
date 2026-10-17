@@ -19,3 +19,94 @@ html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content a:hover
   /* Timeline un poco más compacta en celular */
   html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content h3{ font-size:20px!important; }
 }
+
+/* ---------------------------------------------------------------------
+   Nuvemshop borra al guardar parte de los estilos inline (display/flex,
+   gap, position, border-radius, box-shadow, transform, object-fit) y los
+   <span> vacíos. Todo eso se rearma acá, por la estructura del HTML:
+   1 apertura · 2 línea de tiempo · 3 "JuLu é isso" · 4 gangue · 5 cierre
+   --------------------------------------------------------------------- */
+/* Rayita naranja delante de los kickers */
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(1) > div:first-child > p:first-child,
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(3) > p:last-child{
+  display:flex; align-items:center; gap:12px;
+}
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(1) > div:first-child > p:first-child::before,
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(3) > p:last-child::before{
+  content:""; flex:0 0 36px; height:3px; background:var(--julu-volt);
+}
+
+/* 1 · Apertura: texto + 2 fotos sticker */
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(1){
+  display:flex; flex-wrap:wrap; gap:40px; align-items:center;
+}
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(1) > div:first-child{ flex:1 1 440px; min-width:0; }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(1) > div:last-child{
+  flex:0 1 420px; min-width:0; display:flex; gap:16px; justify-content:center; padding-bottom:24px;
+}
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(1) img{
+  width:48%!important; height:auto; object-fit:cover; border-radius:22px; box-shadow:5px 5px 0 var(--julu-ink);
+}
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(1) img:first-child{ transform:rotate(-4deg); }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(1) img:last-child{ transform:rotate(4deg) translateY(24px); }
+
+/* 2 · Línea de tiempo: puntos sobre la línea */
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(2) > div > div{ position:relative; }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(2) > div > div::before{
+  content:""; position:absolute; left:-60px; top:4px; box-sizing:border-box;
+  width:26px; height:26px; border:3px solid var(--julu-ink); border-radius:9999px; background:var(--julu-volt);
+}
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(2) > div > div:nth-child(even)::before{ background:var(--julu-amber); }
+/* Tarjetas destacadas (viaje naranja, Fênix negro) */
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(2) > div > div[style*="padding"]{ border-radius:24px; }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(2) > div > div[style*="padding"]::before{ left:-61px; top:32px; }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(2) > div > div[style*="background:#ff4d00"]{ box-shadow:6px 6px 0 var(--julu-ink); }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(2) > div > div[style*="background:#ff4d00"]::before{ background:var(--julu-ink); }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(2) > div > div[style*="background:#0a0a0a"]::before{ background:var(--julu-paper); }
+/* Fênix: foto + texto */
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(2) > div > div > div{
+  display:flex; flex-wrap:wrap; gap:24px; align-items:flex-start;
+}
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(2) > div > div > div > img{
+  flex:0 0 180px; height:auto; object-fit:cover; border-radius:20px; box-shadow:4px 4px 0 var(--julu-ink); transform:rotate(-2deg);
+}
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(2) > div > div > div > div{ flex:1 1 300px; min-width:0; }
+
+/* 3 · JuLu é isso */
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(3){ border-radius:32px; }
+
+/* 4 · A gangue: franja naranja a todo el ancho + tarjetas sticker */
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(4){
+  margin-left:calc(50% - 50vw)!important; margin-right:calc(50% - 50vw)!important;
+  padding:80px max(24px, calc(50vw - 616px))!important;
+}
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(4) > div{ display:flex; flex-wrap:wrap; gap:20px; }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(4) > div > div{
+  flex:1 1 230px; min-width:0; border-radius:24px; box-shadow:5px 5px 0 var(--julu-ink);
+}
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(4) > div > div:nth-child(1){ transform:rotate(-1.5deg); }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(4) > div > div:nth-child(2){ transform:rotate(1deg); }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(4) > div > div:nth-child(3){ transform:rotate(-1deg); }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(4) > div > div:nth-child(4){ transform:rotate(1.5deg); }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(4) img{
+  display:block; width:100%!important; height:auto; object-fit:cover; border-radius:16px;
+}
+
+/* 5 · Cierre con botones */
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(5){
+  display:flex; flex-wrap:wrap; gap:24px; justify-content:space-between; align-items:center; border-radius:32px;
+}
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(5) > p{ display:flex; flex-wrap:wrap; gap:12px; }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(5) a{
+  display:inline-flex; align-items:center; border-radius:9999px; transition:background-color .15s ease, color .15s ease;
+}
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(5) a:hover{ opacity:1; background:var(--julu-ink)!important; color:var(--julu-paper)!important; }
+/* Tamaños con clamp() (Nuvemshop también los borra del inline) */
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content h1{ font-size:clamp(44px,7vw,88px)!important; }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(2) > h2{ font-size:clamp(34px,4.5vw,48px)!important; }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(2) > div > div[style*="background:#ff4d00"] h3{ font-size:clamp(24px,3vw,30px)!important; }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(3){ padding:clamp(32px,6vw,72px)!important; }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(3) > p:nth-child(2){ font-size:clamp(28px,3.6vw,44px)!important; }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(4) > h2{ font-size:clamp(40px,5vw,56px)!important; }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(5){ padding:clamp(28px,5vw,48px)!important; }
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:nth-child(5) > h2{ font-size:clamp(32px,4vw,44px)!important; }
