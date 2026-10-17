@@ -31,6 +31,7 @@
      - 21-producto-coleccion.css
      - 22-newsletter-popup.css
      - 23-cookies.css
+     - 24-buscar.css
    ===================================================================== */
 
 
@@ -2428,4 +2429,95 @@ html:has(link[rel="canonical"][href$="/guia-de-medidas/"]) main .user-content p 
 @media (max-width:640px){
   .js-notification-cookie-private.notification-fixed{ left:12px!important; right:12px!important; bottom:12px!important; width:auto!important; }
   .js-notification-cookie-private .notification-accept-btn{ flex:1 1 100%; }
+}
+
+
+/* =====================================================================
+   24. BUSCAR (header)
+   Botón "Buscar" como píldora; al abrir: campo píldora + lupa naranja.
+   Sugerencias como tarjeta sticker. Aplica también al modal de mobile.
+   ===================================================================== */
+/* Botón que abre la búsqueda (desktop) */
+.js-search-trigger.search-trigger{
+  display:inline-flex!important; align-items:center; gap:8px;
+  padding:9px 18px 9px 14px!important; border-radius:9999px!important;
+  border:2px solid rgba(10,10,10,.18)!important; background:transparent!important;
+  transition:border-color .15s ease, background-color .15s ease;
+}
+.js-search-trigger.search-trigger:hover{ border-color:var(--julu-ink)!important; background:var(--julu-paper)!important; }
+.js-search-trigger.search-trigger svg{ width:18px!important; height:18px!important; }
+.js-search-trigger .search-text{
+  margin:0!important; font-family:var(--julu-body)!important; font-size:15px!important; font-weight:600!important;
+  color:var(--julu-ink)!important;
+}
+
+/* Campo de búsqueda (header y modal mobile) */
+.js-search-form .search-form-field{ position:relative; margin:0!important; }
+.js-search-form .js-search-input.search-input{
+  height:48px!important; box-sizing:border-box;
+  padding:0 96px 0 22px!important; border-radius:9999px!important;
+  border:2px solid var(--julu-ink)!important; background:#fff!important; box-shadow:none!important;
+  font-family:var(--julu-body)!important; font-size:15px!important; color:var(--julu-ink)!important;
+  outline:none!important;
+}
+.js-search-form .js-search-input.search-input::placeholder{ color:var(--julu-muted)!important; opacity:1; }
+.js-search-form .js-search-input.search-input:focus{ box-shadow:0 0 0 4px rgba(255,77,0,.28)!important; }
+
+/* Lupa = botón naranja dentro del campo */
+.js-search-form .search-submit-btn{
+  position:absolute!important; top:50%!important; right:5px!important; left:auto!important; transform:translateY(-50%);
+  width:38px!important; height:38px!important; padding:0!important;
+  display:flex!important; align-items:center; justify-content:center;
+  border:0!important; border-radius:9999px!important; background:var(--julu-volt)!important;
+  transition:background-color .15s ease, transform .15s ease;
+}
+.js-search-form .search-submit-btn:hover{ background:var(--julu-ink)!important; transform:translateY(-50%) rotate(-8deg); }
+.js-search-form .search-submit-btn svg{ width:17px!important; height:17px!important; fill:var(--julu-ink); color:var(--julu-ink); }
+.js-search-form .search-submit-btn:hover svg{ fill:var(--julu-paper); color:var(--julu-paper); }
+/* Borrar texto: a la izquierda de la lupa */
+.js-search-form .search-empty-btn{
+  position:absolute!important; top:50%!important; right:48px!important; left:auto!important; transform:translateY(-50%);
+  width:30px!important; height:30px!important; padding:0!important;
+  display:flex; align-items:center; justify-content:center;
+  border:0!important; border-radius:9999px!important; background:transparent!important;
+}
+.js-search-form .search-empty-btn:hover{ background:var(--julu-cream)!important; }
+.js-search-form .search-empty-btn svg{ width:14px!important; height:14px!important; }
+
+/* Sugerencias */
+.js-search-form-suggestions.search-suggestions{
+  margin-top:10px!important; padding:8px!important; box-sizing:border-box;
+  border:2px solid var(--julu-ink)!important; border-radius:20px!important;
+  background:var(--julu-paper)!important; box-shadow:5px 5px 0 var(--julu-ink)!important;
+  overflow:hidden;
+}
+.js-search-form-suggestions:empty{ display:none!important; }
+.search-suggestions-list{ margin:0!important; padding:0!important; list-style:none; }
+.search-suggestions-item{ margin:0!important; border:0!important; }
+.search-suggestions-link{
+  display:flex!important; align-items:center; gap:12px;
+  padding:8px!important; border-radius:14px; text-decoration:none!important;
+  transition:background-color .12s ease;
+}
+.search-suggestions-link:hover{ background:var(--julu-cream)!important; }
+.search-suggestions-image-container{ flex:0 0 56px; width:56px!important; margin:0!important; }
+.search-suggest-image{ width:56px!important; height:56px!important; object-fit:cover; object-position:50% 0; border-radius:10px; }
+.search-suggestions-name{
+  font-family:var(--julu-body)!important; font-size:14px!important; font-weight:500!important; line-height:1.3!important;
+  color:var(--julu-ink)!important;
+}
+.search-suggestions-name strong{ font-weight:800!important; color:#c23a00!important; }
+.search-suggestions-price{
+  margin-top:3px; font-family:var(--julu-display)!important; font-weight:900!important; font-size:15px!important;
+  color:var(--julu-ink)!important;
+}
+.search-suggestions-all-link-container{ padding:8px 8px 4px!important; border:0!important; }
+.search-suggestions-all-link{
+  display:inline-block; font-family:var(--julu-body)!important; font-size:14px!important; font-weight:700!important;
+  color:var(--julu-ink)!important; text-decoration:underline!important;
+  text-decoration-color:var(--julu-volt)!important; text-decoration-thickness:2px!important; text-underline-offset:4px;
+}
+.search-suggestions-text{ margin:0!important; padding:0!important; }
+@media (min-width:768px){
+  .js-search-container .js-search-form-suggestions.search-suggestions{ width:400px!important; max-height:min(520px,70vh); overflow:auto; }
 }
