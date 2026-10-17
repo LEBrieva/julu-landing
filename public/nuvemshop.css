@@ -2397,7 +2397,7 @@ html:has(link[rel="canonical"][href$="/guia-de-medidas/"]) main .user-content p 
 .js-notification-cookie-private.notification-fixed{
   top:auto!important; bottom:20px!important; left:20px!important; right:auto!important;
   width:min(380px, calc(100vw - 40px))!important; max-width:none!important; box-sizing:border-box;
-  display:flex!important; flex-wrap:wrap; align-items:center; gap:14px 16px;
+  display:flex; flex-wrap:wrap; align-items:center; gap:14px 16px;
   margin:0!important; padding:20px 22px!important;
   border:2px solid var(--julu-ink)!important; border-radius:22px!important;
   background:var(--julu-ink)!important; color:var(--julu-paper)!important;
@@ -2405,6 +2405,8 @@ html:has(link[rel="canonical"][href$="/guia-de-medidas/"]) main .user-content p 
   font-family:var(--julu-body)!important; text-align:left!important;
   animation:juluCookieIn .35s ease-out .6s both;
 }
+/* Al tocar "Entendi" el tema le pone display:none inline: respetarlo */
+.js-notification-cookie-private.notification-fixed[style*="none"]{ display:none!important; }
 @keyframes juluCookieIn{ from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:none; } }
 .js-notification-cookie-private.notification-fixed::before{
   content:"🍪 Cookies, não biscoitos de gato";
