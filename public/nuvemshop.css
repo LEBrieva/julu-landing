@@ -2875,6 +2875,8 @@ html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content{
 /* La franja naranja sale a todo el ancho: evitar scroll horizontal */
 html:has(link[rel="canonical"][href$="/quem-somos/"]) body{ overflow-x:clip; }
 html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content img{ max-width:100%; }
+/* Texto corrido siempre en Inter (el tema mete su propia fuente en .user-content p) */
+html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content :is(p,li,a):not([style*="Archivo"]){ font-family:var(--julu-body)!important; }
 html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content a:hover{ opacity:.85; }
 @media (max-width:767px){
   /* Timeline un poco más compacta en celular */
