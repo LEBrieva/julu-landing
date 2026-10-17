@@ -19,13 +19,34 @@
 .julu-news[open]{ animation:juluNewsIn .25s ease-out; }
 @keyframes juluNewsIn{ from{ opacity:0; transform:translateY(16px) scale(.98); } to{ opacity:1; transform:none; } }
 
-/* Franja naranja arriba con el gatito durmiendo */
-.julu-news-step{ position:relative; padding:36px 36px 28px; }
+/* Franja naranja arriba: "CLUBE JULU" corriendo de fondo */
 .julu-news::before{
-  content:""; display:block; height:120px;
-  background:var(--julu-volt) url('nuvemshop/gato-dormindo.webp') right 24px bottom -28px / 150px auto no-repeat;
-  border-bottom:2px solid var(--julu-ink);
+  content:"CLUBE JULU ✦ CLUBE JULU ✦ CLUBE JULU ✦ CLUBE JULU ✦ CLUBE JULU ✦ CLUBE JULU ✦";
+  display:block; height:132px; overflow:hidden; white-space:nowrap;
+  background:var(--julu-volt); border-bottom:2px solid var(--julu-ink);
+  font-family:var(--julu-display); font-weight:900; font-size:76px; line-height:132px;
+  letter-spacing:-.02em; color:rgba(10,10,10,.13);
+  animation:juluNewsMarquee 22s linear infinite;
 }
+@keyframes juluNewsMarquee{ from{ text-indent:0; } to{ text-indent:-600px; } }
+/* Gatito grande, a la izquierda, asomando sobre la línea */
+.julu-news::after{
+  content:""; position:absolute; top:6px; left:20px; z-index:1;
+  width:190px; height:150px; pointer-events:none;
+  background:url('nuvemshop/gato-dormindo.webp') left bottom / contain no-repeat;
+  mix-blend-mode:multiply; transform:rotate(-4deg);
+}
+/* Sticker inclinado sobre la línea */
+.julu-news-step::before{
+  content:"Grátis • zero spam";
+  position:absolute; top:-22px; right:28px; z-index:2;
+  padding:8px 16px; border:2px solid var(--julu-ink); border-radius:9999px;
+  background:var(--julu-amber); box-shadow:3px 3px 0 var(--julu-ink);
+  font-family:var(--julu-body); font-size:13px; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+  color:var(--julu-ink); transform:rotate(4deg);
+}
+.julu-news-step[data-step="ok"]::before{ content:"Miau! 😻"; }
+.julu-news-step{ position:relative; padding:40px 36px 28px; }
 
 .julu-news-x{
   position:absolute; top:16px; right:16px; z-index:2;
@@ -36,6 +57,8 @@
   font-family:var(--julu-body); font-size:24px; line-height:1; color:var(--julu-ink);
   transition:transform .15s ease, background-color .15s ease;
 }
+.julu-news-x:focus{ outline:none; }
+.julu-news-x:focus-visible{ background:var(--julu-amber); }
 .julu-news-x:hover{ background:var(--julu-amber); transform:rotate(-8deg); }
 
 .julu-news-kicker{
@@ -79,6 +102,8 @@
 .julu-news-small{ margin:6px 0 0!important; font-size:12px!important; color:var(--julu-muted)!important; }
 
 /* Mobile: panel desde abajo */
+@media (prefers-reduced-motion:reduce){ .julu-news::before{ animation:none; } }
+
 @media (max-width:640px){
   .julu-news{
     width:100vw; max-width:100vw; max-height:88vh;
@@ -86,7 +111,9 @@
   }
   .julu-news[open]{ animation:juluNewsUp .28s ease-out; }
   @keyframes juluNewsUp{ from{ transform:translateY(100%); } to{ transform:none; } }
-  .julu-news::before{ height:96px; background-size:120px auto; background-position:right 16px bottom -22px; }
-  .julu-news-step{ padding:28px 20px 32px; }
+  .julu-news::before{ height:104px; line-height:104px; font-size:60px; }
+  .julu-news::after{ width:150px; height:118px; left:12px; }
+  .julu-news-step{ padding:36px 20px 32px; }
+  .julu-news-step::before{ right:16px; font-size:12px; }
   .julu-news-form button, .julu-news-back{ flex:1 1 100%; }
 }
