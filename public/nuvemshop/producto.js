@@ -2,8 +2,18 @@
    Lo carga el bloque Código del producto (src/nuvemshop/bloques/producto-codigo.html).
    1. Flechas sobre la foto grande; se deshabilitan en la primera / última foto.
    2. Al mover la foto grande (flecha o swipe), las miniaturas acompañan
-      para que la seleccionada siempre quede a la vista. */
+      para que la seleccionada siempre quede a la vista.
+   3. Carrito: "Ver mais produtos" lleva a /camisetas/ (el tema solo cerraba el panel,
+      y en la página de producto eso deja a la persona en el mismo producto). */
 (function(){
+  /* 3. "Ver mais produtos" del carrito → catálogo */
+  document.addEventListener('click',function(e){
+    var a=e.target.closest && e.target.closest('#modal-cart a.js-modal-close-private');
+    if(!a || !/ver mais produtos/i.test(a.textContent)) return;
+    e.preventDefault(); e.stopPropagation();
+    location.href='/camisetas/';
+  },true);
+
   function ready(fn){ if(document.readyState!='loading') fn(); else document.addEventListener('DOMContentLoaded',fn); }
   ready(function init(tries){
     tries = typeof tries=='number' ? tries : 0;
