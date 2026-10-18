@@ -3160,7 +3160,21 @@ html:has(.julu-ct) body{ overflow-x:clip; }
 }
 .julu-ct-send:hover{ background:var(--julu-ink); color:var(--julu-paper); transform:rotate(-2deg); }
 .julu-ct-send:disabled{ opacity:.6; cursor:wait; transform:none; }
-.julu-ct-ok{ padding:36px 8px; text-align:center; }
+.julu-ct-ok{ padding:28px 8px 20px; text-align:center; }
+.julu-ct-ok::before{
+  content:""; display:block; width:180px; aspect-ratio:1/1; margin:0 auto 22px;
+  border:3px solid var(--julu-ink); border-radius:24px; box-shadow:6px 6px 0 var(--julu-volt);
+  background:url('nuvemshop/gatos/deitado-calico.webp') center/cover no-repeat;
+  transform:rotate(-3deg);
+}
+.julu-ct-again{
+  margin-top:22px; padding:14px 26px; cursor:pointer;
+  border:2px solid var(--julu-ink); border-radius:9999px; background:var(--julu-ink); color:var(--julu-paper);
+  font-family:var(--julu-body); font-size:15px; font-weight:700;
+  transition:background-color .15s ease, color .15s ease, transform .15s ease;
+}
+.julu-ct-again:hover{ background:var(--julu-volt); color:var(--julu-ink); transform:rotate(-2deg); }
+.julu-ct-again:focus-visible{ outline:3px solid var(--julu-volt); outline-offset:2px; }
 .julu-ct-ok strong{ display:block; font-family:var(--julu-display); font-weight:900; font-size:30px; text-transform:uppercase; }
 .julu-ct-ok p{ margin:10px auto 0; max-width:380px; font-size:16px; line-height:1.55; color:#4f4a40; }
 
