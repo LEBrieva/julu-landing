@@ -358,3 +358,50 @@
   font-family:var(--julu-body)!important; font-size:14px!important; font-weight:600!important;
   color:#c23a00!important;
 }
+
+/* ---------------------------------------------------------------------
+   Foto ampliada (lightbox del tema, Fancybox): flechas y cerrar con el
+   mismo estilo sticker que las flechas de la galería.
+   --------------------------------------------------------------------- */
+.fancybox__backdrop{ background:rgba(10,10,10,.9)!important; }
+.fancybox__container .fancybox__content > img,
+.fancybox__container .fancybox__slide.has-image .fancybox__content{ border-radius:20px; overflow:hidden; }
+.fancybox__container .f-button{
+  width:52px!important; height:52px!important; padding:0!important;
+  display:flex!important; align-items:center; justify-content:center;
+  background:var(--julu-paper)!important; color:var(--julu-ink)!important;
+  border:2px solid var(--julu-ink)!important; border-radius:9999px!important;
+  box-shadow:4px 4px 0 var(--julu-volt)!important; opacity:1!important;
+  transition:transform .15s ease, background-color .15s ease, box-shadow .15s ease;
+}
+.fancybox__container .f-button svg{ display:none!important; }
+/* Fancybox usa el ::before de las flechas como zona de clic ampliada (absoluta): se anula */
+.fancybox__container .f-button::before{
+  position:static!important; inset:auto!important; margin:0!important;
+  content:""; width:22px; height:22px; background:var(--julu-ink);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15M13 5.5l6.5 6.5-6.5 6.5'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15M13 5.5l6.5 6.5-6.5 6.5'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.fancybox__container .f-button.is-prev::before{ transform:scaleX(-1); }
+.fancybox__container .fancybox__toolbar .f-button::before{
+  width:18px; height:18px;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.4' stroke-linecap='round'%3E%3Cpath d='M5 5l14 14M19 5L5 19'/%3E%3C/svg%3E");
+          mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.4' stroke-linecap='round'%3E%3Cpath d='M5 5l14 14M19 5L5 19'/%3E%3C/svg%3E");
+}
+.fancybox__container .f-button:hover{ background:var(--julu-volt)!important; transform:translate(-1px,-1px) rotate(-6deg); box-shadow:5px 5px 0 var(--julu-paper)!important; }
+.fancybox__container .f-button:active{ transform:translate(2px,2px); box-shadow:1px 1px 0 var(--julu-volt)!important; }
+.fancybox__container .f-button:focus-visible{ outline:3px solid var(--julu-volt); outline-offset:3px; }
+.fancybox__container .f-button[disabled]{ opacity:.35!important; }
+.fancybox__container .fancybox__nav .f-button.is-prev{ left:24px!important; }
+.fancybox__container .fancybox__nav .f-button.is-next{ right:24px!important; }
+.fancybox__container .fancybox__toolbar{ padding:16px 20px!important; }
+/* Contador "1 / 7" como pastilla */
+.fancybox__container .fancybox__infobar{
+  padding:6px 14px!important; border-radius:9999px; background:var(--julu-paper); color:var(--julu-ink)!important;
+  font-family:var(--julu-body)!important; font-size:14px!important; font-weight:800!important; text-shadow:none!important;
+}
+@media (max-width:767px){
+  .fancybox__container .f-button{ width:44px!important; height:44px!important; }
+  .fancybox__container .fancybox__nav .f-button.is-prev{ left:10px!important; }
+  .fancybox__container .fancybox__nav .f-button.is-next{ right:10px!important; }
+}
