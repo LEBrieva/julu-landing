@@ -1,0 +1,160 @@
+<!--
+  JULU · Página Contato
+  Editor → Contato → agregar sección "Personalizada" → bloque "Código".
+  Pegar TODO este archivo y "Salvar e publicar". La sección queda oculta por CSS;
+  el script mueve cada parte a su lugar dentro de la plantilla de Nuvemshop:
+    - tarjetas de canales a la izquierda del formulario
+    - chips de "Assunto" + "Número do pedido" dentro del formulario
+      (al enviar se suman al comienzo del mensaje, así llegan en el mismo mail)
+    - Dúvidas frequentes y la franja de Collab debajo
+  Datos: editar el bloque CONFIG. Lo que quede vacío ('') no aparece.
+  Estilo: src/nuvemshop/30-contato.css
+-->
+<span class="julu-ct-src" hidden></span>
+
+<script>
+(function(){
+  /* ====== CONFIG: completar ====== */
+  var CONFIG = {
+    whatsapp:  '',                      /* solo números con DDD, ej.: '22999998888' */
+    email:     '',                      /* ej.: 'contato@julu.clothing' */
+    instagram: 'julu.brasil',
+    tiktok:    '',                      /* ej.: 'julu.brasil' */
+    horario:   '',                      /* ej.: 'Seg a sex, 9h às 18h' */
+    prazoProducao: '',                  /* días hábiles, ej.: '3 a 5' */
+    prazoTroca:    ''                   /* días, ej.: '7' */
+  };
+  /* ================================ */
+
+  var ASSUNTOS = ['Meu pedido','Troca de tamanho','Dúvida sobre produto','Collab','Outro'];
+
+  function faqs(){
+    return [
+      ['Quanto tempo leva pra chegar?',
+        (CONFIG.prazoProducao
+          ? 'Cada peça é produzida depois do seu pedido, em até '+CONFIG.prazoProducao+' dias úteis. '
+          : 'Cada peça é produzida depois do seu pedido. ')
+        + 'Depois disso, o prazo do frete aparece no checkout de acordo com o seu CEP.'],
+      ['Como escolho o tamanho certo?',
+        'Confira o <a href="/guia-de-medidas/">guia de medidas</a>. Oversized, Regular e Cropped têm caimentos bem diferentes, então compare com uma camiseta que você já usa e ama.'],
+      ['Posso trocar se não servir?',
+        (CONFIG.prazoTroca
+          ? 'Pode! Você tem '+CONFIG.prazoTroca+' dias depois do recebimento pra pedir a troca de tamanho. '
+          : 'Pode! ')
+        + 'Escreve pra gente aqui mesmo, escolhendo “Troca de tamanho” e colocando o número do pedido.'],
+      ['Quais formas de pagamento vocês aceitam?',
+        'Pix (com 5% de desconto), cartão de crédito e boleto, tudo pelo checkout seguro da loja.'],
+      ['Como cuidar da estampa?',
+        'Lava do avesso em água fria, não passa ferro direto na estampa e foge da secadora. Assim ela dura muito mais.']
+    ];
+  }
+
+  var ICON = {
+    wa: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/></svg>',
+    mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+    ig: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>',
+    tt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 2.5 2.5 4.5 5 4.5"/></svg>'
+  };
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function card(cls,href,icon,title,sub){
+    return '<a class="julu-ct-card '+cls+'" href="'+href+'" target="_blank" rel="noopener">'
+      +'<span class="julu-ct-ico">'+icon+'</span>'
+      +'<span class="julu-ct-txt"><strong>'+title+'</strong><span>'+esc(sub)+'</span></span>'
+      +'<span class="julu-ct-arrow" aria-hidden="true">→</span></a>';
+  }
+  function fmtWhats(n){
+    var d=n.replace(/\D/g,''); if(d.length===11) return '('+d.slice(0,2)+') '+d.slice(2,7)+'-'+d.slice(7);
+    if(d.length===10) return '('+d.slice(0,2)+') '+d.slice(2,6)+'-'+d.slice(6); return n;
+  }
+
+  function ready(fn){ if(document.readyState!='loading') fn(); else document.addEventListener('DOMContentLoaded',fn); }
+  ready(function(){
+    if(!document.body.classList.contains('template-contact') || document.body.dataset.juluCt) return;
+    document.body.dataset.juluCt='1';
+    var grid=document.querySelector('#ns-section-contact_form .d-grid');
+    var form=document.getElementById('contact-form');
+    if(!grid || !form) return;
+
+    /* --- Apertura --- */
+    var h1=document.querySelector('#ns-section-heading .page-header-title');
+    if(h1){
+      h1.innerHTML='Fala com a <span>gente</span>';
+      var sub=document.createElement('p'); sub.className='julu-ct-sub';
+      sub.textContent='Dúvida sobre pedido, tamanho, troca ou quer fazer uma collab? A gente responde (quando os gatos deixam). 🐾';
+      h1.insertAdjacentElement('afterend',sub);
+    }
+
+    /* --- Canales --- */
+    var c='';
+    if(CONFIG.whatsapp){
+      var d=CONFIG.whatsapp.replace(/\D/g,'');
+      c+=card('is-whats','https://wa.me/55'+d.replace(/^55/,'')+'?text='+encodeURIComponent('Oi, JULU! 🐾'),ICON.wa,'WhatsApp',fmtWhats(d));
+    }
+    if(CONFIG.email) c+=card('','mailto:'+CONFIG.email,ICON.mail,'E-mail',CONFIG.email);
+    if(CONFIG.instagram) c+=card('','https://instagram.com/'+CONFIG.instagram,ICON.ig,'Instagram','@'+CONFIG.instagram);
+    if(CONFIG.tiktok) c+=card('','https://www.tiktok.com/@'+CONFIG.tiktok,ICON.tt,'TikTok','@'+CONFIG.tiktok);
+    var info='<p class="julu-ct-info">'+(CONFIG.horario?'<strong>Atendimento:</strong> '+esc(CONFIG.horario)+'<br>':'')+'Loja 100% online · Cabo Frio, RJ</p>';
+    var col=document.createElement('div'); col.className='julu-ct-canais';
+    col.innerHTML='<p class="julu-ct-kicker">Canais</p>'+c+info;
+    grid.insertBefore(col,grid.firstChild);
+
+    /* --- Formulario: título, assunto y pedido --- */
+    var title=document.createElement('h2'); title.className='julu-ct-form-title'; title.textContent='Manda uma mensagem';
+    form.insertBefore(title,form.firstChild);
+
+    var msg=form.querySelector('[name="message"]');
+    var msgGroup=msg && msg.closest('.form-group');
+    var phone=form.querySelector('[name="phone"]');
+    if(phone){ var pl=phone.closest('.form-group').querySelector('label'); if(pl) pl.innerHTML='WhatsApp <span class="julu-ct-opt">(opcional)</span>'; }
+    if(msg) msg.setAttribute('placeholder','Conta pra gente…');
+
+    var extra=document.createElement('div'); extra.className='julu-ct-extra';
+    extra.innerHTML=
+      '<div class="form-group julu-ct-pedido"><label class="form-label" for="julu-ct-pedido">Número do pedido <span class="julu-ct-opt">(opcional)</span></label>'
+      +'<input id="julu-ct-pedido" class="form-control" type="text" inputmode="numeric" placeholder="#0000" autocomplete="off"></div>'
+      +'<div class="form-group julu-ct-assunto"><span class="form-label">Assunto</span><div class="julu-ct-chips" role="radiogroup" aria-label="Assunto">'
+      +ASSUNTOS.map(function(a,i){ return '<button type="button" role="radio" aria-checked="'+(i===0)+'" class="julu-ct-chip'+(i===0?' is-on':'')+'">'+a+'</button>'; }).join('')
+      +'</div></div>';
+    if(msgGroup) form.insertBefore(extra,msgGroup); else form.appendChild(extra);
+
+    var chips=[].slice.call(extra.querySelectorAll('.julu-ct-chip'));
+    function pick(label){
+      chips.forEach(function(b){ var on=b.textContent===label; b.classList.toggle('is-on',on); b.setAttribute('aria-checked',on); });
+    }
+    chips.forEach(function(b){ b.addEventListener('click',function(){ pick(b.textContent); }); });
+
+    var MARK='— enviado pelo site —';
+    form.addEventListener('submit',function(){
+      if(!msg) return;
+      var body=msg.value, i=body.indexOf(MARK);
+      if(i>-1) body=body.slice(i+MARK.length).replace(/^\s+/,'');
+      var on=extra.querySelector('.julu-ct-chip.is-on'), ped=document.getElementById('julu-ct-pedido').value.trim();
+      var head='Assunto: '+(on?on.textContent:'—')+(ped?'\nPedido: '+ped:'')+'\n'+MARK+'\n\n';
+      msg.value=head+body;
+    },true);
+
+    /* --- Dúvidas frequentes + Collab --- */
+    var after=document.getElementById('ns-section-contact_form');
+    var faq=document.createElement('section'); faq.className='julu-ct-faq';
+    faq.innerHTML='<div class="julu-ct-faq-in"><p class="julu-ct-kicker">Antes de escrever</p><h2>Dúvidas frequentes</h2>'
+      +faqs().map(function(q,i){ return '<details'+(i===0?' open':'')+'><summary>'+q[0]+'</summary><p>'+q[1]+'</p></details>'; }).join('')
+      +'</div>';
+    var collab=document.createElement('section'); collab.className='julu-ct-collab';
+    collab.innerHTML='<div class="julu-ct-collab-in"><div><p class="julu-ct-kicker">Colaborações</p><h2>É criador de conteúdo?</h2>'
+      +'<p>Ama gato, tem comunidade e quer vestir JULU? Manda mensagem e a gente cria algo junto. 😻</p></div>'
+      +'<button type="button" class="julu-ct-collab-btn">Quero fazer collab →</button></div>';
+    after.insertAdjacentElement('afterend',faq);
+    faq.insertAdjacentElement('afterend',collab);
+
+    /* Solo un acordeón abierto a la vez */
+    var dets=[].slice.call(faq.querySelectorAll('details'));
+    dets.forEach(function(d){ d.addEventListener('toggle',function(){ if(d.open) dets.forEach(function(o){ if(o!==d) o.open=false; }); }); });
+
+    collab.querySelector('button').addEventListener('click',function(){
+      pick('Collab');
+      form.scrollIntoView({behavior:'smooth',block:'start'});
+      setTimeout(function(){ if(msg) msg.focus({preventScroll:true}); },500);
+    });
+  });
+})();
+</script>
