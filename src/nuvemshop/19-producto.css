@@ -337,6 +337,16 @@
 .julu-arrow:hover{ background:var(--julu-volt); transform:translate(-1px,-1px) rotate(-6deg); box-shadow:4px 4px 0 var(--julu-ink); }
 .julu-arrow:active{ transform:translate(2px,2px); box-shadow:1px 1px 0 var(--julu-ink); }
 @media (hover:none){ .julu-arrow{ opacity:1; } }
+/* Primera / última foto: la flecha de ese lado queda apagada */
+.julu-arrow:disabled,
+.product-images-slider:hover .julu-arrow:disabled{ opacity:.3!important; cursor:default; pointer-events:none; box-shadow:none; }
+@media (hover:none){ .julu-arrow:disabled{ opacity:0!important; } }
+/* Celular: sin flechas en las miniaturas (se deslizan con el dedo) */
+@media (max-width:767px){
+  .template-product .product-images-thumbs .slider-arrow-inline,
+  .template-product .product-images-thumbs .swiper-button-prev,
+  .template-product .product-images-thumbs .swiper-button-next{ display:none!important; }
+}
 
 .julu-guia-medidas{
   float:right;

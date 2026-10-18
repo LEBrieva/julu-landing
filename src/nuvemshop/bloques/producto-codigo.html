@@ -3,7 +3,8 @@
   (Editor → Produto → sección Personalizada → Código).
   Pegar TODO este archivo en el bloque y "Salvar e publicar".
   Hace 3 cosas:
-    1. Flechas sobre la foto grande (mueven el carrusel).
+    1. Galería (flechas, miniaturas que acompañan): script externo
+       https://julu.clothing/nuvemshop/producto.js (se actualiza con git push).
     2. Link "Guia de medidas" al lado de "Tamanho".
     3. Popup con la guía de medidas (Oversized / Cropped).
   El estilo vive en src/nuvemshop/20-guia-medidas.css (y 19-producto.css).
@@ -90,24 +91,11 @@
   </div>
 </dialog>
 
+<script src="https://julu.clothing/nuvemshop/producto.js" defer></script>
 <script>
 (function(){
   function ready(fn){ if(document.readyState!='loading') fn(); else document.addEventListener('DOMContentLoaded',fn); }
   ready(function init(){
-    /* 1. Flechas en la foto grande */
-    var s=document.querySelector('.js-product-slider');
-    if(!s||!s.swiper){ return setTimeout(init,300); }
-    var w=s.closest('.product-images-slider');
-    if(w && !w.querySelector('.julu-arrow')){
-      ['prev','next'].forEach(function(d){
-        var b=document.createElement('button'); b.type='button';
-        b.className='julu-arrow julu-arrow-'+d;
-        b.setAttribute('aria-label', d=='prev'?'Foto anterior':'Próxima foto');
-        b.onclick=function(){ d=='prev'?s.swiper.slidePrev():s.swiper.slideNext(); };
-        w.appendChild(b);
-      });
-    }
-
     /* 2. Link "Guia de medidas" al lado de "Tamanho" (el visible) */
     var l=document.querySelector('.julu-guia-medidas');
     var g=[].filter.call(document.querySelectorAll('#ns-section-main_product .product-detail-variants-group .form-label'),function(x){
