@@ -5,6 +5,8 @@
    ===================================================================== */
 /* El modelo puede traer el título/breadcrumb del tema: fuera */
 html:has(.julu-ct) #ns-section-heading{ display:none!important; }
+/* El contenido de texto de la página no se usa en este modelo (por si queda algo pegado) */
+html:has(.julu-ct-form) #ns-section-page_content{ display:none!important; }
 html:has(.julu-ct) body{ overflow-x:clip; }
 /* La sección Personalizada que contiene el bloque: sin márgenes del tema */
 [id^="ns-section-custom"]:has(.julu-ct),
