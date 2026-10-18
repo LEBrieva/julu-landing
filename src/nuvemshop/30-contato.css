@@ -69,8 +69,25 @@ html:has(.julu-ct) body{ overflow-x:clip; }
 .julu-ct-arrow{ margin-left:auto; font-size:22px; color:#c23a00; transition:transform .15s ease; }
 .julu-ct-card.is-whats .julu-ct-arrow{ color:var(--julu-volt); }
 .julu-ct-card:hover .julu-ct-arrow{ transform:translateX(4px); }
-.julu-ct-info{ margin:4px 4px 0; font-size:14px; line-height:1.6; color:#4f4a40; }
+/* Horario: tarjeta sticker con el gato durmiendo (solo CSS, el HTML no cambia) */
+.julu-ct-info{
+  position:relative; margin:10px 0 0; padding:22px 22px 22px 116px; min-height:112px;
+  border:2px dashed rgba(10,10,10,.35); border-radius:22px; background:var(--julu-paper);
+  font-size:15px; line-height:1.6; color:#4f4a40;
+}
+.julu-ct-info::before{
+  content:""; position:absolute; left:14px; top:50%; width:88px; height:88px; transform:translateY(-50%) rotate(-6deg);
+  background:url('nuvemshop/gato-dormindo.webp') center/contain no-repeat;
+}
+.julu-ct-info::after{
+  content:"Fora desse horário, os gatos ficam de plantão (dormindo, claro). 😴";
+  display:block; margin-top:8px; font-size:13px; font-style:italic; color:var(--julu-muted);
+}
 .julu-ct-info strong{ color:var(--julu-ink); }
+/* La columna acompaña al formulario al bajar */
+@media (min-width:861px){
+  .julu-ct-canais{ position:sticky; top:150px; }
+}
 
 /* Tarjeta del formulario */
 .julu-ct-form{
