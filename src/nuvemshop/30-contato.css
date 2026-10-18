@@ -4,7 +4,7 @@
    pedido, FAQ, collab) lo agrega el bloque Código
    (src/nuvemshop/bloques/contato.html), que se oculta acá.
    ===================================================================== */
-[id^="ns-section-custom"]:has(.julu-ct-src){ display:none!important; }
+:is([id^="ns-section-custom"], .ns-section):has(.julu-ct-src){ display:none!important; }
 
 /* ---- Apertura ---- */
 .template-contact #ns-section-heading .breadcrumbs{ display:none!important; }

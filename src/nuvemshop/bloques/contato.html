@@ -1,6 +1,8 @@
 <!--
   JULU · Página Contato
-  Editor → Contato → agregar sección "Personalizada" → bloque "Código".
+  Editor → Cabeçalho → Adicionar seção "Personalizada" → bloque "Código"
+  (va en el Cabeçalho porque la plantilla de Contato no aparece en el editor;
+  el script solo actúa en /contato/ y en el resto de las páginas no hace nada).
   Pegar TODO este archivo y "Salvar e publicar". La sección queda oculta por CSS;
   el script mueve cada parte a su lugar dentro de la plantilla de Nuvemshop:
     - tarjetas de canales a la izquierda del formulario
@@ -16,13 +18,13 @@
 (function(){
   /* ====== CONFIG: completar ====== */
   var CONFIG = {
-    whatsapp:  '',                      /* solo números con DDD, ej.: '22999998888' */
-    email:     '',                      /* ej.: 'contato@julu.clothing' */
+    whatsapp:  '22992432630',           /* solo números con DDD */
+    email:     'contato@julu.clothing',
     instagram: 'julu.brasil',
-    tiktok:    '',                      /* ej.: 'julu.brasil' */
-    horario:   '',                      /* ej.: 'Seg a sex, 9h às 18h' */
-    prazoProducao: '',                  /* días hábiles, ej.: '3 a 5' */
-    prazoTroca:    ''                   /* días, ej.: '7' */
+    tiktok:    'julu.brasil',
+    horario:   'Seg a sex, 8h às 18h',
+    prazoProducao: '2',                 /* días hábiles */
+    prazoTroca:    '30'                 /* días */
   };
   /* ================================ */
 
@@ -71,6 +73,8 @@
   ready(function(){
     if(!document.body.classList.contains('template-contact') || document.body.dataset.juluCt) return;
     document.body.dataset.juluCt='1';
+    var src=document.querySelector('.julu-ct-src'), sec=src && src.closest('section');
+    if(sec) sec.style.display='none';
     var grid=document.querySelector('#ns-section-contact_form .d-grid');
     var form=document.getElementById('contact-form');
     if(!grid || !form) return;
