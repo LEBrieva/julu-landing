@@ -2020,9 +2020,17 @@ html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[h
   letter-spacing:-.03em!important; text-transform:uppercase; color:var(--julu-ink)!important;
 }
 
-/* La galería no queda pegada al hacer scroll: el tema le calcula un "sticky"
-   con JS y salta cuando se abre el acordeón de la descripción. */
+/* Galería fija mientras se scrollea la info (solo compu). El tema calcula un
+   "top" con JS que salta al abrir los acordeones: lo pisamos con un valor fijo
+   (debajo del header compacto). En pantallas bajas la galería se achica para
+   entrar entera (foto 4:5 + miniaturas). */
 .template-product .js-product-images{ position:static!important; top:auto!important; }
+@media (min-width:768px){
+  .template-product .product-columns > .js-product-images{
+    position:sticky!important; top:136px!important; align-self:flex-start!important;
+    flex-basis:min(540px, calc((100vh - 300px) * .8))!important;
+  }
+}
 
 /* Flechas de la foto grande y link "Guia de medidas":
    los crea el bloque "Código" del editor (Produto → Informação do produto).
