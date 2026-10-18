@@ -3093,8 +3093,9 @@ html:has(.julu-ct) body{ overflow-x:clip; }
   font-size:15px; line-height:1.6; color:#4f4a40;
 }
 .julu-ct-info::before{
-  content:""; position:absolute; left:14px; top:50%; width:88px; height:88px; transform:translateY(-50%) rotate(-6deg);
-  background:url('nuvemshop/gato-dormindo.webp') center/contain no-repeat;
+  content:""; position:absolute; left:16px; top:50%; width:84px; height:84px; transform:translateY(-50%) rotate(-6deg);
+  border:2px solid var(--julu-ink); border-radius:16px;
+  background:url('nuvemshop/gatos/dormindo-enrolado.webp') center/cover no-repeat;
 }
 .julu-ct-info::after{
   content:"Fora desse horário, os gatos ficam de plantão (dormindo, claro). 😴";
@@ -3102,8 +3103,14 @@ html:has(.julu-ct) body{ overflow-x:clip; }
 }
 .julu-ct-info strong{ color:var(--julu-ink); }
 /* La columna acompaña al formulario al bajar */
+/* Sticker grande debajo de los canales (llena la columna en compu) */
 @media (min-width:861px){
-  .julu-ct-canais{ position:sticky; top:150px; }
+  .julu-ct-canais::after{
+    content:""; align-self:center; width:min(78%, 340px); aspect-ratio:1/1; margin-top:22px;
+    border:3px solid var(--julu-ink); border-radius:26px; box-shadow:7px 7px 0 var(--julu-volt);
+    background:url('nuvemshop/gatos/derrubando-copo.webp') center/cover no-repeat;
+    transform:rotate(3deg);
+  }
 }
 
 /* Tarjeta del formulario */
@@ -3156,7 +3163,16 @@ html:has(.julu-ct) body{ overflow-x:clip; }
 .julu-ct-ok p{ margin:10px auto 0; max-width:380px; font-size:16px; line-height:1.55; color:#4f4a40; }
 
 /* ---- Dúvidas frequentes ---- */
-.julu-ct-faq{ background:var(--julu-ink); color:var(--julu-paper); }
+.julu-ct-faq{ position:relative; overflow:hidden; background:var(--julu-ink); color:var(--julu-paper); }
+/* Gato bravo mirando las preguntas (pantallas anchas) */
+@media (min-width:1180px){
+  .julu-ct-faq::after{
+    content:""; position:absolute; top:72px; right:max(32px, calc(50vw - 600px)); width:210px; aspect-ratio:1/1;
+    border:3px solid var(--julu-paper); border-radius:24px; box-shadow:7px 7px 0 var(--julu-volt);
+    background:url('nuvemshop/gatos/cara-preto-bravo.webp') center/cover no-repeat;
+    transform:rotate(6deg);
+  }
+}
 .julu-ct-faq-in{ max-width:920px; margin:0 auto; padding:clamp(56px,8vw,80px) 24px; }
 .julu-ct-faq .julu-ct-kicker{ color:var(--julu-volt); }
 .julu-ct-faq h2{
