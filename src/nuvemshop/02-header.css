@@ -86,3 +86,11 @@ header .desktop-list-subitems{
 }
 header .desktop-list-subitems > li{ margin:0!important; padding:0!important; }
 header .desktop-list-subitems .nav-list-link{ font-size:16px!important; margin:0!important; padding:0 0 4px!important; }
+
+/* Header fijo al scrollear: el tema pasa los textos a mayúsculas con 3px de
+   espaciado. Lo dejamos igual que arriba. */
+.js-head-main.compress .utility-text,
+.js-head-main.compress .utility-text *,
+.js-head-main.compress .js-cart-widget-total{
+  text-transform:none!important; letter-spacing:normal!important;
+}

@@ -87,3 +87,7 @@
 @media (min-width:768px){
   .js-search-container .js-search-form-suggestions.search-suggestions{ width:400px!important; max-height:min(520px,70vh); overflow:auto; }
 }
+/* Celular: solo la lupa (sin píldora), para que no se monte sobre el logo */
+@media (max-width:767px){
+  .js-search-trigger.search-trigger{ padding:0!important; border:0!important; background:none!important; }
+}
