@@ -163,14 +163,26 @@
       fd.append('message',body); fd.append('g-recaptcha-response',token); fd.append('contact','');
 
       btn.disabled=true; btn.textContent='Enviando…';
-      fetch('/',{method:'POST',body:fd,credentials:'same-origin'}).then(function(r){
-        if(!r.ok) throw new Error(r.status);
+      /* El contacto de Nuvemshop solo se procesa en /contato/ (no redirigir esa URL) */
+      fetch('/contato/',{method:'POST',body:fd,credentials:'same-origin'}).then(function(r){
+        if(!r.ok) throw new Error('HTTP '+r.status);
+        return r.text().then(function(h){
+          var d=new DOMParser().parseFromString(h,'text/html');
+          var sec=d.querySelector('#ns-section-contact_form')||d;
+          var ok=sec.querySelector('.alert-success'), bad=sec.querySelector('.alert-danger');
+          var info={status:r.status,url:r.url.split('?')[0],query:(r.url.split('?')[1]||''),ok:!!ok,bad:bad?bad.textContent.trim():''};
+          try{ console.log('[julu-ct] resposta', JSON.stringify(info)); }catch(e){}
+          if(bad) throw new Error(bad.textContent.trim());
+          if(!ok && !/success/.test(r.url)) throw new Error('sem confirmação');
+        });
+      }).then(function(){
         [].slice.call(form.children).forEach(function(c){ if(!c.classList.contains('julu-ct-ok')) c.hidden=true; });
         form.querySelector('.julu-ct-ok').hidden=false;
-      }).catch(function(){
+      }).catch(function(e){
+        try{ console.log('[julu-ct] erro', e && e.message); }catch(x){}
         btn.disabled=false; btn.textContent='Enviar mensagem →';
         if(widget!==null && window.grecaptcha) grecaptcha.reset(widget);
-        fail('Ops, não deu certo. Tenta de novo ou chama a gente no WhatsApp.');
+        fail('Ops, não deu certo. Confere o “não sou um robô” e tenta de novo, ou chama a gente no WhatsApp.');
       });
     });
   });
