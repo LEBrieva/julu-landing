@@ -1,0 +1,61 @@
+/* =====================================================================
+   31. AVISO "ADICIONADO AO CARRINHO" (lo muestra el tema al agregar)
+   Tarjeta sticker: borde negro, sombra naranja, foto redondeada,
+   "Adicionado ao carrinho!" arriba como etiqueta.
+   ===================================================================== */
+.js-alert-add-to-cart-private.notification-cart-container{
+  width:min(390px, calc(100vw - 24px))!important; max-width:none!important;
+}
+@media (min-width:768px){ .js-alert-add-to-cart-private.notification-cart-container{ right:20px!important; } }
+.js-alert-add-to-cart-private.notification-cart-container .notification{
+  position:relative; box-sizing:border-box;
+  padding:18px 52px 18px 18px!important;
+  border:2px solid var(--julu-ink)!important; border-radius:22px!important;
+  background:var(--julu-paper)!important; color:var(--julu-ink)!important;
+  box-shadow:5px 5px 0 var(--julu-volt)!important;
+  font-family:var(--julu-body)!important;
+  animation:juluCartIn .28s ease-out both;
+}
+@keyframes juluCartIn{ from{ opacity:0; transform:translateY(-8px) rotate(-1deg); } to{ opacity:1; transform:none; } }
+.js-alert-add-to-cart-private .notification-cart-item{ align-items:center; gap:16px; }
+.js-alert-add-to-cart-private .notification-cart-image-container{
+  margin:0!important; width:84px; flex:0 0 84px;
+  border:2px solid var(--julu-ink); border-radius:14px; overflow:hidden; background:#e4e4e2;
+  transform:rotate(-3deg);
+}
+.js-alert-add-to-cart-private .notification-cart-image-container img{
+  display:block; width:100%!important; height:auto!important; aspect-ratio:4/5; object-fit:cover; object-position:50% 30%;
+}
+/* Texto: etiqueta arriba, nombre, cantidad × precio */
+.js-alert-add-to-cart-private .notification-info-container{ display:flex; flex-direction:column; gap:6px; min-width:0; }
+.js-alert-add-to-cart-private .notification-cart-success{
+  order:-1; align-self:flex-start; margin:0 0 2px!important;
+  padding:5px 12px; border-radius:9999px; background:var(--julu-ink); color:var(--julu-paper)!important;
+  font-family:var(--julu-body)!important; font-size:12px!important; font-weight:700!important;
+  letter-spacing:.06em; text-transform:uppercase; white-space:nowrap;
+}
+.js-alert-add-to-cart-private .notification-cart-success::after{ content:" 🐾"; }
+.js-alert-add-to-cart-private .notification-info-line{ margin:0!important; font-size:14px!important; line-height:1.35; color:var(--julu-ink)!important; }
+.js-alert-add-to-cart-private .js-cart-notification-item-name-private{
+  font-family:var(--julu-display)!important; font-weight:800!important; font-size:15px!important;
+}
+.js-alert-add-to-cart-private .js-cart-notification-item-variant-container-private{ color:var(--julu-muted)!important; font-size:13px!important; }
+.js-alert-add-to-cart-private .js-cart-notification-item-price-private{
+  font-family:var(--julu-display)!important; font-weight:900!important; font-size:16px!important;
+}
+.js-alert-add-to-cart-private .notification-cart-discount-badge{
+  border-radius:9999px!important; background:var(--julu-volt)!important; color:var(--julu-ink)!important; font-weight:800!important;
+}
+/* Cerrar: botoncito redondo */
+.js-alert-add-to-cart-private .notification-close{
+  position:absolute!important; top:12px!important; right:12px!important; left:auto!important;
+  width:30px!important; height:30px!important; padding:0!important;
+  display:flex!important; align-items:center; justify-content:center;
+  border:2px solid var(--julu-ink)!important; border-radius:9999px!important; background:#fff!important;
+  transition:background-color .15s ease, transform .15s ease;
+}
+.js-alert-add-to-cart-private .notification-close:hover{ background:var(--julu-volt)!important; transform:rotate(90deg); }
+.js-alert-add-to-cart-private .notification-close svg{ width:12px!important; height:12px!important; fill:var(--julu-ink)!important; }
+@media (max-width:767px){
+  .js-alert-add-to-cart-private .notification-cart-image-container{ width:68px; flex-basis:68px; }
+}
