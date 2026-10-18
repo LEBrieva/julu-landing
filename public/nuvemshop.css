@@ -3016,38 +3016,39 @@ html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:n
 
 
 /* =====================================================================
-   30. CONTATO (/contato/)  ·  body.template-contact
-   La plantilla trae título + formulario. El resto (canales, assunto,
-   pedido, FAQ, collab) lo agrega el bloque Código
-   (src/nuvemshop/bloques/contato.html), que se oculta acá.
+   30. FALE COM A GENTE (/fale-com-a-gente/, reemplaza /contato/)
+   Página de contenido con modelo propio + bloque Código
+   (src/nuvemshop/bloques/contato.html). Todo cuelga de .julu-ct.
    ===================================================================== */
-:is([id^="ns-section-custom"], .ns-section):has(.julu-ct-src){ display:none!important; }
+/* El modelo puede traer el título/breadcrumb del tema: fuera */
+html:has(.julu-ct) #ns-section-heading{ display:none!important; }
+html:has(.julu-ct) body{ overflow-x:clip; }
+/* La sección Personalizada que contiene el bloque: sin márgenes del tema */
+[id^="ns-section-custom"]:has(.julu-ct),
+[id^="ns-section-custom"]:has(.julu-ct) .container{ max-width:none!important; margin:0!important; padding:0!important; }
+
+.julu-ct{ font-family:var(--julu-body); color:var(--julu-ink); }
+.julu-ct *{ box-sizing:border-box; }
+.julu-ct-wrap{ max-width:1280px; margin:0 auto; padding-left:24px; padding-right:24px; }
+.julu-ct h1, .julu-ct h2{ font-family:var(--julu-display)!important; font-weight:900!important; text-transform:uppercase; color:inherit; }
+.julu-ct-kicker{
+  margin:0 0 10px; font-family:var(--julu-body); font-size:13px; font-weight:700;
+  letter-spacing:.24em; text-transform:uppercase; color:#c23a00;
+}
+.julu-ct-line{ display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+.julu-ct-line::before{ content:""; flex:0 0 36px; height:3px; background:var(--julu-volt); }
 
 /* ---- Apertura ---- */
-.template-contact #ns-section-heading .breadcrumbs{ display:none!important; }
-.template-contact #ns-section-heading .page-header{ position:relative; overflow:hidden; }
-.template-contact #ns-section-heading .container{ max-width:1280px!important; padding:72px 24px 40px!important; }
-.template-contact #ns-section-heading :is(.page-header-title-row,.page-header-title-inner){ display:block!important; }
-.template-contact #ns-section-heading .page-header-title-inner{ position:relative; z-index:1; }
-.template-contact #ns-section-heading .page-header-title-inner::before{
-  content:"Contato"; display:block; margin-bottom:18px; padding-left:48px;
-  background:linear-gradient(var(--julu-volt),var(--julu-volt)) left center / 36px 3px no-repeat;
-  font-family:var(--julu-body); font-size:13px; font-weight:700; letter-spacing:.24em; text-transform:uppercase; color:#c23a00;
-}
-.template-contact #ns-section-heading .page-header-title{
+.julu-ct-hero{ position:relative; overflow:hidden; }
+.julu-ct-hero .julu-ct-wrap{ position:relative; z-index:1; padding-top:clamp(48px,7vw,80px); padding-bottom:clamp(28px,4vw,48px); }
+.julu-ct-hero h1{
   margin:0!important; max-width:820px;
-  font-family:var(--julu-display)!important; font-weight:900!important;
   font-size:clamp(48px,8vw,88px)!important; line-height:.88!important; letter-spacing:-.04em!important;
-  text-transform:uppercase; color:var(--julu-ink)!important;
 }
-.template-contact #ns-section-heading .page-header-title span{ color:var(--julu-volt); }
-.template-contact .julu-ct-sub{
-  margin:20px 0 0; max-width:560px;
-  font-family:var(--julu-body); font-size:clamp(16px,1.6vw,19px); line-height:1.55; color:#4f4a40;
-}
-/* Gato sticker a la derecha */
+.julu-ct-hero h1 span{ color:var(--julu-volt); }
+.julu-ct-sub{ margin:20px 0 0; max-width:560px; font-size:clamp(16px,1.6vw,19px); line-height:1.55; color:#4f4a40; }
 @media (min-width:1024px){
-  .template-contact #ns-section-heading .page-header::after{
+  .julu-ct-hero::after{
     content:""; position:absolute; right:max(24px, calc(50vw - 600px)); top:28px;
     width:260px; aspect-ratio:1/1; pointer-events:none;
     background:url('nuvemshop/gato-preto.webp') center/contain no-repeat;
@@ -3056,20 +3057,12 @@ html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:n
 }
 
 /* ---- Canales + formulario ---- */
-.template-contact .contact-form-section .container{ max-width:1280px!important; padding:0 24px 72px!important; }
-.template-contact .contact-form-section .d-grid{
-  display:grid!important; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)!important;
-  gap:32px!important; align-items:start;
+.julu-ct-main{
+  display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:32px; align-items:start;
+  padding-bottom:72px;
 }
-@media (max-width:860px){
-  .template-contact .contact-form-section .d-grid{ grid-template-columns:minmax(0,1fr)!important; }
-}
-.julu-ct-kicker{
-  margin:0 0 10px; font-family:var(--julu-body); font-size:13px; font-weight:700;
-  letter-spacing:.24em; text-transform:uppercase; color:#c23a00;
-}
+@media (max-width:860px){ .julu-ct-main{ grid-template-columns:minmax(0,1fr); } }
 .julu-ct-canais{ display:flex; flex-direction:column; gap:14px; min-width:0; }
-.julu-ct-canais .julu-ct-kicker{ display:none; }
 .julu-ct-card{
   display:flex; align-items:center; gap:16px; padding:20px 22px;
   border:2px solid var(--julu-ink); border-radius:22px;
@@ -3088,60 +3081,37 @@ html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:n
 .julu-ct-ico svg{ width:24px; height:24px; }
 .julu-ct-txt{ display:flex; flex-direction:column; gap:2px; min-width:0; }
 .julu-ct-txt strong{ font-family:var(--julu-display); font-size:19px; font-weight:800; }
-.julu-ct-txt span{ font-family:var(--julu-body); font-size:15px; color:#4f4a40; overflow-wrap:anywhere; }
+.julu-ct-txt span{ font-size:15px; color:#4f4a40; overflow-wrap:anywhere; }
 .julu-ct-card.is-whats .julu-ct-txt span{ color:#c9c3b5; }
 .julu-ct-arrow{ margin-left:auto; font-size:22px; color:#c23a00; transition:transform .15s ease; }
 .julu-ct-card.is-whats .julu-ct-arrow{ color:var(--julu-volt); }
 .julu-ct-card:hover .julu-ct-arrow{ transform:translateX(4px); }
-.julu-ct-info{ margin:4px 4px 0; font-family:var(--julu-body); font-size:14px; line-height:1.6; color:#4f4a40; }
+.julu-ct-info{ margin:4px 4px 0; font-size:14px; line-height:1.6; color:#4f4a40; }
 .julu-ct-info strong{ color:var(--julu-ink); }
 
 /* Tarjeta del formulario */
-.template-contact .contact-form-container{
-  min-width:0; padding:clamp(24px,3vw,36px)!important; box-sizing:border-box;
-  border:2px solid var(--julu-ink); border-radius:28px;
+.julu-ct-form{
+  display:flex; flex-direction:column; gap:16px; min-width:0;
+  padding:clamp(24px,3vw,36px); border:2px solid var(--julu-ink); border-radius:28px;
   background:#fff; box-shadow:6px 6px 0 var(--julu-ink);
 }
-.template-contact #contact-form{ display:flex; flex-direction:column; gap:16px; }
-.template-contact #contact-form .form-group{ margin:0!important; }
-.julu-ct-extra{ display:flex; flex-direction:column; gap:16px; }
-.julu-ct-form-title{
-  margin:0 0 4px!important; font-family:var(--julu-display)!important; font-weight:900!important;
-  font-size:clamp(26px,3vw,32px)!important; line-height:1!important; letter-spacing:-.02em!important;
-  text-transform:uppercase; color:var(--julu-ink)!important;
+.julu-ct-form h2{
+  margin:0 0 4px!important; font-size:clamp(26px,3vw,32px)!important; line-height:1!important; letter-spacing:-.02em!important;
 }
-.template-contact #contact-form .form-label{
-  display:block; margin:0 0 6px!important; font-family:var(--julu-body)!important;
-  font-size:14px!important; font-weight:700!important; letter-spacing:0!important; text-transform:none!important;
-  color:var(--julu-ink)!important;
-}
-.julu-ct-opt{ font-weight:500; color:var(--julu-muted); }
-.template-contact #contact-form .form-control{
-  width:100%; box-sizing:border-box; padding:14px 18px!important;
-  border:1.5px solid rgba(10,10,10,.25)!important; border-radius:14px!important;
-  background:var(--julu-paper)!important; box-shadow:none!important; outline:none!important;
-  font-family:var(--julu-body)!important; font-size:15px!important; color:var(--julu-ink)!important;
+.julu-ct-row{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; }
+.julu-ct-field{ display:flex; flex-direction:column; gap:6px; min-width:0; }
+.julu-ct-field label, .julu-ct-label{ font-size:14px; font-weight:700; color:var(--julu-ink); }
+.julu-ct-field label span{ font-weight:500; color:var(--julu-muted); }
+.julu-ct-field input, .julu-ct-field textarea{
+  width:100%; margin:0; padding:14px 18px; border:1.5px solid rgba(10,10,10,.25); border-radius:14px;
+  background:var(--julu-paper); box-shadow:none; outline:none;
+  font:inherit; font-size:15px; color:var(--julu-ink);
   transition:border-color .15s ease, box-shadow .15s ease;
 }
-.template-contact #contact-form input.form-control{ height:auto!important; }
-.template-contact #contact-form .form-control::placeholder{ color:var(--julu-muted)!important; opacity:1; }
-.template-contact #contact-form .form-control:focus{ border-color:var(--julu-ink)!important; box-shadow:0 0 0 4px rgba(255,77,0,.25)!important; }
-.template-contact #contact-form .form-control-area{ min-height:140px; resize:vertical; }
-/* Nome + E-mail en dos columnas, WhatsApp + Pedido en dos columnas */
-@media (min-width:600px){
-  .template-contact #contact-form{ display:grid; grid-template-columns:1fr 1fr; gap:16px 14px; }
-  .template-contact #contact-form > *{ grid-column:1 / -1; }
-  .template-contact #contact-form > .form-group:has(#name),
-  .template-contact #contact-form > .form-group:has(#email),
-  .template-contact #contact-form > .form-group:has(#phone){ grid-column:auto; }
-  .template-contact #contact-form > .julu-ct-extra{ display:contents; }
-  .template-contact #contact-form .julu-ct-pedido{ grid-column:auto; }
-  .template-contact #contact-form .julu-ct-assunto{ grid-column:1 / -1; }
-}
-.template-contact #contact-form .winnie-pooh,
-.template-contact #contact-form input[type="hidden"]{ display:none!important; }
+.julu-ct-field textarea{ min-height:140px; resize:vertical; }
+.julu-ct-field input::placeholder, .julu-ct-field textarea::placeholder{ color:var(--julu-muted); opacity:1; }
+.julu-ct-field input:focus, .julu-ct-field textarea:focus{ border-color:var(--julu-ink); box-shadow:0 0 0 4px rgba(255,77,0,.25); }
 
-/* Chips de assunto */
 .julu-ct-chips{ display:flex; flex-wrap:wrap; gap:8px; }
 .julu-ct-chip{
   min-height:44px; padding:10px 18px; border-radius:9999px; cursor:pointer;
@@ -3151,36 +3121,30 @@ html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:n
 }
 .julu-ct-chip:hover{ border-color:var(--julu-ink); }
 .julu-ct-chip.is-on{ border-color:var(--julu-ink); background:var(--julu-ink); color:var(--julu-paper); transform:rotate(-2deg); }
-.julu-ct-chip:focus-visible{ outline:3px solid var(--julu-volt); outline-offset:2px; }
+.julu-ct-chip:focus-visible, .julu-ct-send:focus-visible, .julu-ct-collab-btn:focus-visible{ outline:3px solid var(--julu-volt); outline-offset:2px; }
 
-/* reCAPTCHA + botón */
-.template-contact #contact-form .g-recaptcha{ justify-self:start; margin:4px 0 0!important; }
-.template-contact #contact-form button[type="submit"]{
-  justify-self:start; align-self:flex-start; width:auto!important; margin:4px 0 0!important;
-  padding:18px 34px!important; border:2px solid var(--julu-ink)!important; border-radius:9999px!important;
-  background:var(--julu-volt)!important; color:var(--julu-ink)!important;
-  font-family:var(--julu-body)!important; font-size:17px!important; font-weight:800!important;
-  letter-spacing:0!important; text-transform:none!important;
+.julu-ct-captcha:empty{ display:none; }
+.julu-ct-error{ margin:0; padding:12px 16px; border-radius:14px; background:#ffe3d6; color:#8a2a00; font-size:14px; font-weight:600; }
+.julu-ct-form [hidden]{ display:none!important; }
+.julu-ct-send{
+  align-self:flex-start; padding:18px 34px; cursor:pointer;
+  border:2px solid var(--julu-ink); border-radius:9999px; background:var(--julu-volt); color:var(--julu-ink);
+  font-family:var(--julu-body); font-size:17px; font-weight:800;
   transition:background-color .15s ease, color .15s ease, transform .15s ease;
 }
-.template-contact #contact-form button[type="submit"]::after{ content:" →"; }
-.template-contact #contact-form button[type="submit"]:disabled{ opacity:.55!important; cursor:not-allowed; transform:none!important; }
-.template-contact #contact-form button[type="submit"]:hover{ background:var(--julu-ink)!important; color:var(--julu-paper)!important; transform:rotate(-2deg); }
-/* Mensajes de éxito / error del tema */
-.template-contact .contact-form-section .alert{
-  border:2px solid var(--julu-ink)!important; border-radius:18px!important;
-  font-family:var(--julu-body)!important; font-weight:600;
-}
-.template-contact .contact-form-section .alert-success{ background:var(--julu-amber)!important; color:var(--julu-ink)!important; }
+.julu-ct-send:hover{ background:var(--julu-ink); color:var(--julu-paper); transform:rotate(-2deg); }
+.julu-ct-send:disabled{ opacity:.6; cursor:wait; transform:none; }
+.julu-ct-ok{ padding:36px 8px; text-align:center; }
+.julu-ct-ok strong{ display:block; font-family:var(--julu-display); font-weight:900; font-size:30px; text-transform:uppercase; }
+.julu-ct-ok p{ margin:10px auto 0; max-width:380px; font-size:16px; line-height:1.55; color:#4f4a40; }
 
 /* ---- Dúvidas frequentes ---- */
 .julu-ct-faq{ background:var(--julu-ink); color:var(--julu-paper); }
 .julu-ct-faq-in{ max-width:920px; margin:0 auto; padding:clamp(56px,8vw,80px) 24px; }
 .julu-ct-faq .julu-ct-kicker{ color:var(--julu-volt); }
 .julu-ct-faq h2{
-  margin:0 0 28px!important; font-family:var(--julu-display)!important; font-weight:900!important;
-  font-size:clamp(34px,5vw,48px)!important; line-height:.95!important; letter-spacing:-.03em!important;
-  text-transform:uppercase; color:var(--julu-paper)!important;
+  margin:0 0 28px!important; font-size:clamp(34px,5vw,48px)!important; line-height:.95!important; letter-spacing:-.03em!important;
+  color:var(--julu-paper)!important;
 }
 .julu-ct-faq details{ border-bottom:1px solid rgba(244,240,230,.2); }
 .julu-ct-faq details:first-of-type{ border-top:1px solid rgba(244,240,230,.2); }
@@ -3190,14 +3154,14 @@ html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:n
   font-family:var(--julu-display); font-weight:800; font-size:clamp(17px,2vw,19px); color:var(--julu-paper);
 }
 .julu-ct-faq summary::-webkit-details-marker{ display:none; }
-.julu-ct-faq summary::after{ content:"+"; flex:0 0 auto; font-size:26px; line-height:1; color:var(--julu-volt); transition:transform .2s ease; }
+.julu-ct-faq summary::after{ content:"+"; flex:0 0 auto; font-size:26px; line-height:1; color:var(--julu-volt); }
 .julu-ct-faq details[open] summary::after{ content:"−"; }
 .julu-ct-faq summary:hover{ color:var(--julu-volt); }
-.julu-ct-faq details p{ margin:0 0 22px; font-family:var(--julu-body); font-size:16px; line-height:1.65; color:#c9c3b5; }
+.julu-ct-faq details p{ margin:0 0 22px; font-size:16px; line-height:1.65; color:#c9c3b5; }
 .julu-ct-faq details a{ color:var(--julu-paper); text-decoration:underline; text-decoration-color:var(--julu-volt); text-underline-offset:3px; }
 
 /* ---- Collab ---- */
-.julu-ct-collab{ max-width:1280px; margin:0 auto; padding:72px 24px; box-sizing:border-box; }
+.julu-ct-collab{ padding-top:72px; padding-bottom:72px; }
 .julu-ct-collab-in{
   display:flex; flex-wrap:wrap; gap:24px; justify-content:space-between; align-items:center;
   padding:clamp(28px,5vw,48px); border:2px solid var(--julu-ink); border-radius:32px;
@@ -3206,11 +3170,9 @@ html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:n
 .julu-ct-collab-in > div{ flex:1 1 420px; min-width:0; }
 .julu-ct-collab .julu-ct-kicker{ color:var(--julu-ink); }
 .julu-ct-collab h2{
-  margin:0 0 10px!important; font-family:var(--julu-display)!important; font-weight:900!important;
-  font-size:clamp(32px,4.5vw,44px)!important; line-height:.95!important; letter-spacing:-.03em!important;
-  text-transform:uppercase; color:var(--julu-ink)!important;
+  margin:0 0 10px!important; font-size:clamp(32px,4.5vw,44px)!important; line-height:.95!important; letter-spacing:-.03em!important;
 }
-.julu-ct-collab-in > div > p:last-child{ margin:0; max-width:520px; font-family:var(--julu-body); font-size:17px; line-height:1.5; color:var(--julu-ink); }
+.julu-ct-collab-in > div > p:last-child{ margin:0; max-width:520px; font-size:17px; line-height:1.5; }
 .julu-ct-collab-btn{
   display:inline-flex; align-items:center; padding:16px 28px; cursor:pointer;
   border:2px solid var(--julu-ink); border-radius:9999px; background:var(--julu-ink); color:var(--julu-paper);
@@ -3220,10 +3182,11 @@ html:has(link[rel="canonical"][href$="/quem-somos/"]) main .user-content > div:n
 .julu-ct-collab-btn:hover{ background:var(--julu-paper); color:var(--julu-ink); transform:rotate(-2deg); }
 
 @media (max-width:640px){
-  .template-contact #ns-section-heading .container{ padding:48px 20px 28px!important; }
-  .template-contact .contact-form-section .container{ padding:0 16px 56px!important; }
+  .julu-ct-wrap{ padding-left:16px; padding-right:16px; }
   .julu-ct-card{ padding:16px 18px; }
   .julu-ct-ico{ flex-basis:46px; width:46px; height:46px; }
-  .template-contact #contact-form button[type="submit"]{ width:100%!important; }
-  .julu-ct-collab{ padding:56px 16px; }
+  .julu-ct-send{ width:100%; }
+  .julu-ct-main, .julu-ct-collab{ padding-bottom:56px; }
+  .julu-ct-collab{ padding-top:56px; }
+  .julu-ct-collab-btn{ width:100%; justify-content:center; }
 }
