@@ -302,8 +302,13 @@
 .template-product .js-product-images{ position:static!important; top:auto!important; }
 @media (min-width:768px){
   .template-product .product-columns > .js-product-images{
-    position:sticky!important; top:136px!important; align-self:flex-start!important;
-    flex-basis:min(540px, calc((100vh - 300px) * .8))!important;
+    /* ancho de la galería: 540px, o menos en pantallas bajas (mínimo 400px) */
+    --jg:min(540px, max(400px, calc((100vh - 300px) * .8)));
+    flex-basis:var(--jg)!important; max-width:var(--jg)!important; min-width:0!important;
+    /* alto = foto 4:5 (ancho × 1,25) + miniaturas (~126px). Si no entra entera
+       debajo del header, sube lo necesario para que las miniaturas siempre se vean */
+    position:sticky!important; align-self:flex-start!important;
+    top:min(136px, calc(100vh - var(--jg) * 1.25 - 142px))!important;
   }
 }
 
