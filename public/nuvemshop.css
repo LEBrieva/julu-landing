@@ -3027,7 +3027,7 @@ html:has(.julu-ct-form) #ns-section-page_content{ display:none!important; }
 html:has(.julu-ct) body{ overflow-x:clip; }
 /* La sección Personalizada que contiene el bloque: sin márgenes del tema */
 [id^="ns-section-custom"]:has(.julu-ct),
-[id^="ns-section-custom"]:has(.julu-ct) .container{ max-width:none!important; margin:0!important; padding:0!important; }
+[id^="ns-section-custom"]:has(.julu-ct) :is(.section-custom,.container){ max-width:none!important; margin:0!important; padding:0!important; }
 
 .julu-ct{ font-family:var(--julu-body); color:var(--julu-ink); }
 .julu-ct *{ box-sizing:border-box; }
@@ -3042,7 +3042,7 @@ html:has(.julu-ct) body{ overflow-x:clip; }
 
 /* ---- Apertura ---- */
 .julu-ct-hero{ position:relative; overflow:hidden; }
-.julu-ct-hero .julu-ct-wrap{ position:relative; z-index:1; padding-top:clamp(48px,7vw,80px); padding-bottom:clamp(28px,4vw,48px); }
+.julu-ct-hero .julu-ct-wrap{ position:relative; z-index:1; padding-top:clamp(32px,4vw,56px); padding-bottom:clamp(28px,4vw,48px); }
 .julu-ct-hero h1{
   margin:0!important; max-width:820px;
   font-size:clamp(48px,8vw,88px)!important; line-height:.88!important; letter-spacing:-.04em!important;
@@ -3051,8 +3051,8 @@ html:has(.julu-ct) body{ overflow-x:clip; }
 .julu-ct-sub{ margin:20px 0 0; max-width:560px; font-size:clamp(16px,1.6vw,19px); line-height:1.55; color:#4f4a40; }
 @media (min-width:1024px){
   .julu-ct-hero::after{
-    content:""; position:absolute; right:max(24px, calc(50vw - 600px)); top:28px;
-    width:260px; aspect-ratio:1/1; pointer-events:none;
+    content:""; position:absolute; right:max(24px, calc(50vw - 600px)); top:50%;
+    width:240px; margin-top:-120px; aspect-ratio:1/1; pointer-events:none;
     background:url('nuvemshop/gato-preto.webp') center/contain no-repeat;
     transform:rotate(-6deg);
   }
