@@ -94,3 +94,8 @@ header .desktop-list-subitems .nav-list-link{ font-size:16px!important; margin:0
 .js-head-main.compress .js-cart-widget-total{
   text-transform:none!important; letter-spacing:normal!important;
 }
+/* Header fijo: el tema pinta el menú del color del fondo (no se veía) */
+header .js-head-main.compress nav.nav-desktop .nav-list-link,
+header .js-head-main.compress nav.nav-desktop .nav-list-link *{
+  color:var(--julu-ink)!important; text-transform:none!important; letter-spacing:-.01em!important;
+}
