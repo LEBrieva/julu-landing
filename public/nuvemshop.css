@@ -2014,6 +2014,7 @@ html:has(link[rel="canonical"][href$="/contato/"])   header .nav-main-item > a[h
 .template-product .social-share svg{ fill:var(--julu-ink)!important; }
 
 /* "Combina com" (productos relacionados) */
+.template-product #ns-section-alternative_products{ padding-top:clamp(56px,7vw,96px)!important; }
 .template-product .section-related-products .heading-block{
   font-family:var(--julu-display)!important; font-weight:900!important;
   font-size:clamp(30px,3vw,40px)!important; line-height:1!important;
