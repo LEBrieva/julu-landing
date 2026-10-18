@@ -157,33 +157,43 @@
       var on=form.querySelector('.julu-ct-chip.is-on'), ped=document.getElementById('jct-pedido').value.trim();
       var body='Assunto: '+(on?on.textContent:'—')+(ped?'\nPedido: '+ped:'')+'\n\n'+msg;
 
-      var fd=new FormData();
-      fd.append('winnie-pooh',''); fd.append('product',''); fd.append('type','contact');
-      fd.append('name',name); fd.append('email',email); fd.append('phone',fP.value.trim());
-      fd.append('message',body); fd.append('g-recaptcha-response',token); fd.append('contact','');
+      var data={'winnie-pooh':'',product:'',type:'contact',name:name,email:email,phone:fP.value.trim(),
+        message:body,'g-recaptcha-response':token,contact:''};
 
       btn.disabled=true; btn.textContent='Enviando…';
-      /* El contacto de Nuvemshop solo se procesa en /contato/ (no redirigir esa URL) */
-      fetch('/contato/',{method:'POST',body:fd,credentials:'same-origin'}).then(function(r){
-        if(!r.ok) throw new Error('HTTP '+r.status);
-        return r.text().then(function(h){
-          var d=new DOMParser().parseFromString(h,'text/html');
-          var sec=d.querySelector('#ns-section-contact_form')||d;
-          var ok=sec.querySelector('.alert-success'), bad=sec.querySelector('.alert-danger');
-          var info={status:r.status,url:r.url.split('?')[0],query:(r.url.split('?')[1]||''),ok:!!ok,bad:bad?bad.textContent.trim():''};
-          try{ console.log('[julu-ct] resposta', JSON.stringify(info)); }catch(e){}
-          if(bad) throw new Error(bad.textContent.trim());
-          if(!ok && !/success/.test(r.url)) throw new Error('sem confirmação');
-        });
-      }).then(function(){
-        [].slice.call(form.children).forEach(function(c){ if(!c.classList.contains('julu-ct-ok')) c.hidden=true; });
-        form.querySelector('.julu-ct-ok').hidden=false;
-      }).catch(function(e){
+
+      /* Envío igual al formulario nativo: POST normal a /contato/ (el único lugar donde
+         Nuvemshop procesa el contacto; no redirigir esa URL), pero dentro de un iframe
+         oculto para no salir de la página. Después se lee la respuesta del iframe. */
+      var sink=document.getElementById('julu-ct-sink');
+      if(!sink){ sink=document.createElement('iframe'); sink.id='julu-ct-sink'; sink.name='julu-ct-sink'; sink.hidden=true; sink.setAttribute('aria-hidden','true'); document.body.appendChild(sink); }
+      var post=document.createElement('form'); post.method='post'; post.action='/contato/'; post.target='julu-ct-sink'; post.hidden=true;
+      Object.keys(data).forEach(function(k){ var i=document.createElement('input'); i.type='hidden'; i.name=k; i.value=data[k]; post.appendChild(i); });
+      document.body.appendChild(post);
+
+      var timer=setTimeout(function(){ done(new Error('timeout')); },20000);
+      function done(e){
+        clearTimeout(timer); sink.onload=null; if(post.parentNode) post.parentNode.removeChild(post);
+        if(!e){
+          [].slice.call(form.children).forEach(function(c){ if(!c.classList.contains('julu-ct-ok')) c.hidden=true; });
+          form.querySelector('.julu-ct-ok').hidden=false; return;
+        }
         try{ console.log('[julu-ct] erro', e && e.message); }catch(x){}
         btn.disabled=false; btn.textContent='Enviar mensagem →';
         if(widget!==null && window.grecaptcha) grecaptcha.reset(widget);
         fail('Ops, não deu certo. Confere o “não sou um robô” e tenta de novo, ou chama a gente no WhatsApp.');
-      });
+      }
+      sink.onload=function(){
+        var d, href='';
+        try{ d=sink.contentDocument; href=sink.contentWindow.location.href; }catch(x){ return done(new Error('sem acesso à resposta')); }
+        var sec=(d && d.querySelector('#ns-section-contact_form'))||d;
+        var ok=sec && sec.querySelector('.alert-success'), bad=sec && sec.querySelector('.alert-danger');
+        try{ console.log('[julu-ct] resposta', JSON.stringify({url:href.split('?')[0], query:(href.split('?')[1]||''), ok:!!ok, bad:bad?bad.textContent.trim():'', alerts:[].slice.call(sec?sec.querySelectorAll('[class*="alert"]'):[]).map(function(a){return a.className+': '+a.textContent.trim().slice(0,80);})})); }catch(x){}
+        if(bad) return done(new Error(bad.textContent.trim()));
+        if(ok || /success/.test(href)) return done();
+        done(new Error('sem confirmação'));
+      };
+      post.submit();
     });
   });
 })();
