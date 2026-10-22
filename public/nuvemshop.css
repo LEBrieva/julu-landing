@@ -2953,6 +2953,69 @@ body.modal-show .js-notification-cookie-private{ opacity:0!important; pointer-ev
   .template-account-reset #ns-section-reset_form form{ padding:26px 20px 22px!important; border-radius:22px; box-shadow:5px 5px 0 var(--julu-ink); }
 }
 
+/* ---------------------------------------------------------------------
+   Cadastro enviado: "Você está a um passo de criar sua conta!"
+   (Nuvemshop lo muestra después de enviar el formulario de registro)
+   --------------------------------------------------------------------- */
+html:has(.js-account-validation-pending) .template-account-register .page-header-title::before,
+.template-account-register:has(.js-account-validation-pending) .page-header-title::before{ content:"Quase lá 🐾"; }
+.account-form-container:has(.js-account-validation-pending) .account-form-subtitle{ display:none!important; }
+
+.template-account-register .js-account-validation-pending{
+  box-sizing:border-box; width:100%; max-width:480px; margin:8px auto 0!important;
+  padding:34px 32px 28px!important; text-align:center;
+  border:2px solid var(--julu-ink)!important; border-radius:28px!important;
+  background:#fff!important; color:var(--julu-ink)!important; box-shadow:8px 8px 0 var(--julu-ink)!important;
+}
+/* Gato estirándose arriba */
+.template-account-register .js-account-validation-pending::before{
+  content:""; display:block; width:150px; aspect-ratio:1/1; margin:0 auto 20px;
+  border:3px solid var(--julu-ink); border-radius:22px; box-shadow:5px 5px 0 var(--julu-volt);
+  background:url('nuvemshop/gatos/espreguicando.webp') center/cover no-repeat;
+  transform:rotate(-3deg);
+}
+.template-account-register .form-validation-title{
+  margin:0 0 10px!important; font-family:var(--julu-display)!important; font-weight:900!important;
+  font-size:clamp(24px,3vw,30px)!important; line-height:1.05!important; letter-spacing:-.02em!important;
+  text-transform:uppercase; color:var(--julu-ink)!important;
+}
+.template-account-register .form-validation-text{
+  font-family:var(--julu-body)!important; font-size:16px!important; line-height:1.5; color:#4f4a40!important;
+  overflow-wrap:anywhere;
+}
+/* Pasos */
+.template-account-register .js-account-validation-pending::after{
+  content:"1. Abre seu e-mail\A 2. Clica no link de validação\A 3. Pronto, já é do bando 🐾";
+  display:block; white-space:pre-line; margin:20px 0 0; padding:16px 20px; text-align:left;
+  border:2px dashed rgba(10,10,10,.3); border-radius:18px; background:var(--julu-paper);
+  font-family:var(--julu-body); font-size:15px; font-weight:600; line-height:1.8; color:var(--julu-ink);
+}
+/* "Ainda não recebeu?" + botón píldora */
+.template-account-register .form-validation-help{
+  max-width:480px; margin:26px auto 0!important; text-align:center;
+  font-family:var(--julu-body)!important; font-size:14px!important; color:#4f4a40!important;
+}
+.template-account-register .form-validation-help::before{
+  content:"Não chegou? Confere o spam e a aba Promoções."; display:block; margin-bottom:6px;
+}
+.template-account-register .form-validation-link{
+  display:inline-flex!important; align-items:center; margin:10px 0 0 6px!important; padding:11px 22px!important;
+  border:2px solid var(--julu-ink)!important; border-radius:9999px!important; background:transparent!important;
+  font-family:var(--julu-body)!important; font-size:14px!important; font-weight:700!important;
+  color:var(--julu-ink)!important; text-decoration:none!important; cursor:pointer;
+  transition:background-color .15s ease, transform .15s ease;
+}
+.template-account-register .form-validation-link:hover{ background:var(--julu-volt)!important; transform:rotate(-2deg); }
+.template-account-register :is(.js-resend-validation-success,.js-resend-validation-error) .alert{
+  max-width:480px; margin:16px auto 0!important; text-align:center;
+  border:2px solid var(--julu-ink)!important; border-radius:18px!important; font-family:var(--julu-body)!important; font-weight:600;
+}
+.template-account-register .js-resend-validation-success .alert{ background:var(--julu-amber)!important; color:var(--julu-ink)!important; }
+@media (max-width:640px){
+  .template-account-register .js-account-validation-pending{ padding:28px 20px 22px!important; }
+  .template-account-register .js-account-validation-pending::before{ width:120px; }
+}
+
 
 /* =====================================================================
    29. PÁGINA QUEM SOMOS (/quem-somos/)
