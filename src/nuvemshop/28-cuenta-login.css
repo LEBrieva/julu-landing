@@ -165,10 +165,10 @@ html:has(.js-account-validation-pending) .template-account-register .page-header
    Recuperar senha — e-mail enviado: el aviso verde pasa a ser la tarjeta
    principal y el formulario desaparece (no hace falta mandar otro).
    --------------------------------------------------------------------- */
-.template-account-reset:has(#ns-section-reset_form .alert-success) .page-header-title::before{ content:"Olha seu e-mail 📬"; }
-.template-account-reset main:has(#ns-section-reset_form .alert-success) form,
-.template-account-reset main:has(#ns-section-reset_form .alert-success) .account-form-subtitle{ display:none!important; }
-.template-account-reset #ns-section-reset_form .alert-success{
+.template-account-reset:has(main .alert-success) .page-header-title::before{ content:"Olha seu e-mail 📬"; }
+.template-account-reset main:has(.alert-success) form,
+.template-account-reset main:has(.alert-success) .account-form-subtitle{ display:none!important; }
+.template-account-reset main .alert-success{
   box-sizing:border-box; width:100%; max-width:480px; margin:8px auto 0!important;
   padding:34px 32px 28px!important; text-align:center;
   border:2px solid var(--julu-ink)!important; border-radius:28px!important;
@@ -177,20 +177,79 @@ html:has(.js-account-validation-pending) .template-account-register .page-header
   font-size:19px!important; line-height:1.3!important; overflow-wrap:anywhere;
 }
 /* Gato durmiendo arriba */
-.template-account-reset #ns-section-reset_form .alert-success::before{
+.template-account-reset main .alert-success::before{
   content:""; display:block; width:140px; aspect-ratio:1/1; margin:0 auto 20px;
   border:3px solid var(--julu-ink); border-radius:22px; box-shadow:5px 5px 0 var(--julu-volt);
   background:url('nuvemshop/gatos/dormindo-enrolado.webp') center/cover no-repeat;
   transform:rotate(-3deg);
 }
 /* Pasos + aviso de spam */
-.template-account-reset #ns-section-reset_form .alert-success::after{
+.template-account-reset main .alert-success::after{
   content:"1. Abre o e-mail da Julu Brasil\A 2. Toca em “Mudar senha”\A 3. Cria a senha nova e pronto 🐾\A\A Não chegou em uns minutos? Confere o spam e a aba Promoções.";
   display:block; white-space:pre-line; margin:20px 0 0; padding:16px 20px; text-align:left;
   border:2px dashed rgba(10,10,10,.3); border-radius:18px; background:var(--julu-paper);
   font-family:var(--julu-body); font-size:15px; font-weight:600; line-height:1.7; color:var(--julu-ink);
 }
 @media (max-width:640px){
-  .template-account-reset #ns-section-reset_form .alert-success{ padding:28px 20px 22px!important; font-size:17px!important; }
-  .template-account-reset #ns-section-reset_form .alert-success::before{ width:116px; }
+  .template-account-reset main .alert-success{ padding:28px 20px 22px!important; font-size:17px!important; }
+  .template-account-reset main .alert-success::before{ width:116px; }
+}
+
+/* ---------------------------------------------------------------------
+   Nova senha / ativar conta (/account/newpass/…): link del mail
+   "Mudar senha". Mismo look que login. Sin migas (Nuvemshop muestra
+   "breadcrumbs.<código>" en la última).
+   --------------------------------------------------------------------- */
+html:has(#ns-section-newpass_form) main{ padding-bottom:88px; }
+html:has(#ns-section-newpass_form) #ns-section-heading .breadcrumbs{ display:none!important; }
+html:has(#ns-section-newpass_form) #ns-section-heading .page-header{ padding:56px 0 28px!important; text-align:center; }
+html:has(#ns-section-newpass_form) #ns-section-heading :is(.page-header-title-row,.page-header-title-inner){
+  display:block!important; text-align:center!important;
+}
+html:has(#ns-section-newpass_form) .page-header-title{
+  margin:0!important; font-family:var(--julu-display)!important; font-weight:900!important;
+  font-size:clamp(40px,6vw,64px)!important; line-height:.95!important; letter-spacing:-.03em!important;
+  text-transform:uppercase; color:var(--julu-ink)!important;
+}
+html:has(#ns-section-newpass_form) .page-header-title::before{
+  content:"Quase lá 🐾"; display:block; margin-bottom:12px;
+  font-family:var(--julu-body); font-size:13px; font-weight:700; line-height:1.3;
+  letter-spacing:.24em; text-transform:uppercase; color:#c23a00;
+}
+#ns-section-newpass_form .account-form-container{ max-width:480px!important; margin:0 auto!important; padding:0!important; }
+#ns-section-newpass_form .account-form-container::before{
+  content:"Escolhe uma senha nova e pronto: você volta pro bando."; display:block;
+  margin:-8px auto 24px; text-align:center; font-family:var(--julu-body); font-size:16px; line-height:1.5; color:#4f4a40;
+}
+#ns-section-newpass_form form{
+  box-sizing:border-box; width:100%; max-width:480px; margin:0 auto!important;
+  padding:36px 36px 28px!important;
+  border:2px solid var(--julu-ink); border-radius:28px; background:#fff; box-shadow:8px 8px 0 var(--julu-ink);
+}
+#ns-section-newpass_form .form-group{ position:relative; margin-bottom:18px!important; }
+#ns-section-newpass_form .form-label{
+  display:block; margin:0 0 8px 4px!important;
+  font-family:var(--julu-body)!important; font-size:12px!important; font-weight:700!important;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--julu-ink)!important;
+}
+#ns-section-newpass_form .form-control{
+  height:52px!important; box-sizing:border-box; padding:0 52px 0 22px!important;
+  border:2px solid var(--julu-ink)!important; border-radius:9999px!important;
+  background:var(--julu-paper)!important; box-shadow:none!important; outline:none!important;
+  font-family:var(--julu-body)!important; font-size:16px!important; color:var(--julu-ink)!important;
+}
+#ns-section-newpass_form .form-control:focus{ box-shadow:0 0 0 4px rgba(255,77,0,.25)!important; }
+#ns-section-newpass_form .password-toggle{ right:18px!important; }
+#ns-section-newpass_form .btn-primary{
+  height:auto!important; margin:8px 0 0!important; padding:16px 24px!important;
+  border:2px solid var(--julu-ink)!important; border-radius:9999px!important;
+  background:var(--julu-volt)!important; color:var(--julu-ink)!important; box-shadow:4px 4px 0 var(--julu-ink)!important;
+  font-family:var(--julu-body)!important; font-size:17px!important; font-weight:800!important;
+  letter-spacing:0!important; text-transform:none!important;
+  transition:transform .15s ease, background-color .15s ease, color .15s ease;
+}
+#ns-section-newpass_form .btn-primary:hover{ background:var(--julu-ink)!important; color:var(--julu-paper)!important; transform:rotate(-1.5deg); }
+#ns-section-newpass_form .alert{ border:2px solid var(--julu-ink)!important; border-radius:16px!important; margin-bottom:16px!important; }
+@media (max-width:640px){
+  #ns-section-newpass_form form{ padding:28px 22px 22px!important; }
 }
