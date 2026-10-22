@@ -39,6 +39,7 @@
      - 29-quem-somos.css
      - 30-contato.css
      - 31-aviso-carrito.css
+     - 32-loja-fechada.css
    ===================================================================== */
 
 
@@ -3473,4 +3474,72 @@ html:has(.julu-ct) body{ overflow-x:clip; }
 .js-alert-add-to-cart-private .notification-close svg{ width:12px!important; height:12px!important; fill:var(--julu-ink)!important; }
 @media (max-width:767px){
   .js-alert-add-to-cart-private .notification-cart-image-container{ width:68px; flex-basis:68px; }
+}
+
+
+/* =====================================================================
+   32. LOJA FECHADA (/password/ — "Estamos reformando a loja…")
+   La pantalla que ve la gente mientras la tienda pide contraseña.
+   Gato sticker + título grande + tarjeta con el campo y el botón.
+   ===================================================================== */
+.template-password{ background:var(--julu-paper)!important; }
+.template-password .head-main-password{ padding:20px 0!important; background:transparent!important; }
+.template-password .password-section-layout{ padding:24px 0 80px!important; }
+.template-password .password-form-wrapper{ display:flex; justify-content:center; }
+.template-password .password-form-content{
+  width:100%; max-width:520px; margin:0 auto; text-align:center;
+  display:flex; flex-direction:column; align-items:center;
+}
+/* Gato tirando el vaso: "tá uma bagunça, mas já volta" */
+.template-password .password-form-content::before{
+  content:""; display:block; width:min(220px, 56vw); aspect-ratio:1/1; margin:8px auto 26px;
+  border:3px solid var(--julu-ink); border-radius:26px; box-shadow:7px 7px 0 var(--julu-volt);
+  background:url('nuvemshop/gatos/derrubando-copo.webp') center/cover no-repeat;
+  transform:rotate(-4deg);
+}
+.template-password .password-page-title{
+  margin:0 0 28px!important; max-width:520px;
+  font-family:var(--julu-display)!important; font-weight:900!important;
+  font-size:clamp(28px,4.4vw,42px)!important; line-height:1!important; letter-spacing:-.03em!important;
+  text-transform:uppercase; color:var(--julu-ink)!important;
+}
+.template-password .password-page-title::before{
+  content:"Em breve 🐾"; display:block; margin-bottom:14px;
+  font-family:var(--julu-body); font-size:13px; font-weight:700; letter-spacing:.24em; color:#c23a00;
+}
+/* Tarjeta del formulario */
+.template-password #password-form{
+  box-sizing:border-box; width:100%; max-width:440px; margin:0 auto!important; text-align:left;
+  padding:28px 28px 24px!important;
+  border:2px solid var(--julu-ink); border-radius:26px; background:#fff; box-shadow:7px 7px 0 var(--julu-ink);
+}
+.template-password #password-form .form-group{ position:relative; margin:0 0 16px!important; }
+.template-password #password-form .form-label{
+  display:block; margin:0 0 8px 4px!important;
+  font-family:var(--julu-body)!important; font-size:12px!important; font-weight:700!important;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--julu-ink)!important;
+}
+.template-password #password-form .form-control{
+  height:52px!important; box-sizing:border-box; padding:0 52px 0 22px!important;
+  border:2px solid var(--julu-ink)!important; border-radius:9999px!important;
+  background:var(--julu-paper)!important; box-shadow:none!important; outline:none!important;
+  font-family:var(--julu-body)!important; font-size:16px!important; color:var(--julu-ink)!important;
+}
+.template-password #password-form .form-control:focus{ box-shadow:0 0 0 4px rgba(255,77,0,.25)!important; }
+.template-password #password-form .form-control::placeholder{ color:var(--julu-muted)!important; opacity:1; }
+.template-password #password-form .password-toggle{ right:18px!important; }
+.template-password #password-form .btn-primary{
+  height:auto!important; padding:16px 24px!important; margin:0!important;
+  border:2px solid var(--julu-ink)!important; border-radius:9999px!important;
+  background:var(--julu-volt)!important; color:var(--julu-ink)!important; box-shadow:4px 4px 0 var(--julu-ink)!important;
+  font-family:var(--julu-body)!important; font-size:17px!important; font-weight:800!important;
+  letter-spacing:0!important; text-transform:none!important;
+  transition:transform .15s ease, background-color .15s ease, color .15s ease;
+}
+.template-password #password-form .btn-primary:hover{ background:var(--julu-ink)!important; color:var(--julu-paper)!important; transform:rotate(-1.5deg); }
+.template-password .alert{ max-width:440px; margin:0 auto 14px!important; border-radius:16px!important; border:2px solid var(--julu-ink)!important; }
+/* Debajo: dónde seguirnos mientras tanto */
+.template-password .password-form-content::after{
+  content:"Enquanto isso, a gangue tá no Instagram: @julu.brasil";
+  display:block; margin-top:24px; font-family:var(--julu-body); font-size:14px; font-weight:600; color:#4f4a40;
 }
