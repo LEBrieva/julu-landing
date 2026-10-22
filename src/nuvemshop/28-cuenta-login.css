@@ -165,10 +165,10 @@ html:has(.js-account-validation-pending) .template-account-register .page-header
    Recuperar senha — e-mail enviado: el aviso verde pasa a ser la tarjeta
    principal y el formulario desaparece (no hace falta mandar otro).
    --------------------------------------------------------------------- */
-.template-account-reset:has(main .alert-success) .page-header-title::before{ content:"Olha seu e-mail 📬"; }
-.template-account-reset main:has(.alert-success) form,
-.template-account-reset main:has(.alert-success) .account-form-subtitle{ display:none!important; }
-.template-account-reset main .alert-success{
+.template-account-reset:has(#ns-section-reset_form .alert-success) .page-header-title::before{ content:"Olha seu e-mail 📬"; }
+.template-account-reset main:has(#ns-section-reset_form .alert-success) form,
+.template-account-reset main:has(#ns-section-reset_form .alert-success) .account-form-subtitle{ display:none!important; }
+.template-account-reset #ns-section-reset_form .alert-success{
   box-sizing:border-box; width:100%; max-width:480px; margin:8px auto 0!important;
   padding:34px 32px 28px!important; text-align:center;
   border:2px solid var(--julu-ink)!important; border-radius:28px!important;
@@ -177,22 +177,22 @@ html:has(.js-account-validation-pending) .template-account-register .page-header
   font-size:19px!important; line-height:1.3!important; overflow-wrap:anywhere;
 }
 /* Gato durmiendo arriba */
-.template-account-reset main .alert-success::before{
+.template-account-reset #ns-section-reset_form .alert-success::before{
   content:""; display:block; width:140px; aspect-ratio:1/1; margin:0 auto 20px;
   border:3px solid var(--julu-ink); border-radius:22px; box-shadow:5px 5px 0 var(--julu-volt);
   background:url('nuvemshop/gatos/dormindo-enrolado.webp') center/cover no-repeat;
   transform:rotate(-3deg);
 }
 /* Pasos + aviso de spam */
-.template-account-reset main .alert-success::after{
+.template-account-reset #ns-section-reset_form .alert-success::after{
   content:"1. Abre o e-mail da Julu Brasil\A 2. Toca em “Mudar senha”\A 3. Cria a senha nova e pronto 🐾\A\A Não chegou em uns minutos? Confere o spam e a aba Promoções.";
   display:block; white-space:pre-line; margin:20px 0 0; padding:16px 20px; text-align:left;
   border:2px dashed rgba(10,10,10,.3); border-radius:18px; background:var(--julu-paper);
   font-family:var(--julu-body); font-size:15px; font-weight:600; line-height:1.7; color:var(--julu-ink);
 }
 @media (max-width:640px){
-  .template-account-reset main .alert-success{ padding:28px 20px 22px!important; font-size:17px!important; }
-  .template-account-reset main .alert-success::before{ width:116px; }
+  .template-account-reset #ns-section-reset_form .alert-success{ padding:28px 20px 22px!important; font-size:17px!important; }
+  .template-account-reset #ns-section-reset_form .alert-success::before{ width:116px; }
 }
 
 /* ---------------------------------------------------------------------
