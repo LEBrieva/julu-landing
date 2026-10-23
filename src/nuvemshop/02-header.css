@@ -87,15 +87,18 @@ header .desktop-list-subitems{
 header .desktop-list-subitems > li{ margin:0!important; padding:0!important; }
 header .desktop-list-subitems .nav-list-link{ font-size:16px!important; margin:0!important; padding:0 0 4px!important; }
 
-/* Header fijo al scrollear: el tema pasa los textos a mayúsculas con 3px de
-   espaciado. Lo dejamos igual que arriba. */
-.js-head-main.compress .utility-text,
-.js-head-main.compress .utility-text *,
-.js-head-main.compress .js-cart-widget-total{
+/* Header fijo al scrollear. El tema pasa por dos estados: primero
+   .sticky-header-wrapper.is-fixed(.hide-announcements) y después
+   .js-head-main.compress. En el medio ponía mayúsculas con 3px de espaciado,
+   el menú en 12px casi del color del fondo y los íconos naranjas.
+   Lo dejamos igual que arriba en los dos estados (sin saltos al scrollear). */
+header :is(.sticky-header-wrapper.is-fixed,.js-head-main.compress) :is(.utility-text,.utility-text *,.js-cart-widget-total,.search-text,.header-account-label){
   text-transform:none!important; letter-spacing:normal!important;
 }
-/* Header fijo: el tema pinta el menú del color del fondo (no se veía) */
-header .js-head-main.compress nav.nav-desktop .nav-list-link,
-header .js-head-main.compress nav.nav-desktop .nav-list-link *{
-  color:var(--julu-ink)!important; text-transform:none!important; letter-spacing:-.01em!important;
+header :is(.sticky-header-wrapper.is-fixed,.js-head-main.compress) nav.nav-desktop .nav-list-link,
+header :is(.sticky-header-wrapper.is-fixed,.js-head-main.compress) nav.nav-desktop .nav-list-link *{
+  color:var(--julu-ink)!important; text-transform:none!important; letter-spacing:-.01em!important; font-size:17px!important;
+}
+header :is(.sticky-header-wrapper.is-fixed,.js-head-main.compress) :is(.js-search-trigger svg,.header-account svg,.nav-desktop svg){
+  fill:var(--julu-ink)!important; color:var(--julu-ink)!important;
 }
