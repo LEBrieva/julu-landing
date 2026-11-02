@@ -54,32 +54,38 @@
     });
     dlg.addEventListener('cancel',function(e){ e.preventDefault(); close(); });   /* tecla Esc */
 
-    /* Envío: mismo formulario de newsletter de Nuvemshop */
+    /* Envío: formulario "Newsletter site" de Nuvem Marketing (Perfit).
+       Campos del form: fields[3] = Email, fields[1] = Nome. Responde 201 + JSON.
+       Además avisamos al newsletter nativo de Nuvemshop (best effort, no bloquea). */
+    var PERFIT='https://pubapi.myperfit.com/v2/optin/julubrasil/8jMsTnfm';
     var form=dlg.querySelector('.julu-news-form'), err=dlg.querySelector('.julu-news-error');
+    function fail(msg,input){ err.textContent=msg; err.hidden=false; if(input) input.focus(); }
     form.addEventListener('submit',function(e){
       e.preventDefault();
-      var email=form.email.value.trim();
-      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-        err.textContent='Hmm, esse e-mail não parece certo. Confere aí?'; err.hidden=false; form.email.focus(); return;
-      }
+      var nome=form.nome.value.trim().replace(/\s+/g,' '), email=form.email.value.trim();
+      if(nome.length<2) return fail('Como a gente te chama? Coloca seu nome 😺',form.nome);
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail('Hmm, esse e-mail não parece certo. Confere aí?',form.email);
       err.hidden=true;
       var btn=form.querySelector('button'); btn.disabled=true; btn.textContent='Enviando…';
-      /* Igual que el formulario nativo de la tienda: reCAPTCHA v3 (acción
-         "createContact") + los mismos campos. Sin el token, Nuvemshop responde 404. */
-      v3Token().then(function(tok){
-        var d=new URLSearchParams();
-        d.append('email',email); d.append('winnie-pooh','');
-        d.append('name','Sem nome'); d.append('message','Pedido de inscrição na newsletter'); d.append('type','newsletter');
-        d.append('g-recaptcha-response',tok); d.append('action','createContact'); d.append('contact','Enviar');
-        return fetch('/',{method:'POST',body:d,credentials:'same-origin'});
-      }).then(function(r){
+
+      var p=new URLSearchParams(); p.append('fields[3]',email); p.append('fields[1]',nome);
+      fetch(PERFIT,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:p.toString()})
+      .then(function(r){
         if(!r.ok) throw new Error(r.status);
         dlg.dataset.done='1'; subscribed();
         dlg.querySelector('[data-step="form"]').hidden=true;
         dlg.querySelector('[data-step="ok"]').hidden=false;
+        /* Aviso a Nuvemshop: reCAPTCHA v3 + mismos campos que el form nativo */
+        v3Token().then(function(tok){
+          var d=new URLSearchParams();
+          d.append('email',email); d.append('winnie-pooh','');
+          d.append('name',nome); d.append('message','Pedido de inscrição na newsletter'); d.append('type','newsletter');
+          d.append('g-recaptcha-response',tok); d.append('action','createContact'); d.append('contact','Enviar');
+          return fetch('/',{method:'POST',body:d,credentials:'same-origin'});
+        }).catch(function(){});
       }).catch(function(){
         btn.disabled=false; btn.textContent='Quero entrar';
-        err.textContent='Ops, não deu certo. Tenta de novo em um minutinho?'; err.hidden=false;
+        fail('Ops, não deu certo. Tenta de novo em um minutinho?');
       });
     });
   });

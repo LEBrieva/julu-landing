@@ -2447,6 +2447,7 @@ html:has(link[rel="canonical"][href$="/guia-de-medidas/"]) main .user-content p 
   border:2px solid var(--julu-ink); background:#fff; color:var(--julu-ink);
   font-family:var(--julu-body); font-size:16px; outline:none;
 }
+.julu-news-form input[name="nome"]{ flex-basis:100%; }
 .julu-news-form input:focus{ box-shadow:0 0 0 3px rgba(255,77,0,.35); }
 .julu-news-form button,
 .julu-news-back{

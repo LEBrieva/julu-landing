@@ -6,7 +6,9 @@
     - Aparece cuando el visitante scrolleó la mitad de la home.
     - Si lo cierra: no vuelve por 7 días.
     - Si se suscribe (acá o en el bloque naranja de la home): no vuelve nunca.
-  Envía al mismo formulario de newsletter de Nuvemshop (Clientes → Mensagens).
+  Envía al formulario "Newsletter site" de Nuvem Marketing (Perfit, lista Newsletter):
+  doble opt-in → al confirmar dispara la automatización de bienvenida.
+  También avisa al newsletter de Nuvemshop (te llega el mail "Fulano se inscreveu").
   Estilo: src/nuvemshop/22-newsletter-popup.css
   Lógica: https://julu.clothing/nuvemshop/newsletter-popup.js (se actualiza con git push)
 -->
@@ -20,6 +22,7 @@
     <h2 id="julu-news-titulo">Fica sabendo <span>antes</span> de todo mundo</h2>
     <p>Coleções novas, drops e as histórias da Cleo, da Roma e do Chili direto no seu e-mail. Sem spam, palavra de gato. 🐾</p>
     <form class="julu-news-form" novalidate>
+      <input type="text" name="nome" placeholder="Seu nome" autocomplete="given-name" maxlength="60" required aria-label="Seu nome">
       <input type="email" name="email" placeholder="Seu e-mail" autocomplete="email" required aria-label="Seu e-mail">
       <button type="submit">Quero entrar</button>
     </form>
@@ -30,8 +33,8 @@
 
   <div class="julu-news-step" data-step="ok" hidden>
     <span class="julu-news-kicker">Pronto!</span>
-    <h2>Bem-vindo ao <span>Clube</span> 😻</h2>
-    <p>Seu e-mail tá na lista. Quando sair coleção nova, você fica sabendo primeiro.</p>
+    <h2>Olha seu <span>e-mail</span> 📬</h2>
+    <p>Falta só um clique: te mandamos um e-mail pra confirmar. Dá uma olhada na caixa de entrada (e no spam, vai que o gato escondeu 🐾).</p>
     <button type="button" class="julu-news-back" data-news-close>Voltar pra loja</button>
   </div>
 </dialog>
