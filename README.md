@@ -73,11 +73,14 @@ Luego, en otra terminal, `npm run share` igual que antes.
 
 El campo "CSS personalizado" de Nuvemshop tiene un límite de 15.000 caracteres, así que el CSS de la tienda se sirve desde esta landing.
 
-- El archivo vive en `public/nuvemshop.css` y queda publicado en `https://landing.julu.clothing/nuvemshop.css`.
+- El archivo vive en `public/nuvemshop.css` y queda publicado en `https://cdn.jsdelivr.net/gh/LEBrieva/julu-landing@main/public/nuvemshop.css`.
 - En Nuvemshop, el CSS personalizado es solo esta línea:
 
   ```css
-  @import url('https://landing.julu.clothing/nuvemshop.css?v=N');
+  @import url('https://cdn.jsdelivr.net/gh/LEBrieva/julu-landing@main/public/nuvemshop.css?v=N');
+
+> **Por qué jsDelivr y no landing.julu.clothing:** desde Brasil (al menos Claro fijo y datos móviles, nov 2026) las IPs de Cloudflare de julu.clothing no responden, así que la tienda quedaba sin diseño. jsDelivr lee directo de GitHub (repo público) y tiene varias CDN de respaldo.
+> Tras un `git push`, jsDelivr puede tardar hasta 12 h en tomar `@main`. Para forzarlo: abrir `https://purge.jsdelivr.net/gh/LEBrieva/julu-landing@main/public/nuvemshop.css` (y lo mismo para cada `.js` que cambie) y subir el `?v=N` del `@import`.
   ```
 
 - En cada cambio: editar `public/nuvemshop.css`, hacer deploy y subir el número de `?v=N` en Nuvemshop (para que no quede la versión vieja cacheada).
