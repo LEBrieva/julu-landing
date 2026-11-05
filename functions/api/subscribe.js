@@ -78,8 +78,8 @@ export async function onRequestPost(context) {
     const bres = await fetch(SERVE_URL, {
       method: 'POST',
       headers: {
-        Origin: 'https://julu.clothing',
-        Referer: 'https://julu.clothing/',
+        Origin: 'https://landing.julu.clothing',
+        Referer: 'https://landing.julu.clothing/',
         'User-Agent':
           'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36',
         Accept: 'application/json',

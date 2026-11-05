@@ -73,11 +73,11 @@ Luego, en otra terminal, `npm run share` igual que antes.
 
 El campo "CSS personalizado" de Nuvemshop tiene un límite de 15.000 caracteres, así que el CSS de la tienda se sirve desde esta landing.
 
-- El archivo vive en `public/nuvemshop.css` y queda publicado en `https://julu.clothing/nuvemshop.css`.
+- El archivo vive en `public/nuvemshop.css` y queda publicado en `https://landing.julu.clothing/nuvemshop.css`.
 - En Nuvemshop, el CSS personalizado es solo esta línea:
 
   ```css
-  @import url('https://julu.clothing/nuvemshop.css?v=N');
+  @import url('https://landing.julu.clothing/nuvemshop.css?v=N');
   ```
 
 - En cada cambio: editar `public/nuvemshop.css`, hacer deploy y subir el número de `?v=N` en Nuvemshop (para que no quede la versión vieja cacheada).

@@ -3,7 +3,7 @@
 //
 // Uso: npm run css:nuvemshop   (también corre solo antes de `npm run build`)
 // En Nuvemshop → CSS personalizado va SOLO:
-//   @import url('https://julu.clothing/nuvemshop.css');
+//   @import url('https://landing.julu.clothing/nuvemshop.css');
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 
 const srcDir = new URL('../src/nuvemshop/', import.meta.url);
@@ -16,7 +16,7 @@ const header = `/* =============================================================
    ARCHIVO GENERADO: no editar a mano. Se edita src/nuvemshop/*.css y se corre
    \`npm run css:nuvemshop\` (también corre solo antes de \`npm run build\`).
    En Nuvemshop (CSS personalizado) va SOLO:
-     @import url('https://julu.clothing/nuvemshop.css');
+     @import url('https://landing.julu.clothing/nuvemshop.css');
    Imágenes decorativas: public/nuvemshop/*.webp (rutas relativas a este archivo)
 
    Partes, en este orden:

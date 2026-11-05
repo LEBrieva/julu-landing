@@ -102,7 +102,7 @@
 /* --- Página "Guia de medidas" (/guia-de-medidas/) ---
    Para quien llega desde el footer fuera de un producto (en producto, el mismo
    link abre el popup). Contenido cargado en Nuvemshop → Páginas, con HTML simple:
-   h2 por calce, imagen del dibujo (julu.clothing/nuvemshop/guia-medidas-*.svg),
+   h2 por calce, imagen del dibujo (landing.julu.clothing/nuvemshop/guia-medidas-*.svg),
    tabla y párrafos. Nuvemshop no deja <style> ni clases fiables ahí: se estiliza
    por la URL de la página. */
 html:has(link[rel="canonical"][href$="/guia-de-medidas/"]) main .user-content{
