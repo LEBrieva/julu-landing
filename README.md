@@ -80,7 +80,7 @@ El campo "CSS personalizado" de Nuvemshop tiene un límite de 15.000 caracteres,
   @import url('https://cdn.jsdelivr.net/gh/LEBrieva/julu-landing@main/public/nuvemshop.css?v=N');
 
 > **Por qué jsDelivr y no landing.julu.clothing:** desde Brasil (al menos Claro fijo y datos móviles, nov 2026) las IPs de Cloudflare de julu.clothing no responden, así que la tienda quedaba sin diseño. jsDelivr lee directo de GitHub (repo público) y tiene varias CDN de respaldo.
-> Tras un `git push`, jsDelivr puede tardar hasta 12 h en tomar `@main`. Para forzarlo: abrir `https://purge.jsdelivr.net/gh/LEBrieva/julu-landing@main/public/nuvemshop.css` (y lo mismo para cada `.js` que cambie) y subir el `?v=N` del `@import`.
+> Tras un `git push` a `main` que toque `public/nuvemshop.css` o `public/nuvemshop/**`, el workflow `.github/workflows/purge-jsdelivr.yml` purga esos archivos en jsDelivr y la tienda toma la versión nueva en 1–2 min (no hace falta subir el `?v=`). Para purgar todo a mano: GitHub → Actions → "Purge jsDelivr (tienda)" → Run workflow.
   ```
 
 - En cada cambio: editar `public/nuvemshop.css`, hacer deploy y subir el número de `?v=N` en Nuvemshop (para que no quede la versión vieja cacheada).

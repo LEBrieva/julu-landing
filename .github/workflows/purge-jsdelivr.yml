@@ -1,0 +1,58 @@
+# Refresca en jsDelivr los archivos de la tienda Nuvemshop apenas se pushean a main.
+#
+# La tienda carga su CSS/JS/imágenes desde
+#   https://cdn.jsdelivr.net/gh/LEBrieva/julu-landing@main/public/...
+# y jsDelivr cachea "@main" hasta 12 h. Este workflow le pide que borre la copia
+# vieja de cada archivo que cambió en el push, así la tienda toma la versión
+# nueva en uno o dos minutos. No hace falta tocar el ?v= del @import.
+name: Purge jsDelivr (tienda)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/nuvemshop.css'
+      - 'public/nuvemshop/**'
+  workflow_dispatch: {}   # botón "Run workflow" para purgar todo a mano
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Archivos a purgar
+        id: files
+        env:
+          BEFORE: ${{ github.event.before }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT" = "workflow_dispatch" ] || [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            # Manual (o primer push): todo lo publicado para la tienda
+            git ls-files public/nuvemshop.css public/nuvemshop > files.txt
+          else
+            git diff --name-only --diff-filter=AM "$BEFORE" "$GITHUB_SHA" -- public/nuvemshop.css public/nuvemshop > files.txt
+          fi
+          echo "Archivos:"; cat files.txt
+          echo "count=$(wc -l < files.txt | tr -d ' ')" >> "$GITHUB_OUTPUT"
+
+      - name: Purgar en jsDelivr
+        if: steps.files.outputs.count != '0'
+        run: |
+          base="https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}@main"
+          fail=0
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            enc=$(python3 -c 'import sys,urllib.parse;print(urllib.parse.quote(sys.argv[1]))' "$f")
+            for i in 1 2 3; do
+              res=$(curl -s -m 30 "$base/$enc" || true)
+              if echo "$res" | grep -q '"status":"finished"\|"throttled":false'; then
+                echo "✅ $f"; break
+              fi
+              echo "… reintento $i para $f: $res"; sleep 5
+              [ "$i" = 3 ] && { echo "❌ $f"; fail=1; }
+            done
+          done < files.txt
+          exit $fail
