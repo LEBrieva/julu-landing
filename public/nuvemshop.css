@@ -41,6 +41,7 @@
      - 31-aviso-carrito.css
      - 32-loja-fechada.css
      - 33-minha-conta-pagina.css
+     - 34-aviso-pedido.css
    ===================================================================== */
 
 
@@ -3768,3 +3769,49 @@ html:has(#ns-section-account_info) .page-header-title::before{
 }
 #ns-section-account_info .account-form-help .btn-link::before{ content:"🔒 "; }
 @media (max-width:640px){ #ns-section-account_info form{ padding:28px 22px 22px!important; } }
+
+
+/* =====================================================================
+   34. AVISO "ACOMPANHE AQUI SUA ÚLTIMA COMPRA"
+   Cartelito flotante que muestra el tema después de una compra
+   (.notification-order). Mismo look que el aviso de carrito (31).
+   ===================================================================== */
+.notification-order.notification-fixed{
+  box-sizing:border-box; width:auto!important; max-width:calc(100vw - 24px)!important;
+  padding:14px 52px 14px 16px!important;
+  border:2px solid var(--julu-ink)!important; border-radius:20px!important;
+  background:var(--julu-paper)!important; color:var(--julu-ink)!important;
+  box-shadow:5px 5px 0 var(--julu-volt)!important;
+  font-family:var(--julu-body)!important;
+  animation:juluCartIn .28s ease-out both;
+}
+@media (min-width:768px){ .notification-order.notification-fixed{ right:20px!important; } }
+.notification-order .notification-content-wrapper{
+  display:flex; align-items:center; flex-wrap:wrap; gap:4px 6px; margin:0!important; padding:0!important;
+  font-size:15px; line-height:1.35; text-align:left;
+}
+/* Iconito de caja antes del texto */
+.notification-order .notification-content-wrapper::before{
+  content:"📦"; display:inline-flex; align-items:center; justify-content:center;
+  width:34px; height:34px; margin-right:6px; flex:0 0 34px;
+  border:2px solid var(--julu-ink); border-radius:9999px; background:#fff; font-size:16px;
+}
+.notification-order .notification-link{
+  padding:0!important; font-family:var(--julu-display)!important; font-weight:800!important; font-size:15px!important;
+  color:var(--julu-ink)!important; text-transform:none!important; letter-spacing:0!important;
+  text-decoration:underline!important; text-decoration-color:var(--julu-volt)!important;
+  text-decoration-thickness:3px!important; text-underline-offset:4px;
+}
+.notification-order .notification-link:hover{ color:#c23a00!important; }
+.notification-order .notification-message{ color:var(--julu-ink)!important; font-weight:500; }
+.notification-order .notification-message::after{ content:" 🐾"; }
+/* Cerrar: botoncito redondo (igual al del carrito) */
+.notification-order .notification-close{
+  position:absolute!important; top:50%!important; right:12px!important; left:auto!important;
+  width:30px!important; height:30px!important; margin-top:-15px!important; padding:0!important;
+  display:flex!important; align-items:center; justify-content:center;
+  border:2px solid var(--julu-ink)!important; border-radius:9999px!important; background:#fff!important;
+  transition:background-color .15s ease, transform .15s ease;
+}
+.notification-order .notification-close:hover{ background:var(--julu-volt)!important; transform:rotate(90deg); }
+.notification-order .notification-close svg{ width:12px!important; height:12px!important; fill:var(--julu-ink)!important; }
